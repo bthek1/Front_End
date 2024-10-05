@@ -1,0 +1,9 @@
+project:
+  output-dir: _docs
+
+website:
+  title: "Front_End"
+  site-url: "https://bthek1.github.io/Front_End"
+  description: ""
+  repo-branch: main
+  repo-url: "https://github.com/bthek1/Front_End"
