@@ -1,0 +1,1363 @@
+[
+  {
+    "objectID": "javascript.html",
+    "href": "javascript.html",
+    "title": "Javascript",
+    "section": "",
+    "text": "1. Understanding the Architecture:\n\nDjango REST Framework (DRF) provides the backend, offering an API that returns data (typically JSON) in response to HTTP requests.\nJavaScript (JS) on the front end is responsible for interacting with the DRF API to send and receive data asynchronously (usually via AJAX or fetch).\n\n\n\n2. Setting Up the Front End:\n\nDRF and Django are typically used with templates, but if you’re building a single-page application (SPA), the front end may be separated from Django’s template system.\nYou might still use Django’s built-in templating, but increasingly, front-end frameworks like React, Vue.js, or Vanilla JavaScript with build tools (Webpack, Vite) are preferred.\n\n\n\n3. Using APIs:\n\nDRF’s role is to expose data as a REST API. You’ll use JavaScript (or a framework) to interact with this API.\nUse fetch or Axios (or any HTTP client) to send HTTP requests from the front end to the API.\n\n\nExample of Fetching Data in JavaScript:\nfetch('http://localhost:8000/api/items/')\n  .then(response =&gt; response.json())\n  .then(data =&gt; {\n    console.log(data);  // Handle the JSON data\n  })\n  .catch(error =&gt; {\n    console.error('Error:', error);\n  });\n\nMethods: You’ll need to know how to send different types of requests:\n\nGET: To retrieve data from the API.\nPOST: To send data for creating new objects.\nPUT/PATCH: To update data.\nDELETE: To delete resources.\n\n\n\n\nExample of Sending Data:\nfetch('http://localhost:8000/api/items/', {\n  method: 'POST',\n  headers: {\n    'Content-Type': 'application/json',\n    'Authorization': 'Bearer &lt;token&gt;'  // If using token-based auth\n  },\n  body: JSON.stringify({name: 'Item', description: 'A new item'})\n})\n  .then(response =&gt; response.json())\n  .then(data =&gt; console.log('Item created:', data))\n  .catch(error =&gt; console.error('Error:', error));\n\n\n\n4. Cross-Origin Resource Sharing (CORS):\n\nWhen using JavaScript to make API requests from a front-end hosted on a different domain or port, you’ll need to handle CORS.\nDjango-cors-headers can be used to configure CORS in your DRF project.\n\n\nInstall and Configure django-cors-headers:\npip install django-cors-headers\nIn settings.py: ```python INSTALLED_APPS = [ …, ‘corsheaders’, ]\nMIDDLEWARE = [ ‘corsheaders.middleware.CorsMiddleware’, …, ]\n# Allow all origins (for development purposes): CORS_ALLOW_ALL_ORIGINS = True ```\n\nFor production, configure CORS_ALLOWED_ORIGINS with specific origins.\n\n\n\n\n5. Handling Authentication:\n\nJWT (JSON Web Tokens) or Token-based authentication are common in DRF projects.\nUse the front end to send the token along with requests for protected routes.\n\n\nExample of Adding Authorization Header:\nfetch('http://localhost:8000/api/protected/', {\n  headers: {\n    'Authorization': 'Bearer ' + localStorage.getItem('access_token')  // Add the token here\n  }\n});\n\nStore the token securely on the client side (e.g., in localStorage or sessionStorage).\n\n\n\n\n6. Error Handling in JavaScript:\n\nHandle errors that come from the DRF API, such as 400 (bad request), 401 (unauthorized), 403 (forbidden), or 500 (server error).\n\nExample: javascript    fetch('http://localhost:8000/api/resource/')      .then(response =&gt; {        if (!response.ok) {          throw new Error('Network response was not ok ' + response.statusText);        }        return response.json();      })      .then(data =&gt; console.log(data))      .catch(error =&gt; console.error('There was a problem with your fetch operation:', error));\n\n\n7. Handling Forms and File Uploads:\n\nFor HTML forms, use JavaScript’s FormData to send form data, including file uploads, to DRF.\n\nExample of File Upload: ```javascript const formData = new FormData(); formData.append(‘file’, fileInput.files[0]);\nfetch(‘http://localhost:8000/api/upload/’, { method: ‘POST’, body: formData }) .then(response =&gt; response.json()) .then(data =&gt; console.log(‘File uploaded:’, data)) .catch(error =&gt; console.error(‘Error:’, error)); ```\n\n\n8. Front-End Frameworks:\n\nReact and Vue.js are popular frameworks to work with DRF. They offer better state management, routing, and modularity for building complex front-end applications.\n\n#### Example in React: ```javascript import React, { useState, useEffect } from ‘react’;\nfunction Items() { const [items, setItems] = useState([]);\n useEffect(() =&gt; {\n   fetch('http://localhost:8000/api/items/')\n     .then(response =&gt; response.json())\n     .then(data =&gt; setItems(data))\n     .catch(error =&gt; console.error('Error:', error));\n }, []);\n\n return (\n   &lt;div&gt;\n     &lt;h1&gt;Items List&lt;/h1&gt;\n     &lt;ul&gt;\n       {items.map(item =&gt; (\n         &lt;li key={item.id}&gt;{item.name}&lt;/li&gt;\n       ))}\n     &lt;/ul&gt;\n   &lt;/div&gt;\n );\n}\nexport default Items; ```\n\n\n9. Frontend Build Tools:\n\nIf you use modern front-end tooling like Webpack or Vite, you can bundle your JavaScript assets for Django.\n\n\nExample: Using Webpack with Django\n\nInstall Webpack:\nnpm install webpack webpack-cli --save-dev\nConfigure webpack.config.js:\nconst path = require('path');\n\nmodule.exports = {\n  entry: './src/index.js',\n  output: {\n    filename: 'bundle.js',\n    path: path.resolve(__dirname, 'static/js')\n  },\n  mode: 'development'\n};\nUse the generated bundle.js in your Django templates.\n\n\n\n\n10. Debugging and Testing:\n\nUse Chrome DevTools or Firefox Developer Tools for debugging JavaScript and network requests.\nFor automated testing of your JavaScript code interacting with DRF APIs, consider tools like Jest for unit tests and Cypress or Puppeteer for end-to-end testing.\n\n\n\n\n\n Back to top",
+    "crumbs": [
+      "Blog",
+      "Javascript"
+    ]
+  },
+  {
+    "objectID": "React/react_native.html",
+    "href": "React/react_native.html",
+    "title": "React-Native",
+    "section": "",
+    "text": "sudo npm  i -g expo-cli\nInstall expo app",
+    "crumbs": [
+      "Blog",
+      "React",
+      "React-Native"
+    ]
+  },
+  {
+    "objectID": "React/react_native.html#installation",
+    "href": "React/react_native.html#installation",
+    "title": "React-Native",
+    "section": "",
+    "text": "sudo npm  i -g expo-cli\nInstall expo app",
+    "crumbs": [
+      "Blog",
+      "React",
+      "React-Native"
+    ]
+  },
+  {
+    "objectID": "React/react_native.html#starting-a-new-project",
+    "href": "React/react_native.html#starting-a-new-project",
+    "title": "React-Native",
+    "section": "Starting a new project",
+    "text": "Starting a new project\nexpo init DoneWithIt",
+    "crumbs": [
+      "Blog",
+      "React",
+      "React-Native"
+    ]
+  },
+  {
+    "objectID": "React/react.html",
+    "href": "React/react.html",
+    "title": "React + typescript",
+    "section": "",
+    "text": "need node version &gt;16 ==&gt; goto node for instructions",
+    "crumbs": [
+      "Blog",
+      "React",
+      "React + typescript"
+    ]
+  },
+  {
+    "objectID": "React/react.html#setup-using-vite",
+    "href": "React/react.html#setup-using-vite",
+    "title": "React + typescript",
+    "section": "Setup using vite",
+    "text": "Setup using vite\nnpm create vite@4.1.0",
+    "crumbs": [
+      "Blog",
+      "React",
+      "React + typescript"
+    ]
+  },
+  {
+    "objectID": "React/react.html#settings",
+    "href": "React/react.html#settings",
+    "title": "React + typescript",
+    "section": "settings",
+    "text": "settings\nProject name: … react-app\n✔ Select a framework: › React\n✔ Select a variant: › TypeScript",
+    "crumbs": [
+      "Blog",
+      "React",
+      "React + typescript"
+    ]
+  },
+  {
+    "objectID": "React/react.html#setup-react-app",
+    "href": "React/react.html#setup-react-app",
+    "title": "React + typescript",
+    "section": "Setup React app",
+    "text": "Setup React app\ncd react-app\nnpm install",
+    "crumbs": [
+      "Blog",
+      "React",
+      "React + typescript"
+    ]
+  },
+  {
+    "objectID": "React/react.html#localhost",
+    "href": "React/react.html#localhost",
+    "title": "React + typescript",
+    "section": "Localhost",
+    "text": "Localhost\nnpm run dev\nhttp://127.0.0.1:5173/",
+    "crumbs": [
+      "Blog",
+      "React",
+      "React + typescript"
+    ]
+  },
+  {
+    "objectID": "React/react.html#using-bootstrap",
+    "href": "React/react.html#using-bootstrap",
+    "title": "React + typescript",
+    "section": "Using Bootstrap",
+    "text": "Using Bootstrap\n\ncss classes for rapid style\n\nnpm i bootstrap@5.2.3",
+    "crumbs": [
+      "Blog",
+      "React",
+      "React + typescript"
+    ]
+  },
+  {
+    "objectID": "fasthtml.html",
+    "href": "fasthtml.html",
+    "title": "fastHTML",
+    "section": "",
+    "text": "pip install python-fasthtml\n\nfrom fasthtml.common import *\n\n\n# Assuming the file Front_end/app.py exists and contains some content\nfile_path = 'Front_end/app.py'\n\n# Reading and displaying the content of the file\nwith open(file_path, 'r') as file:\n    file_content = file.read()\n\n\nprint(file_content)\n\nfrom fasthtml.common import *\n\napp,rt = fast_app()\n\n\ndef NumList(i):\n    return Ul(*[Li(o) for o in range(i)])\n\n\n\n@rt('/')\ndef get(): \n    nums = NumList(5)\n    return Titled('Greeting',\n                  Div(nums, id='stuff', hx_get=\"/change\"),\n                 )\n\n@rt('/change')\ndef get(): \n    return Div(P('Change is good!'),\n               P(A('Home', href=\"/\"))\n              )\n\n\nserve()\n\n\n\nfast_app??\n\n\nSignature:\nfast_app(\n    db: Optional[str] = None,\n    render: Optional[&lt;built-in function callable&gt;] = None,\n    hdrs: Optional[tuple] = None,\n    ftrs: Optional[tuple] = None,\n    tbls: Optional[dict] = None,\n    before: Optional[tuple] = None,\n    middleware: Optional[tuple] = None,\n    live: bool = False,\n    debug: bool = False,\n    routes: Optional[tuple] = None,\n    exception_handlers: Optional[dict] = None,\n    on_startup: Optional[&lt;built-in function callable&gt;] = None,\n    on_shutdown: Optional[&lt;built-in function callable&gt;] = None,\n    lifespan: Optional[&lt;built-in function callable&gt;] = None,\n    default_hdrs=True,\n    pico: Optional[bool] = None,\n    ws_hdr: bool = False,\n    secret_key: Optional[str] = None,\n    key_fname: str = '.sesskey',\n    session_cookie: str = 'session_',\n    max_age: int = 31536000,\n    sess_path: str = '/',\n    same_site: str = 'lax',\n    sess_https_only: bool = False,\n    sess_domain: Optional[str] = None,\n    bodykw: Optional[dict] = None,\n    **kwargs,\n)\nDocstring: &lt;no docstring&gt;\nSource:   \ndef fast_app(\n        db:Optional[str]=None, # Database file name, if needed\n        render:Optional[callable]=None, # Function used to render default database class\n        hdrs:Optional[tuple]=None, # Additional FT elements to add to &lt;HEAD&gt;\n        ftrs:Optional[tuple]=None, # Additional FT elements to add to end of &lt;BODY&gt;\n        tbls:Optional[dict]=None, # Mapping from DB table names to dict table definitions\n        before:Optional[tuple]=None, # Functions to call prior to calling handler\n        middleware:Optional[tuple]=None, # Standard Starlette middleware\n        live:bool=False, # Enable live reloading\n        debug:bool=False, # Passed to Starlette, indicating if debug tracebacks should be returned on errors\n        routes:Optional[tuple]=None, # Passed to Starlette\n        exception_handlers:Optional[dict]=None, # Passed to Starlette\n        on_startup:Optional[callable]=None, # Passed to Starlette\n        on_shutdown:Optional[callable]=None, # Passed to Starlette\n        lifespan:Optional[callable]=None, # Passed to Starlette\n        default_hdrs=True, # Include default FastHTML headers such as HTMX script?\n        pico:Optional[bool]=None, # Include PicoCSS header?\n        ws_hdr:bool=False, # Include HTMX websocket extension header?\n        secret_key:Optional[str]=None, # Signing key for sessions\n        key_fname:str='.sesskey', # Session cookie signing key file name\n        session_cookie:str='session_', # Session cookie name\n        max_age:int=365*24*3600, # Session cookie expiry time\n        sess_path:str='/', # Session cookie path\n        same_site:str='lax', # Session cookie same site policy\n        sess_https_only:bool=False, # Session cookie HTTPS only?\n        sess_domain:Optional[str]=None, # Session cookie domain\n        bodykw:Optional[dict]=None,\n        **kwargs):\n    h = (picolink,) if pico or (pico is None and default_hdrs) else ()\n    if hdrs: h += tuple(hdrs)\n    app_cls = FastHTMLWithLiveReload if live else FastHTML\n    app = app_cls(hdrs=h, ftrs=ftrs, before=before, middleware=middleware, debug=debug, routes=routes, exception_handlers=exception_handlers,\n                  on_startup=on_startup, on_shutdown=on_shutdown, lifespan=lifespan, default_hdrs=default_hdrs, secret_key=secret_key,\n                  session_cookie=session_cookie, max_age=max_age, sess_path=sess_path, same_site=same_site, sess_https_only=sess_https_only,\n                  sess_domain=sess_domain, key_fname=key_fname, ws_hdr=ws_hdr, **(bodykw or {}))\n    @app.route(\"/{fname:path}.{ext:static}\")\n    async def get(fname:str, ext:str): return FileResponse(f'{fname}.{ext}')\n    if not db: return app,app.route\n    db = database(db)\n    if not tbls: tbls={}\n    if kwargs:\n        if isinstance(first(kwargs.values()), dict): tbls = kwargs\n        else:\n            kwargs['render'] = render\n            tbls['items'] = kwargs\n    dbtbls = [get_tbl(db.t, k, v) for k,v in tbls.items()]\n    if len(dbtbls)==1: dbtbls=dbtbls[0]\n    return app,app.route,*dbtbls\nFile:      ~/miniconda3/envs/pfast/lib/python3.12/site-packages/fasthtml/fastapp.py\nType:      function\n\n\n\n\n\n\n Back to top",
+    "crumbs": [
+      "Blog",
+      "fastHTML"
+    ]
+  },
+  {
+    "objectID": "Flutter/widgets.html",
+    "href": "Flutter/widgets.html",
+    "title": "App development",
+    "section": "",
+    "text": "To create a new Flutter app, run the following commands in your shell or Terminal.\nflutter create test_flutter\ncd test_flutter\nTo verify that you have a running target device, run the following command.\nflutter devices\n\n\n\n\n\nList devices\nflutter emulators\nLaunch devices\nflutter emulators --launch &lt;emulator id&gt;\nTo run your app, run the following command.\nflutter run",
+    "crumbs": [
+      "Blog",
+      "Flutter",
+      "App development"
+    ]
+  },
+  {
+    "objectID": "Flutter/widgets.html#create-a-new-project",
+    "href": "Flutter/widgets.html#create-a-new-project",
+    "title": "App development",
+    "section": "",
+    "text": "To create a new Flutter app, run the following commands in your shell or Terminal.\nflutter create test_flutter\ncd test_flutter\nTo verify that you have a running target device, run the following command.\nflutter devices\n\n\n\n\n\nList devices\nflutter emulators\nLaunch devices\nflutter emulators --launch &lt;emulator id&gt;\nTo run your app, run the following command.\nflutter run",
+    "crumbs": [
+      "Blog",
+      "Flutter",
+      "App development"
+    ]
+  },
+  {
+    "objectID": "Flutter/widgets.html#make-changes",
+    "href": "Flutter/widgets.html#make-changes",
+    "title": "App development",
+    "section": "Make changes",
+    "text": "Make changes\n\nOpen lib/main.dart.\nMake changes\nSave your changes.\nType r in the terminal window.",
+    "crumbs": [
+      "Blog",
+      "Flutter",
+      "App development"
+    ]
+  },
+  {
+    "objectID": "Flutter/widgets.html#widget-types",
+    "href": "Flutter/widgets.html#widget-types",
+    "title": "App development",
+    "section": "Widget types",
+    "text": "Widget types\n\nStateless widget\n\ncannot change with time\n\n\n\nStateful widget\n\ncan change with time\n\n\ninitState()\n\ncalled only when the widget is created\nSubscribe to streams or any object that could change our widget data\n\n\n\nBuild()\n\nBuilds the widget tree\nA build is triggered every time we use setState()\n\n\n\nDispose()\n\nWhen the widget/state object is removed",
+    "crumbs": [
+      "Blog",
+      "Flutter",
+      "App development"
+    ]
+  },
+  {
+    "objectID": "Flutter/widgets.html#text-widget",
+    "href": "Flutter/widgets.html#text-widget",
+    "title": "App development",
+    "section": "Text Widget",
+    "text": "Text Widget\n\nstyle\ntextAlign\noverflow\nmaxLin- etc\n\nText('Click me')",
+    "crumbs": [
+      "Blog",
+      "Flutter",
+      "App development"
+    ]
+  },
+  {
+    "objectID": "Flutter/widgets.html#button-widget",
+    "href": "Flutter/widgets.html#button-widget",
+    "title": "App development",
+    "section": "Button Widget",
+    "text": "Button Widget\n\ncolor\nelevation\ndisabledColor\nenabled\netc\n\n     body: Center(\n       child: ElevatedButton.icon(\n         onPressed: () {\n           print('You clicked me');\n         },\n         icon: const Icon(Icons.mail),\n         label: const Text('Mail me'),\n         style: ElevatedButton.styleFrom(\n           shadowColor: Colors.amber,\n         ),\n       ),\n     ),",
+    "crumbs": [
+      "Blog",
+      "Flutter",
+      "App development"
+    ]
+  },
+  {
+    "objectID": "Flutter/widgets.html#row-and-column-widget",
+    "href": "Flutter/widgets.html#row-and-column-widget",
+    "title": "App development",
+    "section": "Row and Column Widget",
+    "text": "Row and Column Widget\n    body: Column(\n        mainAxisAlignment: MainAxisAlignment.spaceEvenly,\n        crossAxisAlignment: CrossAxisAlignment.center,\n        children: &lt;Widget&gt;[\n          Row(\n            mainAxisAlignment: MainAxisAlignment.center,\n            children: const &lt;Widget&gt;[\n              Text('Hello'),\n              Text('World'),\n            ],\n          ),\n          Container(\n            padding: const EdgeInsets.all(20.0),\n            color: Colors.grey[200],\n            child: const TextButton(\n              onPressed: null,\n              child: Text('Click Me'),\n            ),\n          ),\n          const ElevatedButton(\n            onPressed: null,\n            child: Text('Click Me'),\n          ),\n          const OutlinedButton(\n            onPressed: null,\n            child: Text('Click'),\n          ),\n        ],\n      ),",
+    "crumbs": [
+      "Blog",
+      "Flutter",
+      "App development"
+    ]
+  },
+  {
+    "objectID": "Flutter/widgets.html#image-widget",
+    "href": "Flutter/widgets.html#image-widget",
+    "title": "App development",
+    "section": "Image Widget",
+    "text": "Image Widget\n    body: Center(\n        child: Image.asset('assets/beach1.jpg'),\n      )",
+    "crumbs": [
+      "Blog",
+      "Flutter",
+      "App development"
+    ]
+  },
+  {
+    "objectID": "Flutter/widgets.html#expanded-widget",
+    "href": "Flutter/widgets.html#expanded-widget",
+    "title": "App development",
+    "section": "Expanded Widget",
+    "text": "Expanded Widget\n\nlife flex grid\n\n      body: Row(\n        children: &lt;Widget&gt;[\n          Expanded(\n            flex: 3,\n            child: Image.asset('assets/space1.jpg'),\n          ),\n          Expanded(\n            flex: 2,\n            child: Container(\n              padding: const EdgeInsets.all(30.0),\n              color: Colors.cyan,\n              child: Text('1'),\n            ),\n          ),\n          Expanded(\n            flex: 1,\n            child: Container(\n              padding: const EdgeInsets.all(30.0),\n              color: Colors.pink,\n              child: Text('2'),\n            ),\n          ),\n          Expanded(\n            flex: 3,\n            child: Container(\n              padding: const EdgeInsets.all(30.0),\n              color: Colors.amber,\n              child: Text('3'),\n            ),\n          ),\n        ],\n      )",
+    "crumbs": [
+      "Blog",
+      "Flutter",
+      "App development"
+    ]
+  },
+  {
+    "objectID": "Flutter/widgets.html#async-functions",
+    "href": "Flutter/widgets.html#async-functions",
+    "title": "App development",
+    "section": "Async functions",
+    "text": "Async functions\nvoid getData() async {\n    // simulate network request for a username\n    String username = await Future.delayed(Duration(seconds: 3), () {\n      return 'yoshi';\n    });\n\n    // simulate network request to get bio of the username\n    String bio = await Future.delayed(Duration(seconds: 2), () {\n      return 'vegan, musician & egg collector';\n    });\n\n    print('$username - $bio');\n  }\n  Future&lt;void&gt; getTime() async {\n    Response response = await get(\n      Uri.parse('http://worldtimeapi.org/api/timezone/$url'),\n    );\n    Map data = json.decode(response.body);\n\n    String datetime = data['datetime'];\n    String offset = data['utc_offset'].substring(1, 3);\n\n    DateTime now = DateTime.parse(datetime);\n    now = now.add(Duration(hours: int.parse(offset)));\n\n    time = now.toString();\n  }\n}",
+    "crumbs": [
+      "Blog",
+      "Flutter",
+      "App development"
+    ]
+  },
+  {
+    "objectID": "Flutter/widgets.html#routing",
+    "href": "Flutter/widgets.html#routing",
+    "title": "App development",
+    "section": "Routing",
+    "text": "Routing\n      routes: {\n        '/': (context) =&gt; Loading(),\n        '/home': (context) =&gt; Home(),\n        '/location': (context) =&gt; ChooseLocation(),\n      },\n    Navigator.pushReplacementNamed(context, '/home', arguments: {\n      'location': instance.location,\n      'flag': instance.flag,\n      'time': instance.time,\n      'isDaytime': instance.isDaytime,\n    });\n    onPressed: () async {\n      dynamic result =\n          await Navigator.pushNamed(context, '/location');\n      setState(() {\n        data = {\n          'time': result['time'],\n          'location': result['location'],\n          'isDaytime': result['isDaytime'],\n          'flag': result['flag'],\n        };\n      });\n    },\n    Navigator.pop(context, {\n      'location': instance.location,\n      'flag': instance.flag,\n      'time': instance.time,\n      'isDaytime': instance.isDaytime,\n    });",
+    "crumbs": [
+      "Blog",
+      "Flutter",
+      "App development"
+    ]
+  },
+  {
+    "objectID": "Flutter/flutter_setup.html",
+    "href": "Flutter/flutter_setup.html",
+    "title": "Flutter Setup",
+    "section": "",
+    "text": "https://docs.flutter.dev/get-started/install/linux\n\nsudo snap install flutter --classic\nflutter sdk-path",
+    "crumbs": [
+      "Blog",
+      "Flutter",
+      "Flutter Setup"
+    ]
+  },
+  {
+    "objectID": "Flutter/flutter_setup.html#install-flutter-in-wsl",
+    "href": "Flutter/flutter_setup.html#install-flutter-in-wsl",
+    "title": "Flutter Setup",
+    "section": "",
+    "text": "https://docs.flutter.dev/get-started/install/linux\n\nsudo snap install flutter --classic\nflutter sdk-path",
+    "crumbs": [
+      "Blog",
+      "Flutter",
+      "Flutter Setup"
+    ]
+  },
+  {
+    "objectID": "Flutter/flutter_setup.html#check-flutter-install-status",
+    "href": "Flutter/flutter_setup.html#check-flutter-install-status",
+    "title": "Flutter Setup",
+    "section": "Check FLutter install status",
+    "text": "Check FLutter install status\nflutter doctor",
+    "crumbs": [
+      "Blog",
+      "Flutter",
+      "Flutter Setup"
+    ]
+  },
+  {
+    "objectID": "Flutter/flutter_setup.html#install-android-studio-in-wsl",
+    "href": "Flutter/flutter_setup.html#install-android-studio-in-wsl",
+    "title": "Flutter Setup",
+    "section": "Install Android Studio in WSL",
+    "text": "Install Android Studio in WSL\nInstall android studio linux tar gz file\n\n\n\nandroid.png\n\n\n\nInstall using snap\n\ninstall java if needed\n\nsudo apt install openjdk-18-jdk\n\nsudo snap install android-studio --classic\n\ncheck android studio status\n\nsnap list android-studio\n\nadd andriod sdk path to flutter\n\nflutter config --android-sdk ~/Android/Sdk/\n\n\nManually download and install\ngo into usr/local and unzip the tar gz file\ncd /usr/local/\ntar xf ~/Downloads/android-studio-version-number-linux.tar.gz\n\n\nRestart the computer\n\nRestart the computer\n\nwsl --update\nwsl --shutdown",
+    "crumbs": [
+      "Blog",
+      "Flutter",
+      "Flutter Setup"
+    ]
+  },
+  {
+    "objectID": "Flutter/flutter_setup.html#running-android-studio",
+    "href": "Flutter/flutter_setup.html#running-android-studio",
+    "title": "Flutter Setup",
+    "section": "Running Android Studio",
+    "text": "Running Android Studio\nandroid-studio\ncd /usr/local/\nandroid-studio/bin/studio.sh\nOpen Android Studio -&gt; More Actions -&gt; SDK manager -&gt; SDK Tools -&gt; Android SDK Command line\n\n\n\nsdk_manager.png\n\n\n\nConfigure Android\nStart Android Studio.\n\nThe Welcome to Android Studio dialog displays.\n\nFollow the Android Studio Setup Wizard.\n\nInstall the following components:\n    Android SDK Platform, API 33.0.0\n    Android SDK Command-line Tools\n    Android SDK Build-Tools\n    Android SDK Platform-Tools\n    Android Emulator\n\nTo fix android licencing\n\nflutter doctor --android-licenses",
+    "crumbs": [
+      "Blog",
+      "Flutter",
+      "Flutter Setup"
+    ]
+  },
+  {
+    "objectID": "Flutter/flutter_setup.html#install-xming",
+    "href": "Flutter/flutter_setup.html#install-xming",
+    "title": "Flutter Setup",
+    "section": "Install Xming",
+    "text": "Install Xming\n\nNeeded to render graphic applications\n\nsudo apt update\nsudo apt install x11-apps -y\n\nxeyes",
+    "crumbs": [
+      "Blog",
+      "Flutter",
+      "Flutter Setup"
+    ]
+  },
+  {
+    "objectID": "Flutter/flutter_setup.html#install-chrome",
+    "href": "Flutter/flutter_setup.html#install-chrome",
+    "title": "Flutter Setup",
+    "section": "Install Chrome",
+    "text": "Install Chrome\nsudo apt install -y chromium-browser",
+    "crumbs": [
+      "Blog",
+      "Flutter",
+      "Flutter Setup"
+    ]
+  },
+  {
+    "objectID": "Flutter/flutter_setup.html#connect-phone",
+    "href": "Flutter/flutter_setup.html#connect-phone",
+    "title": "Flutter Setup",
+    "section": "Connect Phone",
+    "text": "Connect Phone\n\nEnable Developer options\n\nSettings -&gt; About phone -&gt; Software Information -&gt; Build Number\n\n\n\nUSB debugging\n\nSettings -&gt; Developer Options -&gt; USB debugging && Wireless debugging",
+    "crumbs": [
+      "Blog",
+      "Flutter",
+      "Flutter Setup"
+    ]
+  },
+  {
+    "objectID": "Flutter/flutter_setup.html#connect-phone-to-flutter-in-wsl",
+    "href": "Flutter/flutter_setup.html#connect-phone-to-flutter-in-wsl",
+    "title": "Flutter Setup",
+    "section": "Connect Phone to Flutter in WSL",
+    "text": "Connect Phone to Flutter in WSL\n\nInstall adb in windows\n\nhttps://developer.android.com/tools/releases/platform-tools\n\nadd path to windows environment path variable\nC:\\Users\\bthek\\OneDrive\\Documents\\platform-tools\nCheck for device connected\nadb devices\nTry restarting adb if device doesn’t show up\nadb kill-server\nadb start-server\n\n\nOnce your device is connected via USB, run the following command to map the desired port to adb.\n\nadb tcpip 5555\nGo to wsl and run\nadb connnect &lt;ip&gt;:&lt;port&gt;\nExample:\nadb connect 192.168.1.4:5555",
+    "crumbs": [
+      "Blog",
+      "Flutter",
+      "Flutter Setup"
+    ]
+  },
+  {
+    "objectID": "gradio.html",
+    "href": "gradio.html",
+    "title": "Gradio",
+    "section": "",
+    "text": "!pip list | grep gradio\n\ngradio                              4.27.0\ngradio_client                       0.15.1",
+    "crumbs": [
+      "Blog",
+      "Gradio"
+    ]
+  },
+  {
+    "objectID": "gradio.html#basic-interface-text-slider---text",
+    "href": "gradio.html#basic-interface-text-slider---text",
+    "title": "Gradio",
+    "section": "Basic Interface: text, slider -> text",
+    "text": "Basic Interface: text, slider -&gt; text\n\nimport gradio as gr\n\ndef greet(name, intensity):\n    return \"Hello, \" + name + \"!\" * int(intensity)\n\ndemo = gr.Interface(\n    fn=greet,\n    inputs=[\"text\", \"slider\"],\n    outputs=[\"text\"],\n)\n\ndemo.launch()\n\nRunning on local URL:  http://127.0.0.1:7860\n\nTo create a public link, set `share=True` in `launch()`.\n\n\n\n\n\n\n\n\ngr.Interface(\n    fn: 'Callable',\n    inputs: 'str | Component | list[str | Component] | None',\n    outputs: 'str | Component | list[str | Component] | None',\n    examples: 'list[Any] | list[list[Any]] | str | None' = None,\n    cache_examples: \"bool | Literal['lazy'] | None\" = None,\n    examples_per_page: 'int' = 10,\n    live: 'bool' = False,\n    title: 'str | None' = None,\n    description: 'str | None' = None,\n    article: 'str | None' = None,\n    thumbnail: 'str | None' = None,\n    theme: 'Theme | str | None' = None,\n    css: 'str | None' = None,\n    allow_flagging: \"Literal['never'] | Literal['auto'] | Literal['manual'] | None\" = None,\n    flagging_options: 'list[str] | list[tuple[str, str]] | None' = None,\n    flagging_dir: 'str' = 'flagged',\n    flagging_callback: 'FlaggingCallback | None' = None,\n    analytics_enabled: 'bool | None' = None,\n    batch: 'bool' = False,\n    max_batch_size: 'int' = 4,\n    api_name: 'str | Literal[False] | None' = 'predict',\n    _api_mode: 'bool' = False,\n    allow_duplication: 'bool' = False,\n    concurrency_limit: \"int | None | Literal['default']\" = 'default',\n    js: 'str | None' = None,\n    head: 'str | None' = None,\n    additional_inputs: 'str | Component | list[str | Component] | None' = None,\n    additional_inputs_accordion: 'str | Accordion | None' = None,\n    *,\n    submit_btn: 'str | Button' = 'Submit',\n    stop_btn: 'str | Button' = 'Stop',\n    clear_btn: 'str | Button' = 'Clear',\n    delete_cache: 'tuple[int, int] | None' = None,\n    **kwargs,\n)",
+    "crumbs": [
+      "Blog",
+      "Gradio"
+    ]
+  },
+  {
+    "objectID": "gradio.html#image-output-slider---image",
+    "href": "gradio.html#image-output-slider---image",
+    "title": "Gradio",
+    "section": "Image output: slider -> image",
+    "text": "Image output: slider -&gt; image\n\nimport gradio as gr\nimport numpy as np\nimport time\n\ndef fake_diffusion(steps):\n    rng = np.random.default_rng()\n    for i in range(steps):\n        time.sleep(1)\n        image = rng.random(size=(600, 600, 3))\n        yield image\n    image = np.ones((1000,1000,3), np.uint8)\n    image[:] = [255, 124, 0]\n    yield image\n\n\ndemo = gr.Interface(fake_diffusion,\n                    inputs=gr.Slider(1, 10, 3, step=1),\n                    outputs=\"image\")\n\ndemo.launch()\n\nRunning on local URL:  http://127.0.0.1:7861\n\nTo create a public link, set `share=True` in `launch()`.",
+    "crumbs": [
+      "Blog",
+      "Gradio"
+    ]
+  },
+  {
+    "objectID": "gradio.html#progress-bar-text---text",
+    "href": "gradio.html#progress-bar-text---text",
+    "title": "Gradio",
+    "section": "Progress bar: text -> text",
+    "text": "Progress bar: text -&gt; text\n\nimport gradio as gr\nimport time\n\ndef slowly_reverse(word, progress=gr.Progress()):\n    progress(0, desc=\"Starting\")\n    time.sleep(1)\n    progress(0.05)\n    new_string = \"\"\n    for letter in progress.tqdm(word, desc=\"Reversing\"):\n        time.sleep(0.25)\n        new_string = letter + new_string\n    return new_string\n\ndemo = gr.Interface(slowly_reverse, gr.Text(), gr.Text())\n\ndemo.launch()\n\nRunning on local URL:  http://127.0.0.1:7862\n\nTo create a public link, set `share=True` in `launch()`.\n\n\n\n\n\n\n\n\n\nimport gradio as gr\n\nsecret_word = \"gradio\"\n\nwith gr.Blocks() as demo:    \n    used_letters_var = gr.State([])\n    with gr.Row() as row:\n        with gr.Column():\n            input_letter = gr.Textbox(label=\"Enter letter\")\n            btn = gr.Button(\"Guess Letter\")\n        with gr.Column():\n            hangman = gr.Textbox(\n                label=\"Hangman\",\n                value=\"_\"*len(secret_word)\n            )\n            used_letters_box = gr.Textbox(label=\"Used Letters\")\n\n    def guess_letter(letter, used_letters):\n        used_letters.append(letter)\n        answer = \"\".join([\n            (letter if letter in used_letters else \"_\")\n            for letter in secret_word\n        ])\n        return {\n            used_letters_var: used_letters,\n            used_letters_box: \", \".join(used_letters),\n            hangman: answer\n        }\n    btn.click(\n        guess_letter, \n        [input_letter, used_letters_var],\n        [used_letters_var, used_letters_box, hangman]\n        )\ndemo.launch()\n\nRunning on local URL:  http://127.0.0.1:7863\n\nTo create a public link, set `share=True` in `launch()`.",
+    "crumbs": [
+      "Blog",
+      "Gradio"
+    ]
+  },
+  {
+    "objectID": "gradio.html#audio-audio---audio",
+    "href": "gradio.html#audio-audio---audio",
+    "title": "Gradio",
+    "section": "Audio: audio -> audio",
+    "text": "Audio: audio -&gt; audio\n\nimport gradio as gr\nfrom pydub import AudioSegment\nfrom time import sleep\n\nwith gr.Blocks() as demo:\n    input_audio = gr.Audio(label=\"Input Audio\", type=\"filepath\", format=\"mp3\")\n    with gr.Row():\n        with gr.Column():\n            stream_as_file_btn = gr.Button(\"Stream as File\")\n            format = gr.Radio([\"wav\", \"mp3\"], value=\"wav\", label=\"Format\")\n            stream_as_file_output = gr.Audio(streaming=True)\n\n            def stream_file(audio_file, format):\n                audio = AudioSegment.from_file(audio_file)\n                i = 0\n                chunk_size = 1000\n                while chunk_size * i &lt; len(audio):\n                    chunk = audio[chunk_size * i : chunk_size * (i + 1)]\n                    i += 1\n                    if chunk:\n                        file = f\"/tmp/{i}.{format}\"\n                        chunk.export(file, format=format)\n                        yield file\n                        sleep(0.5)\n\n            stream_as_file_btn.click(\n                stream_file, [input_audio, format], stream_as_file_output\n            )\n\n            gr.Examples(\n                [[\"audio/cantina.wav\", \"wav\"], [\"audio/cantina.wav\", \"mp3\"]],\n                [input_audio, format],\n                fn=stream_file,\n                outputs=stream_as_file_output,\n            )\n\n        with gr.Column():\n            stream_as_bytes_btn = gr.Button(\"Stream as Bytes\")\n            stream_as_bytes_output = gr.Audio(format=\"bytes\", streaming=True)\n\n            def stream_bytes(audio_file):\n                chunk_size = 20_000\n                with open(audio_file, \"rb\") as f:\n                    while True:\n                        chunk = f.read(chunk_size)\n                        if chunk:\n                            yield chunk\n                            sleep(1)\n                        else:\n                            break\n            stream_as_bytes_btn.click(stream_bytes, input_audio, stream_as_bytes_output)\n\nif __name__ == \"__main__\":\n    demo.queue().launch()\n\nRunning on local URL:  http://127.0.0.1:7865\n\nTo create a public link, set `share=True` in `launch()`.\n\n\n\n\n\nTraceback (most recent call last):\n  File \"/home/ben/mambaforge/envs/cfast/lib/python3.11/site-packages/gradio/queueing.py\", line 527, in process_events\n    response = await route_utils.call_process_api(\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/ben/mambaforge/envs/cfast/lib/python3.11/site-packages/gradio/route_utils.py\", line 261, in call_process_api\n    output = await app.get_blocks().process_api(\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/ben/mambaforge/envs/cfast/lib/python3.11/site-packages/gradio/blocks.py\", line 1784, in process_api\n    inputs = await self.preprocess_data(\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/ben/mambaforge/envs/cfast/lib/python3.11/site-packages/gradio/blocks.py\", line 1506, in preprocess_data\n    processed_input.append(block.preprocess(inputs_cached))\n                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/ben/mambaforge/envs/cfast/lib/python3.11/site-packages/gradio/components/audio.py\", line 231, in preprocess\n    processing_utils.audio_to_file(\n  File \"/home/ben/mambaforge/envs/cfast/lib/python3.11/site-packages/gradio/processing_utils.py\", line 560, in audio_to_file\n    file = audio.export(filename, format=format)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/ben/mambaforge/envs/cfast/lib/python3.11/site-packages/pydub/audio_segment.py\", line 970, in export\n    raise CouldntEncodeError(\npydub.exceptions.CouldntEncodeError: Encoding failed. ffmpeg/avlib returned error code: 127\n\nCommand:['ffmpeg', '-y', '-f', 'wav', '-i', '/tmp/tmplaiefr8j', '-f', 'mp3', '/tmp/tmpiojnrpsx']\n\nOutput from ffmpeg/avlib:\n\nffmpeg: error while loading shared libraries: libopenh264.so.5: cannot open shared object file: No such file or directory\n\nTraceback (most recent call last):\n  File \"/home/ben/mambaforge/envs/cfast/lib/python3.11/site-packages/gradio/queueing.py\", line 527, in process_events\n    response = await route_utils.call_process_api(\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/ben/mambaforge/envs/cfast/lib/python3.11/site-packages/gradio/route_utils.py\", line 261, in call_process_api\n    output = await app.get_blocks().process_api(\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/ben/mambaforge/envs/cfast/lib/python3.11/site-packages/gradio/blocks.py\", line 1784, in process_api\n    inputs = await self.preprocess_data(\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/ben/mambaforge/envs/cfast/lib/python3.11/site-packages/gradio/blocks.py\", line 1506, in preprocess_data\n    processed_input.append(block.preprocess(inputs_cached))\n                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/ben/mambaforge/envs/cfast/lib/python3.11/site-packages/gradio/components/audio.py\", line 231, in preprocess\n    processing_utils.audio_to_file(\n  File \"/home/ben/mambaforge/envs/cfast/lib/python3.11/site-packages/gradio/processing_utils.py\", line 560, in audio_to_file\n    file = audio.export(filename, format=format)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/ben/mambaforge/envs/cfast/lib/python3.11/site-packages/pydub/audio_segment.py\", line 970, in export\n    raise CouldntEncodeError(\npydub.exceptions.CouldntEncodeError: Encoding failed. ffmpeg/avlib returned error code: 127\n\nCommand:['ffmpeg', '-y', '-f', 'wav', '-i', '/tmp/tmpuqq4b20d', '-f', 'mp3', '/tmp/tmphx041ptn']\n\nOutput from ffmpeg/avlib:\n\nffmpeg: error while loading shared libraries: libopenh264.so.5: cannot open shared object file: No such file or directory\n\n\n\n\nimport torch\n\nmodel = torch.hub.load('pytorch/vision:v0.6.0', 'resnet18', pretrained=True).eval()\n\nDownloading: \"https://github.com/pytorch/vision/zipball/v0.6.0\" to /home/ben/.cache/torch/hub/v0.6.0.zip\n/home/ben/mambaforge/envs/cfast/lib/python3.11/site-packages/torchvision/models/_utils.py:208: UserWarning: The parameter 'pretrained' is deprecated since 0.13 and may be removed in the future, please use 'weights' instead.\n  warnings.warn(\n/home/ben/mambaforge/envs/cfast/lib/python3.11/site-packages/torchvision/models/_utils.py:223: UserWarning: Arguments other than a weight enum or `None` for 'weights' are deprecated since 0.13 and may be removed in the future. The current behavior is equivalent to passing `weights=ResNet18_Weights.IMAGENET1K_V1`. You can also use `weights=ResNet18_Weights.DEFAULT` to get the most up-to-date weights.\n  warnings.warn(msg)\n\n\n\nimport requests\nfrom PIL import Image\nfrom torchvision import transforms\n\n# Download human-readable labels for ImageNet.\nresponse = requests.get(\"https://git.io/JJkYN\")\nlabels = response.text.split(\"\\n\")\n\ndef predict(inp):\n  inp = transforms.ToTensor()(inp).unsqueeze(0)\n  with torch.no_grad():\n    prediction = torch.nn.functional.softmax(model(inp)[0], dim=0)\n    confidences = {labels[i]: float(prediction[i]) for i in range(1000)}\n  return confidences\n\n\nimport gradio as gr\n\ngr.Interface(fn=predict,\n             inputs=gr.Image(type=\"pil\"),\n             outputs=gr.Label(num_top_classes=3),\n             examples=[\"tiger.jpg\", \"cheetah.jpg\"]).launch()\n\nRunning on local URL:  http://127.0.0.1:7869\n\nThanks for being a Gradio user! If you have questions or feedback, please join our Discord server and chat with us: https://discord.gg/feTf9x3ZSB\n\nTo create a public link, set `share=True` in `launch()`.\n\n\n\n\n\n\n\n\nTraceback (most recent call last):\n  File \"/home/ben/mambaforge/envs/cfast/lib/python3.11/site-packages/gradio/queueing.py\", line 527, in process_events\n    response = await route_utils.call_process_api(\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/ben/mambaforge/envs/cfast/lib/python3.11/site-packages/gradio/route_utils.py\", line 261, in call_process_api\n    output = await app.get_blocks().process_api(\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/ben/mambaforge/envs/cfast/lib/python3.11/site-packages/gradio/blocks.py\", line 1788, in process_api\n    result = await self.call_function(\n             ^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/ben/mambaforge/envs/cfast/lib/python3.11/site-packages/gradio/blocks.py\", line 1340, in call_function\n    prediction = await anyio.to_thread.run_sync(\n                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/ben/mambaforge/envs/cfast/lib/python3.11/site-packages/anyio/to_thread.py\", line 33, in run_sync\n    return await get_asynclib().run_sync_in_worker_thread(\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/ben/mambaforge/envs/cfast/lib/python3.11/site-packages/anyio/_backends/_asyncio.py\", line 877, in run_sync_in_worker_thread\n    return await future\n           ^^^^^^^^^^^^\n  File \"/home/ben/mambaforge/envs/cfast/lib/python3.11/site-packages/anyio/_backends/_asyncio.py\", line 807, in run\n    result = context.run(func, *args)\n             ^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/ben/mambaforge/envs/cfast/lib/python3.11/site-packages/gradio/utils.py\", line 759, in wrapper\n    response = f(*args, **kwargs)\n               ^^^^^^^^^^^^^^^^^^\n  File \"/tmp/ipykernel_145374/855710716.py\", line 10, in predict\n    inp = transforms.ToTensor()(inp).unsqueeze(0)\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/ben/mambaforge/envs/cfast/lib/python3.11/site-packages/torchvision/transforms/transforms.py\", line 137, in __call__\n    return F.to_tensor(pic)\n           ^^^^^^^^^^^^^^^^\n  File \"/home/ben/mambaforge/envs/cfast/lib/python3.11/site-packages/torchvision/transforms/functional.py\", line 140, in to_tensor\n    raise TypeError(f\"pic should be PIL Image or ndarray. Got {type(pic)}\")\nTypeError: pic should be PIL Image or ndarray. Got &lt;class 'NoneType'&gt;",
+    "crumbs": [
+      "Blog",
+      "Gradio"
+    ]
+  },
+  {
+    "objectID": "grafana.html",
+    "href": "grafana.html",
+    "title": "Grafana",
+    "section": "",
+    "text": "sudo apt-get install -y adduser libfontconfig1 musl\nwget https://dl.grafana.com/enterprise/release/grafana-enterprise_10.2.0_amd64.deb\nsudo dpkg -i grafana-enterprise_10.2.0_amd64.deb",
+    "crumbs": [
+      "Blog",
+      "Grafana"
+    ]
+  },
+  {
+    "objectID": "grafana.html#installation",
+    "href": "grafana.html#installation",
+    "title": "Grafana",
+    "section": "",
+    "text": "sudo apt-get install -y adduser libfontconfig1 musl\nwget https://dl.grafana.com/enterprise/release/grafana-enterprise_10.2.0_amd64.deb\nsudo dpkg -i grafana-enterprise_10.2.0_amd64.deb",
+    "crumbs": [
+      "Blog",
+      "Grafana"
+    ]
+  },
+  {
+    "objectID": "grafana.html#to-start-grafana-server",
+    "href": "grafana.html#to-start-grafana-server",
+    "title": "Grafana",
+    "section": "To Start Grafana Server",
+    "text": "To Start Grafana Server\nsudo systemctl start grafana-server",
+    "crumbs": [
+      "Blog",
+      "Grafana"
+    ]
+  },
+  {
+    "objectID": "grafana.html#to-get-grafana-server-status",
+    "href": "grafana.html#to-get-grafana-server-status",
+    "title": "Grafana",
+    "section": "To get Grafana Server status",
+    "text": "To get Grafana Server status\nsudo systemctl status grafana-server",
+    "crumbs": [
+      "Blog",
+      "Grafana"
+    ]
+  },
+  {
+    "objectID": "grafana.html#to-stop-grafana-server",
+    "href": "grafana.html#to-stop-grafana-server",
+    "title": "Grafana",
+    "section": "To Stop Grafana server",
+    "text": "To Stop Grafana server\nsudo systemctl stop grafana-server",
+    "crumbs": [
+      "Blog",
+      "Grafana"
+    ]
+  },
+  {
+    "objectID": "grafana.html#localhost-port",
+    "href": "grafana.html#localhost-port",
+    "title": "Grafana",
+    "section": "LocalHost Port",
+    "text": "LocalHost Port\nhttp://localhost:3000",
+    "crumbs": [
+      "Blog",
+      "Grafana"
+    ]
+  },
+  {
+    "objectID": "grafana.html#first-login",
+    "href": "grafana.html#first-login",
+    "title": "Grafana",
+    "section": "First Login",
+    "text": "First Login\nuser: admin\npass: admin\n\ntoken = 'b4bTbQgLdRCvoBZQSjaRlUh8lnslIflVDFet6VeToen4GWu-MYwHilUddyWZorKPFCSFiu1KLNSvptXcHVDzPg=='",
+    "crumbs": [
+      "Blog",
+      "Grafana"
+    ]
+  },
+  {
+    "objectID": "bootstrap.html",
+    "href": "bootstrap.html",
+    "title": "Bootstrap",
+    "section": "",
+    "text": "CDN (Content Delivery Network): The easiest way to use Bootstrap is by including it via a CDN.\n\n&lt;!doctype html&gt;\n&lt;html lang=\"en\"&gt;\n  &lt;head&gt;\n    &lt;meta charset=\"utf-8\"&gt;\n    &lt;meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"&gt;\n    &lt;title&gt;Bootstrap demo&lt;/title&gt;\n    &lt;link href=\"https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css\" rel=\"stylesheet\" integrity=\"sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH\" crossorigin=\"anonymous\"&gt;\n  &lt;/head&gt;\n  &lt;body&gt;\n    &lt;h1&gt;Hello, world!&lt;/h1&gt;\n    &lt;script src=\"https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js\" integrity=\"sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz\" crossorigin=\"anonymous\"&gt;&lt;/script&gt;\n  &lt;/body&gt;\n&lt;/html&gt;\n\nDownload: Alternatively, you can download Bootstrap and include it locally in your project.\nBootstrap Versions: Bootstrap has evolved through several versions, with Bootstrap 5 being the latest. It removed dependency on jQuery, added more features, and improved the overall design and development experience.",
+    "crumbs": [
+      "Blog",
+      "Bootstrap"
+    ]
+  },
+  {
+    "objectID": "bootstrap.html#getting-started-with-bootstrap",
+    "href": "bootstrap.html#getting-started-with-bootstrap",
+    "title": "Bootstrap",
+    "section": "",
+    "text": "CDN (Content Delivery Network): The easiest way to use Bootstrap is by including it via a CDN.\n\n&lt;!doctype html&gt;\n&lt;html lang=\"en\"&gt;\n  &lt;head&gt;\n    &lt;meta charset=\"utf-8\"&gt;\n    &lt;meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"&gt;\n    &lt;title&gt;Bootstrap demo&lt;/title&gt;\n    &lt;link href=\"https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css\" rel=\"stylesheet\" integrity=\"sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH\" crossorigin=\"anonymous\"&gt;\n  &lt;/head&gt;\n  &lt;body&gt;\n    &lt;h1&gt;Hello, world!&lt;/h1&gt;\n    &lt;script src=\"https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js\" integrity=\"sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz\" crossorigin=\"anonymous\"&gt;&lt;/script&gt;\n  &lt;/body&gt;\n&lt;/html&gt;\n\nDownload: Alternatively, you can download Bootstrap and include it locally in your project.\nBootstrap Versions: Bootstrap has evolved through several versions, with Bootstrap 5 being the latest. It removed dependency on jQuery, added more features, and improved the overall design and development experience.",
+    "crumbs": [
+      "Blog",
+      "Bootstrap"
+    ]
+  },
+  {
+    "objectID": "bootstrap.html#bootstrap-grid-system",
+    "href": "bootstrap.html#bootstrap-grid-system",
+    "title": "Bootstrap",
+    "section": "Bootstrap Grid System",
+    "text": "Bootstrap Grid System\n\nResponsive Grid System: Bootstrap’s grid system uses a series of containers, rows, and columns to layout and align content. It’s based on a 12-column layout.\nBreakpoints: Bootstrap defines several responsive breakpoints (e.g., xs, sm, md, lg, xl, xxl) for different screen sizes.\nContainers: The grid system is wrapped in a .container class. Containers can be fixed-width (.container) or fluid-width (.container-fluid).\nRows and Columns: Use .row to create a horizontal group of columns and .col-* classes to define the width of columns.\n\n&lt;div class=\"container\"&gt;\n    &lt;div class=\"row\"&gt;\n        &lt;div class=\"col-md-4\"&gt;Column 1&lt;/div&gt;\n        &lt;div class=\"col-md-4\"&gt;Column 2&lt;/div&gt;\n        &lt;div class=\"col-md-4\"&gt;Column 3&lt;/div&gt;\n    &lt;/div&gt;\n&lt;/div&gt;",
+    "crumbs": [
+      "Blog",
+      "Bootstrap"
+    ]
+  },
+  {
+    "objectID": "bootstrap.html#bootstrap-components",
+    "href": "bootstrap.html#bootstrap-components",
+    "title": "Bootstrap",
+    "section": "Bootstrap Components",
+    "text": "Bootstrap Components\n\nBootstrap provides a wide range of components that can be used to create a fully-functional and aesthetically pleasing UI.\n\n\nButtons: Bootstrap buttons are styled using the .btn class, and additional classes like .btn-primary, .btn-secondary, .btn-success, etc., for different colors.\n&lt;button type=\"button\" class=\"btn btn-primary\"&gt;Primary Button&lt;/button&gt;\n\n\nNavbar: A responsive navigation bar that can collapse into a hamburger menu on smaller screens.\n&lt;nav class=\"navbar navbar-expand-lg navbar-light bg-light\"&gt;\n    &lt;a class=\"navbar-brand\" href=\"#\"&gt;Navbar&lt;/a&gt;\n    &lt;button class=\"navbar-toggler\" type=\"button\" data-bs-toggle=\"collapse\" data-bs-target=\"#navbarNav\" aria-controls=\"navbarNav\" aria-expanded=\"false\" aria-label=\"Toggle navigation\"&gt;\n        &lt;span class=\"navbar-toggler-icon\"&gt;&lt;/span&gt;\n    &lt;/button&gt;\n    &lt;div class=\"collapse navbar-collapse\" id=\"navbarNav\"&gt;\n        &lt;ul class=\"navbar-nav\"&gt;\n            &lt;li class=\"nav-item\"&gt;\n                &lt;a class=\"nav-link active\" aria-current=\"page\" href=\"#\"&gt;Home&lt;/a&gt;\n            &lt;/li&gt;\n            &lt;li class=\"nav-item\"&gt;\n                &lt;a class=\"nav-link\" href=\"#\"&gt;Features&lt;/a&gt;\n            &lt;/li&gt;\n            &lt;li class=\"nav-item\"&gt;\n                &lt;a class=\"nav-link\" href=\"#\"&gt;Pricing&lt;/a&gt;\n            &lt;/li&gt;\n        &lt;/ul&gt;\n    &lt;/div&gt;\n&lt;/nav&gt;\n\n\nCards: Flexible content containers with various options for headers, footers, images, and content.\n&lt;div class=\"card\" style=\"width: 18rem;\"&gt;\n    &lt;img src=\"...\" class=\"card-img-top\" alt=\"...\"&gt;\n    &lt;div class=\"card-body\"&gt;\n        &lt;h5 class=\"card-title\"&gt;Card title&lt;/h5&gt;\n        &lt;p class=\"card-text\"&gt;Some quick example text to build on the card title and make up the bulk of the card's content.&lt;/p&gt;\n        &lt;a href=\"#\" class=\"btn btn-primary\"&gt;Go somewhere&lt;/a&gt;\n    &lt;/div&gt;\n&lt;/div&gt;\n\n\nForms: Bootstrap styles forms to be more consistent and responsive, with various classes for form controls, validation states, and layout.\n&lt;form&gt;\n    &lt;div class=\"mb-3\"&gt;\n        &lt;label for=\"exampleInputEmail1\" class=\"form-label\"&gt;Email address&lt;/label&gt;\n        &lt;input type=\"email\" class=\"form-control\" id=\"exampleInputEmail1\" aria-describedby=\"emailHelp\"&gt;\n        &lt;div id=\"emailHelp\" class=\"form-text\"&gt;We'll never share your email with anyone else.&lt;/div&gt;\n    &lt;/div&gt;\n    &lt;div class=\"mb-3\"&gt;\n        &lt;label for=\"exampleInputPassword1\" class=\"form-label\"&gt;Password&lt;/label&gt;\n        &lt;input type=\"password\" class=\"form-control\" id=\"exampleInputPassword1\"&gt;\n    &lt;/div&gt;\n    &lt;button type=\"submit\" class=\"btn btn-primary\"&gt;Submit&lt;/button&gt;\n&lt;/form&gt;\n\n\nModals: Popup dialogs that can display additional content without leaving the current page.\n&lt;button type=\"button\" class=\"btn btn-primary\" data-bs-toggle=\"modal\" data-bs-target=\"#exampleModal\"&gt;\n    Launch demo modal\n&lt;/button&gt;\n\n&lt;div class=\"modal fade\" id=\"exampleModal\" tabindex=\"-1\" aria-labelledby=\"exampleModalLabel\" aria-hidden=\"true\"&gt;\n    &lt;div class=\"modal-dialog\"&gt;\n        &lt;div class=\"modal-content\"&gt;\n            &lt;div class=\"modal-header\"&gt;\n                &lt;h5 class=\"modal-title\" id=\"exampleModalLabel\"&gt;Modal title&lt;/h5&gt;\n                &lt;button type=\"button\" class=\"btn-close\" data-bs-dismiss=\"modal\" aria-label=\"Close\"&gt;&lt;/button&gt;\n            &lt;/div&gt;\n            &lt;div class=\"modal-body\"&gt;\n                ...\n            &lt;/div&gt;\n            &lt;div class=\"modal-footer\"&gt;\n                &lt;button type=\"button\" class=\"btn btn-secondary\" data-bs-dismiss=\"modal\"&gt;Close&lt;/button&gt;\n                &lt;button type=\"button\" class=\"btn btn-primary\"&gt;Save changes&lt;/button&gt;\n            &lt;/div&gt;\n        &lt;/div&gt;\n    &lt;/div&gt;\n&lt;/div&gt;\n\n\nAlerts: Provides contextual feedback messages for typical user actions.\n&lt;div class=\"alert alert-warning\" role=\"alert\"&gt;\n    This is a warning alert—check it out!\n&lt;/div&gt;\n\n\nTables: Bootstrap tables are styled and responsive by default with classes like .table, .table-striped, .table-bordered, etc.\n&lt;table class=\"table\"&gt;\n    &lt;thead&gt;\n        &lt;tr&gt;\n            &lt;th scope=\"col\"&gt;#&lt;/th&gt;\n            &lt;th scope=\"col\"&gt;First&lt;/th&gt;\n            &lt;th scope=\"col\"&gt;Last&lt;/th&gt;\n            &lt;th scope=\"col\"&gt;Handle&lt;/th&gt;\n        &lt;/tr&gt;\n    &lt;/thead&gt;\n    &lt;tbody&gt;\n        &lt;tr&gt;\n            &lt;th scope=\"row\"&gt;1&lt;/th&gt;\n            &lt;td&gt;Mark&lt;/td&gt;\n            &lt;td&gt;Otto&lt;/td&gt;\n            &lt;td&gt;@mdo&lt;/td&gt;\n        &lt;/tr&gt;\n    &lt;/tbody&gt;\n&lt;/table&gt;\n\n\nCarousels: A slideshow component for cycling through elements like images or text.\n&lt;div id=\"carouselExampleControls\" class=\"carousel slide\" data-bs-ride=\"carousel\"&gt;\n    &lt;div class=\"carousel-inner\"&gt;\n        &lt;div class=\"carousel-item active\"&gt;\n            &lt;img src=\"...\" class=\"d-block w-100\" alt=\"...\"&gt;\n        &lt;/div&gt;\n        &lt;div class=\"carousel-item\"&gt;\n            &lt;img src=\"...\" class=\"d-block w-100\" alt=\"...\"&gt;\n        &lt;/div&gt;\n    &lt;/div&gt;\n    &lt;button class=\"carousel-control-prev\" type=\"button\" data-bs-target=\"#carouselExampleControls\" data-bs-slide=\"prev\"&gt;\n        &lt;span class=\"carousel-control-prev-icon\" aria-hidden=\"true\"&gt;&lt;/span&gt;\n        &lt;span class=\"visually-hidden\"&gt;Previous&lt;/span&gt;\n    &lt;/button&gt;\n    &lt;button class=\"carousel-control-next\" type=\"button\" data-bs-target=\"#carouselExampleControls\" data-bs-slide=\"next\"&gt;\n        &lt;span class=\"carousel-control-next-icon\" aria-hidden=\"true\"&gt;&lt;/span&gt;\n        &lt;span class=\"visually-hidden\"&gt;Next&lt;/span&gt;\n    &lt;/button&gt;\n&lt;/div&gt;",
+    "crumbs": [
+      "Blog",
+      "Bootstrap"
+    ]
+  },
+  {
+    "objectID": "html.html",
+    "href": "html.html",
+    "title": "HTML",
+    "section": "",
+    "text": "Doctype Declaration: At the top of every HTML document, you declare the document type with &lt;!DOCTYPE html&gt;. This tells the browser that the page is written in HTML5.\nHTML Tag (&lt;html&gt;): The root element that contains all other elements.\nHead Section (&lt;head&gt;): Contains meta-information about the document, like the title (&lt;title&gt;), character set (&lt;meta charset=\"UTF-8\"&gt;), and links to CSS or JavaScript files.\nBody Section (&lt;body&gt;): Contains the content of the web page, such as text, images, links, and other media.\n\n\nBasic Example\n\n&lt;!DOCTYPE html&gt;\n&lt;html&gt;\n  &lt;head&gt;\n    &lt;meta charset=\"UTF-8\"&gt;\n    &lt;title&gt;My First HTML Page&lt;/title&gt;\n  &lt;/head&gt;\n  &lt;body&gt;\n    &lt;h1&gt;Hello, World!&lt;/h1&gt;\n    &lt;p&gt;This is a paragraph of text.&lt;/p&gt;\n  &lt;/body&gt;\n&lt;/html&gt;",
+    "crumbs": [
+      "Blog",
+      "HTML"
+    ]
+  },
+  {
+    "objectID": "html.html#basic-structure-of-html",
+    "href": "html.html#basic-structure-of-html",
+    "title": "HTML",
+    "section": "",
+    "text": "Doctype Declaration: At the top of every HTML document, you declare the document type with &lt;!DOCTYPE html&gt;. This tells the browser that the page is written in HTML5.\nHTML Tag (&lt;html&gt;): The root element that contains all other elements.\nHead Section (&lt;head&gt;): Contains meta-information about the document, like the title (&lt;title&gt;), character set (&lt;meta charset=\"UTF-8\"&gt;), and links to CSS or JavaScript files.\nBody Section (&lt;body&gt;): Contains the content of the web page, such as text, images, links, and other media.\n\n\nBasic Example\n\n&lt;!DOCTYPE html&gt;\n&lt;html&gt;\n  &lt;head&gt;\n    &lt;meta charset=\"UTF-8\"&gt;\n    &lt;title&gt;My First HTML Page&lt;/title&gt;\n  &lt;/head&gt;\n  &lt;body&gt;\n    &lt;h1&gt;Hello, World!&lt;/h1&gt;\n    &lt;p&gt;This is a paragraph of text.&lt;/p&gt;\n  &lt;/body&gt;\n&lt;/html&gt;",
+    "crumbs": [
+      "Blog",
+      "HTML"
+    ]
+  },
+  {
+    "objectID": "html.html#html-tags-and-elements",
+    "href": "html.html#html-tags-and-elements",
+    "title": "HTML",
+    "section": "HTML Tags and Elements",
+    "text": "HTML Tags and Elements\n\nTags: Keywords enclosed in angle brackets (e.g., &lt;tagname&gt;). Tags usually come in pairs with an opening tag (&lt;tag&gt;) and a closing tag (&lt;/tag&gt;), though some tags are self-closing (e.g., &lt;img /&gt;).\nElements: The complete structure from the opening tag to the closing tag, including the content between them (e.g., &lt;p&gt;This is a paragraph.&lt;/p&gt;).",
+    "crumbs": [
+      "Blog",
+      "HTML"
+    ]
+  },
+  {
+    "objectID": "html.html#common-html-tags",
+    "href": "html.html#common-html-tags",
+    "title": "HTML",
+    "section": "Common HTML Tags",
+    "text": "Common HTML Tags\n\nHeadings: &lt;h1&gt; to &lt;h6&gt; tags, where &lt;h1&gt; is the highest level and &lt;h6&gt; is the lowest.\nParagraphs: &lt;p&gt; tag for text blocks.\nLinks: &lt;a href=\"URL\"&gt;Link Text&lt;/a&gt; for creating hyperlinks.\nImages: &lt;img src=\"image.jpg\" alt=\"Description\"&gt; for embedding images.\nLists:\n\nUnordered: &lt;ul&gt; with &lt;li&gt; for each list item.\nOrdered: &lt;ol&gt; with &lt;li&gt; for each list item.\n\nTables: &lt;table&gt; containing &lt;tr&gt; (table rows), &lt;th&gt; (table headers), and &lt;td&gt; (table data).\nForms: &lt;form&gt; for creating user input fields, with various input types like &lt;input&gt;, &lt;textarea&gt;, and &lt;select&gt;.\n\n\nExamples:\n\nHeading\n\nqsdfasdfadf\n\n\n\nLink Google Link\n\n\nOrdered List\n\n\nq\n\n\nw\n\n\n\ne\n\n\nr\n\n\n\n\nUnordered List\n\n\nasdf\n\n\nvrewea\n\n\n\nasdf\n\n\n\n\n\n\nTable\nTable Attributes: - border: Specifies the width of the border around the table and cells. - cellpadding: Defines the space between the cell content and the cell borders. - cellspacing: Defines the space between individual table cells. - width and height: Define the dimensions of the table or cells. - align: Aligns the table on the page (left, center, right). - bgcolor: Sets the background color of the table or cells (deprecated in favor of CSS).\n\nExample\n\n\n\n\nMain Title\n\n\n\n\nStudent Name\n\n\nSubject\n\n\nGrade\n\n\n\n\n\n\nJohn Doe\n\n\nMathematics\n\n\nA\n\n\n\n\nJane Smith\n\n\nScience\n\n\nB+\n\n\n\n\nEmily Johnson\n\n\nHistory\n\n\nA-\n\n\n\n\n\n\n\n\n\nMain Title\n\n\n\n\nStudent Name\n\n\nSubject\n\n\nGrade\n\n\n\n\n\n\nJohn Doe\n\n\nMathematics\n\n\nA\n\n\n\n\nJane Smith\n\n\nScience\n\n\nB+\n\n\n\n\nEmily Johnson\n\n\nHistory\n\n\nA-",
+    "crumbs": [
+      "Blog",
+      "HTML"
+    ]
+  },
+  {
+    "objectID": "html.html#attributes",
+    "href": "html.html#attributes",
+    "title": "HTML",
+    "section": "Attributes",
+    "text": "Attributes\n\nGlobal Attributes: Common to all elements, like id, class, style, and title.\nSpecific Attributes: Relevant to particular tags, like href for &lt;a&gt;, src for &lt;img&gt;, and action for &lt;form&gt;\n\n\nExample\n\n&lt;a href=\"https://www.example.com\" title=\"Example Website\"&gt;Visit Example&lt;/a&gt;",
+    "crumbs": [
+      "Blog",
+      "HTML"
+    ]
+  },
+  {
+    "objectID": "html.html#semantic-html",
+    "href": "html.html#semantic-html",
+    "title": "HTML",
+    "section": "Semantic HTML",
+    "text": "Semantic HTML\n\nPurpose: To provide meaning to web content, helping both browsers and developers understand the structure of the web page.\n\n\nExamples: - &lt;header&gt; for page headers. - &lt;nav&gt; for navigation links. - &lt;article&gt; for self-contained content. - &lt;section&gt; for distinct sections of content. - &lt;footer&gt; for page footers.",
+    "crumbs": [
+      "Blog",
+      "HTML"
+    ]
+  },
+  {
+    "objectID": "html.html#html-forms",
+    "href": "html.html#html-forms",
+    "title": "HTML",
+    "section": "HTML Forms",
+    "text": "HTML Forms\n\nUsed for collecting user input.\n\nCommon elements include: - &lt;input&gt; for single-line text fields, checkboxes, radio buttons, etc. - &lt;textarea&gt; for multi-line text input. - &lt;button&gt; for clickable buttons. - &lt;select&gt; for dropdown lists.\n\nExample:\n\n&lt;form action=\"WEB_doc/Front_end/html.html\" method=\"POST\"&gt;\n  &lt;label for=\"name\"&gt;Name:&lt;/label&gt;\n  &lt;input type=\"text\" id=\"name\" name=\"name\"&gt;\n  &lt;button type=\"submit\"&gt;Submit&lt;/button&gt;\n&lt;/form&gt;\n\nName:  Submit\n\n\n\n\nRegistration Form\n\n\n\nPersonal Information First Name:  Last Name:  Email:  Phone Number: \n\n\n\nAccount Information Username:  Password:  Confirm Password: \n\n\n\nPreferences Preferred Contact Method:  Email  Phone Subscribe to our newsletter:  Yes, sign me up! Country:  United States Canada United Kingdom Australia \n\n\n\nProfile Picture Upload a profile picture: \n\n\n\n\nRegister\n\n\nReset",
+    "crumbs": [
+      "Blog",
+      "HTML"
+    ]
+  },
+  {
+    "objectID": "html.html#html5-new-features",
+    "href": "html.html#html5-new-features",
+    "title": "HTML",
+    "section": "HTML5 New Features",
+    "text": "HTML5 New Features\n\nNew Elements: &lt;article&gt;, &lt;aside&gt;, &lt;figure&gt;, &lt;figcaption&gt;, &lt;footer&gt;, &lt;header&gt;, &lt;nav&gt;, &lt;section&gt;, &lt;main&gt;, etc.\nAudio and Video: &lt;audio nd &lt;video&gt; tags allow embedding multimedia without third-party plugins.\nCanvas and SVG: &lt;canvas&gt; for drawing graphics on the fly, &lt;svg&gt; for scalable vector graphics.\nLocal Storage: localStorage and sessionStorage for storing data on the client-side.\nGeolocation API: For accessing the user’s location.\nForms Enhancements: New input types like date, email, range, search, tel, url, and more.",
+    "crumbs": [
+      "Blog",
+      "HTML"
+    ]
+  },
+  {
+    "objectID": "html.html#accessibility-in-html",
+    "href": "html.html#accessibility-in-html",
+    "title": "HTML",
+    "section": "Accessibility in HTML",
+    "text": "Accessibility in HTML\n\nARIA (Accessible Rich Internet Applications): Attributes like aria-label, aria-hidden, etc., to improve accessibility.\nAlt Text: The alt attribute in images provides text descriptions for screen readers.\nSemantic Elements: Using proper tags like &lt;nav&gt;, &lt;header&gt;, etc., for better navigation for assistive technologies.",
+    "crumbs": [
+      "Blog",
+      "HTML"
+    ]
+  },
+  {
+    "objectID": "streamlit.html",
+    "href": "streamlit.html",
+    "title": "Streamlit",
+    "section": "",
+    "text": "!pip list | grep streamlit\n\nstreamlit                           1.33.0",
+    "crumbs": [
+      "Blog",
+      "Streamlit"
+    ]
+  },
+  {
+    "objectID": "streamlit.html#display-text",
+    "href": "streamlit.html#display-text",
+    "title": "Streamlit",
+    "section": "Display text",
+    "text": "Display text\n\nimport streamlit as st\nimport pandas as pd\nimport numpy as np\n\n\n---------------------------------------------------------------------------\nAttributeError                            Traceback (most recent call last)\nCell In[3], line 1\n----&gt; 1 import streamlit as st\n      2 import pandas as pd\n      3 import numpy as np\n\nFile ~/BENEDICT_Only/Benedict_Projects/Benedict_Webdevelopment/webdevelopment_doc/nbs/streamlit.py:5\n      2 import pandas as pd\n      3 import numpy as np\n----&gt; 5 st.title('Uber pickups in NYC')\n      7 DATE_COLUMN = 'date/time'\n      8 DATA_URL = ('https://s3-us-west-2.amazonaws.com/'\n      9             'streamlit-demo-data/uber-raw-data-sep14.csv.gz')\n\nAttributeError: partially initialized module 'streamlit' has no attribute 'title' (most likely due to a circular import)\n\n\n\nst.text('Fixed width text')\nst.markdown('_Markdown_') # see #*\nst.caption('Balloons. Hundreds of them...')\nst.latex(r''' e^{i\\pi} + 1 = 0 ''')\nst.write('Most objects') # df, err, func, keras!\nst.write(['st', 'is &lt;', 3]) # see *\nst.title('My title')\nst.header('My header')\nst.subheader('My sub')\nst.code('for i in range(8): foo()')\n\n# * optional kwarg unsafe_allow_html = True",
+    "crumbs": [
+      "Blog",
+      "Streamlit"
+    ]
+  },
+  {
+    "objectID": "streamlit.html#display-text-1",
+    "href": "streamlit.html#display-text-1",
+    "title": "Streamlit",
+    "section": "Display text",
+    "text": "Display text\nst.dataframe(my_dataframe)\nst.table(data.iloc[0:10])\nst.json({'foo':'bar','fu':'ba'})\nst.metric(label=\"Temp\", value=\"273 K\", delta=\"1.2 K\")",
+    "crumbs": [
+      "Blog",
+      "Streamlit"
+    ]
+  },
+  {
+    "objectID": "streamlit.html#display-media",
+    "href": "streamlit.html#display-media",
+    "title": "Streamlit",
+    "section": "Display media",
+    "text": "Display media\nst.image('./header.png')\nst.audio(data)\nst.video(data)",
+    "crumbs": [
+      "Blog",
+      "Streamlit"
+    ]
+  },
+  {
+    "objectID": "streamlit.html#columns",
+    "href": "streamlit.html#columns",
+    "title": "Streamlit",
+    "section": "Columns",
+    "text": "Columns\ncol1, col2 = st.columns(2)\ncol1.write('Column 1')\ncol2.write('Column 2')\n\n# Three columns with different widths\ncol1, col2, col3 = st.columns([3,1,1])\n# col1 is wider\n\n# Using 'with' notation:\n&gt;&gt;&gt; with col1:\n&gt;&gt;&gt;     st.write('This is column 1')",
+    "crumbs": [
+      "Blog",
+      "Streamlit"
+    ]
+  },
+  {
+    "objectID": "streamlit.html#tabs",
+    "href": "streamlit.html#tabs",
+    "title": "Streamlit",
+    "section": "Tabs",
+    "text": "Tabs\n# Insert containers separated into tabs:\n&gt;&gt;&gt; tab1, tab2 = st.tabs([\"Tab 1\", \"Tab2\"])\n&gt;&gt;&gt; tab1.write(\"this is tab 1\")\n&gt;&gt;&gt; tab2.write(\"this is tab 2\")\n\n# You can also use \"with\" notation:\n&gt;&gt;&gt; with tab1:\n&gt;&gt;&gt;   st.radio('Select one:', [1, 2])",
+    "crumbs": [
+      "Blog",
+      "Streamlit"
+    ]
+  },
+  {
+    "objectID": "streamlit.html#control-flow",
+    "href": "streamlit.html#control-flow",
+    "title": "Streamlit",
+    "section": "Control flow",
+    "text": "Control flow\n# Stop execution immediately:\nst.stop()\n# Rerun script immediately:\nst.experimental_rerun()\n\n# Group multiple widgets:\n&gt;&gt;&gt; with st.form(key='my_form'):\n&gt;&gt;&gt;   username = st.text_input('Username')\n&gt;&gt;&gt;   password = st.text_input('Password')\n&gt;&gt;&gt;   st.form_submit_button('Login')",
+    "crumbs": [
+      "Blog",
+      "Streamlit"
+    ]
+  },
+  {
+    "objectID": "streamlit.html#personalize-apps-for-users",
+    "href": "streamlit.html#personalize-apps-for-users",
+    "title": "Streamlit",
+    "section": "Personalize apps for users",
+    "text": "Personalize apps for users\n# Show different content based on the user's email address.\n&gt;&gt;&gt; if st.user.email == 'jane@email.com':\n&gt;&gt;&gt;    display_jane_content()\n&gt;&gt;&gt; elif st.user.email == 'adam@foocorp.io':\n&gt;&gt;&gt;    display_adam_content()\n&gt;&gt;&gt; else:\n&gt;&gt;&gt;    st.write(\"Please contact us to get access!\")",
+    "crumbs": [
+      "Blog",
+      "Streamlit"
+    ]
+  },
+  {
+    "objectID": "streamlit.html#display-interactive-widgets",
+    "href": "streamlit.html#display-interactive-widgets",
+    "title": "Streamlit",
+    "section": "Display interactive widgets",
+    "text": "Display interactive widgets\nst.button('Hit me')\nst.data_editor('Edit data', data)\nst.checkbox('Check me out')\nst.radio('Pick one:', ['nose','ear'])\nst.selectbox('Select', [1,2,3])\nst.multiselect('Multiselect', [1,2,3])\nst.slider('Slide me', min_value=0, max_value=10)\nst.select_slider('Slide to select', options=[1,'2'])\nst.text_input('Enter some text')\nst.number_input('Enter a number')\nst.text_area('Area for textual entry')\nst.date_input('Date input')\nst.time_input('Time entry')\nst.file_uploader('File uploader')\nst.download_button('On the dl', data)\nst.camera_input(\"一二三,茄子!\")\nst.color_picker('Pick a color')\n# Use widgets' returned values in variables\n&gt;&gt;&gt; for i in range(int(st.number_input('Num:'))): foo()\n&gt;&gt;&gt; if st.sidebar.selectbox('I:',['f']) == 'f': b()\n&gt;&gt;&gt; my_slider_val = st.slider('Quinn Mallory', 1, 88)\n&gt;&gt;&gt; st.write(slider_val)\n# Disable widgets to remove interactivity:\n&gt;&gt;&gt; st.slider('Pick a number', 0, 100, disabled=True)",
+    "crumbs": [
+      "Blog",
+      "Streamlit"
+    ]
+  },
+  {
+    "objectID": "streamlit.html#build-chat-based-apps",
+    "href": "streamlit.html#build-chat-based-apps",
+    "title": "Streamlit",
+    "section": "Build chat-based apps",
+    "text": "Build chat-based apps\n# Insert a chat message container.\n&gt;&gt;&gt; with st.chat_message(\"user\"):\n&gt;&gt;&gt;    st.write(\"Hello 👋\")\n&gt;&gt;&gt;    st.line_chart(np.random.randn(30, 3))\n\n# Display a chat input widget.\n&gt;&gt;&gt; st.chat_input(\"Say something\")",
+    "crumbs": [
+      "Blog",
+      "Streamlit"
+    ]
+  },
+  {
+    "objectID": "streamlit.html#mutate-data",
+    "href": "streamlit.html#mutate-data",
+    "title": "Streamlit",
+    "section": "Mutate data",
+    "text": "Mutate data\n# Add rows to a dataframe after\n# showing it.\n&gt;&gt;&gt; element = st.dataframe(df1)\n&gt;&gt;&gt; element.add_rows(df2)\n\n# Add rows to a chart after\n# showing it.\n&gt;&gt;&gt; element = st.line_chart(df1)\n&gt;&gt;&gt; element.add_rows(df2)",
+    "crumbs": [
+      "Blog",
+      "Streamlit"
+    ]
+  },
+  {
+    "objectID": "streamlit.html#display-code",
+    "href": "streamlit.html#display-code",
+    "title": "Streamlit",
+    "section": "Display code",
+    "text": "Display code\nst.echo()\n&gt;&gt;&gt; with st.echo():\n&gt;&gt;&gt;     st.write('Code will be executed and printed')",
+    "crumbs": [
+      "Blog",
+      "Streamlit"
+    ]
+  },
+  {
+    "objectID": "streamlit.html#placeholders-help-and-options",
+    "href": "streamlit.html#placeholders-help-and-options",
+    "title": "Streamlit",
+    "section": "Placeholders, help, and options",
+    "text": "Placeholders, help, and options\n# Replace any single element.\n&gt;&gt;&gt; element = st.empty()\n&gt;&gt;&gt; element.line_chart(...)\n&gt;&gt;&gt; element.text_input(...)  # Replaces previous.\n\n# Insert out of order.\n&gt;&gt;&gt; elements = st.container()\n&gt;&gt;&gt; elements.line_chart(...)\n&gt;&gt;&gt; st.write(\"Hello\")\n&gt;&gt;&gt; elements.text_input(...)  # Appears above \"Hello\".\n\nst.help(pandas.DataFrame)\nst.get_option(key)\nst.set_option(key, value)\nst.set_page_config(layout='wide')\nst.experimental_show(objects)\nst.experimental_get_query_params()\nst.experimental_set_query_params(**params)",
+    "crumbs": [
+      "Blog",
+      "Streamlit"
+    ]
+  },
+  {
+    "objectID": "streamlit.html#connect-to-data-sources",
+    "href": "streamlit.html#connect-to-data-sources",
+    "title": "Streamlit",
+    "section": "Connect to data sources",
+    "text": "Connect to data sources\nst.experimental_connection('pets_db', type='sql')\nconn = st.experimental_connection('sql')\nconn = st.experimental_connection('snowpark')\n\n&gt;&gt;&gt; class MyConnection(ExperimentalBaseConnection[myconn.MyConnection]):\n&gt;&gt;&gt;    def _connect(self, **kwargs) -&gt; MyConnection:\n&gt;&gt;&gt;        return myconn.connect(**self._secrets, **kwargs)\n&gt;&gt;&gt;    def query(self, query):\n&gt;&gt;&gt;       return self._instance.query(query)",
+    "crumbs": [
+      "Blog",
+      "Streamlit"
+    ]
+  },
+  {
+    "objectID": "streamlit.html#optimize-performance",
+    "href": "streamlit.html#optimize-performance",
+    "title": "Streamlit",
+    "section": "Optimize performance",
+    "text": "Optimize performance\n# E.g. Dataframe computation, storing downloaded data, etc.\n&gt;&gt;&gt; @st.cache_data\n... def foo(bar):\n...   # Do something expensive and return data\n...   return data\n# Executes foo\n&gt;&gt;&gt; d1 = foo(ref1)\n# Does not execute foo\n# Returns cached item by value, d1 == d2\n&gt;&gt;&gt; d2 = foo(ref1)\n# Different arg, so function foo executes\n&gt;&gt;&gt; d3 = foo(ref2)\n# Clear all cached entries for this function\n&gt;&gt;&gt; foo.clear()\n# Clear values from *all* in-memory or on-disk cached functions\n&gt;&gt;&gt; st.cache_data.clear()",
+    "crumbs": [
+      "Blog",
+      "Streamlit"
+    ]
+  },
+  {
+    "objectID": "streamlit.html#cache-global-resources",
+    "href": "streamlit.html#cache-global-resources",
+    "title": "Streamlit",
+    "section": "Cache global resources",
+    "text": "Cache global resources\n# E.g. TensorFlow session, database connection, etc.\n&gt;&gt;&gt; @st.cache_resource\n... def foo(bar):\n...   # Create and return a non-data object\n...   return session\n# Executes foo\n&gt;&gt;&gt; s1 = foo(ref1)\n# Does not execute foo\n# Returns cached item by reference, s1 == s2\n&gt;&gt;&gt; s2 = foo(ref1)\n# Different arg, so function foo executes\n&gt;&gt;&gt; s3 = foo(ref2)\n# Clear all cached entries for this function\n&gt;&gt;&gt; foo.clear()\n# Clear all global resources from cache\n&gt;&gt;&gt; st.cache_resource.clear()",
+    "crumbs": [
+      "Blog",
+      "Streamlit"
+    ]
+  },
+  {
+    "objectID": "streamlit.html#deprecated-caching",
+    "href": "streamlit.html#deprecated-caching",
+    "title": "Streamlit",
+    "section": "Deprecated caching",
+    "text": "Deprecated caching\n&gt;&gt;&gt; @st.cache\n... def foo(bar):\n...   # Do something expensive in here...\n...   return data\n&gt;&gt;&gt; # Executes foo\n&gt;&gt;&gt; d1 = foo(ref1)\n&gt;&gt;&gt; # Does not execute foo\n&gt;&gt;&gt; # Returns cached item by reference, d1 == d2\n&gt;&gt;&gt; d2 = foo(ref1)\n&gt;&gt;&gt; # Different arg, so function foo executes\n&gt;&gt;&gt; d3 = foo(ref2)",
+    "crumbs": [
+      "Blog",
+      "Streamlit"
+    ]
+  },
+  {
+    "objectID": "streamlit.html#display-progress-and-status",
+    "href": "streamlit.html#display-progress-and-status",
+    "title": "Streamlit",
+    "section": "Display progress and status",
+    "text": "Display progress and status\n# Show a spinner during a process\n&gt;&gt;&gt; with st.spinner(text='In progress'):\n&gt;&gt;&gt;   time.sleep(3)\n&gt;&gt;&gt;   st.success('Done')\n\n# Show and update progress bar\n&gt;&gt;&gt; bar = st.progress(50)\n&gt;&gt;&gt; time.sleep(3)\n&gt;&gt;&gt; bar.progress(100)\n\nst.balloons()\nst.snow()\nst.toast('Mr Stay-Puft')\nst.error('Error message')\nst.warning('Warning message')\nst.info('Info message')\nst.success('Success message')\nst.exception(e)",
+    "crumbs": [
+      "Blog",
+      "Streamlit"
+    ]
+  },
+  {
+    "objectID": "streamlit.html#examples",
+    "href": "streamlit.html#examples",
+    "title": "Streamlit",
+    "section": "Examples",
+    "text": "Examples\n\n!cat streamlit.py\n\nimport streamlit as st\nimport pandas as pd\nimport numpy as np\n\nst.title('Uber pickups in NYC')\n\nDATE_COLUMN = 'date/time'\nDATA_URL = ('https://s3-us-west-2.amazonaws.com/'\n            'streamlit-demo-data/uber-raw-data-sep14.csv.gz')\n\n@st.cache_data\ndef load_data(nrows):\n    data = pd.read_csv(DATA_URL, nrows=nrows)\n    lowercase = lambda x: str(x).lower()\n    data.rename(lowercase, axis='columns', inplace=True)\n    data[DATE_COLUMN] = pd.to_datetime(data[DATE_COLUMN])\n    return data\n\ndata_load_state = st.text('Loading data...')\ndata = load_data(10000)\ndata_load_state.text(\"Done! (using st.cache_data)\")\n\nif st.checkbox('Show raw data'):\n    st.subheader('Raw data')\n    st.write(data)\n\nst.subheader('Number of pickups by hour')\nhist_values = np.histogram(data[DATE_COLUMN].dt.hour, bins=24, range=(0,24))[0]\nst.bar_chart(hist_values)\n\n# Some number in the range 0-23\nhour_to_filter = st.slider('hour', 0, 23, 17)\nfiltered_data = data[data[DATE_COLUMN].dt.hour == hour_to_filter]\n\nst.subheader('Map of all pickups at %s:00' % hour_to_filter)\nst.map(filtered_data)\n\n\n\n!cat Streamlit_app/Hello.py\n\nimport streamlit as st\n\nst.set_page_config(\n    page_title=\"Hello\",\n    page_icon=\"👋\",\n)\n\nst.write(\"# Welcome to Streamlit! 👋\")\n\nst.sidebar.success(\"Select a demo above.\")\n\nst.markdown(\n    \"\"\"\n    Streamlit is an open-source app framework built specifically for\n    Machine Learning and Data Science projects.\n    **👈 Select a demo from the sidebar** to see some examples\n    of what Streamlit can do!\n    ### Want to learn more?\n    - Check out [streamlit.io](https://streamlit.io)\n    - Jump into our [documentation](https://docs.streamlit.io)\n    - Ask a question in our [community\n        forums](https://discuss.streamlit.io)\n    ### See more complex demos\n    - Use a neural net to [analyze the Udacity Self-driving Car Image\n        Dataset](https://github.com/streamlit/demo-self-driving)\n    - Explore a [New York City rideshare dataset](https://github.com/streamlit/demo-uber-nyc-pickups)\n\"\"\"\n)\n\n\n\n!cat Streamlit_app/pages/1_Plotting_Demo.py\n\nimport streamlit as st\nimport time\nimport numpy as np\n\nst.set_page_config(page_title=\"Plotting Demo\", page_icon=\"📈\")\n\nst.markdown(\"# Plotting Demo\")\nst.sidebar.header(\"Plotting Demo\")\nst.write(\n    \"\"\"This demo illustrates a combination of plotting and animation with\nStreamlit. We're generating a bunch of random numbers in a loop for around\n5 seconds. Enjoy!\"\"\"\n)\n\nprogress_bar = st.sidebar.progress(0)\nstatus_text = st.sidebar.empty()\nlast_rows = np.random.randn(1, 1)\nchart = st.line_chart(last_rows)\n\nfor i in range(1, 101):\n    new_rows = last_rows[-1, :] + np.random.randn(5, 1).cumsum(axis=0)\n    status_text.text(\"%i%% Complete\" % i)\n    chart.add_rows(new_rows)\n    progress_bar.progress(i)\n    last_rows = new_rows\n    time.sleep(0.05)\n\nprogress_bar.empty()\n\n# Streamlit widgets automatically run the script from top to bottom. Since\n# this button is not connected to any other logic, it just causes a plain\n# rerun.\nst.button(\"Re-run\")\n\n\n\n!cat Streamlit_app/pages/2_Mapping_Demo.py\n\nimport streamlit as st\nimport pandas as pd\nimport pydeck as pdk\nfrom urllib.error import URLError\n\nst.set_page_config(page_title=\"Mapping Demo\", page_icon=\"🌍\")\n\nst.markdown(\"# Mapping Demo\")\nst.sidebar.header(\"Mapping Demo\")\nst.write(\n    \"\"\"This demo shows how to use\n[`st.pydeck_chart`](https://docs.streamlit.io/develop/api-reference/charts/st.pydeck_chart)\nto display geospatial data.\"\"\"\n)\n\n\n@st.cache_data\ndef from_data_file(filename):\n    url = (\n        \"http://raw.githubusercontent.com/streamlit/\"\n        \"example-data/master/hello/v1/%s\" % filename\n    )\n    return pd.read_json(url)\n\n\ntry:\n    ALL_LAYERS = {\n        \"Bike Rentals\": pdk.Layer(\n            \"HexagonLayer\",\n            data=from_data_file(\"bike_rental_stats.json\"),\n            get_position=[\"lon\", \"lat\"],\n            radius=200,\n            elevation_scale=4,\n            elevation_range=[0, 1000],\n            extruded=True,\n        ),\n        \"Bart Stop Exits\": pdk.Layer(\n            \"ScatterplotLayer\",\n            data=from_data_file(\"bart_stop_stats.json\"),\n            get_position=[\"lon\", \"lat\"],\n            get_color=[200, 30, 0, 160],\n            get_radius=\"[exits]\",\n            radius_scale=0.05,\n        ),\n        \"Bart Stop Names\": pdk.Layer(\n            \"TextLayer\",\n            data=from_data_file(\"bart_stop_stats.json\"),\n            get_position=[\"lon\", \"lat\"],\n            get_text=\"name\",\n            get_color=[0, 0, 0, 200],\n            get_size=15,\n            get_alignment_baseline=\"'bottom'\",\n        ),\n        \"Outbound Flow\": pdk.Layer(\n            \"ArcLayer\",\n            data=from_data_file(\"bart_path_stats.json\"),\n            get_source_position=[\"lon\", \"lat\"],\n            get_target_position=[\"lon2\", \"lat2\"],\n            get_source_color=[200, 30, 0, 160],\n            get_target_color=[200, 30, 0, 160],\n            auto_highlight=True,\n            width_scale=0.0001,\n            get_width=\"outbound\",\n            width_min_pixels=3,\n            width_max_pixels=30,\n        ),\n    }\n    st.sidebar.markdown(\"### Map Layers\")\n    selected_layers = [\n        layer\n        for layer_name, layer in ALL_LAYERS.items()\n        if st.sidebar.checkbox(layer_name, True)\n    ]\n    if selected_layers:\n        st.pydeck_chart(\n            pdk.Deck(\n                map_style=\"mapbox://styles/mapbox/light-v9\",\n                initial_view_state={\n                    \"latitude\": 37.76,\n                    \"longitude\": -122.4,\n                    \"zoom\": 11,\n                    \"pitch\": 50,\n                },\n                layers=selected_layers,\n            )\n        )\n    else:\n        st.error(\"Please choose at least one layer above.\")\nexcept URLError as e:\n    st.error(\n        \"\"\"\n        **This demo requires internet access.**\n        Connection error: %s\n    \"\"\"\n        % e.reason\n    )\n\n\n\n!cat Streamlit_app/pages/3_DataFrame_Demo.py\n\nimport streamlit as st\nimport pandas as pd\nimport altair as alt\nfrom urllib.error import URLError\n\nst.set_page_config(page_title=\"DataFrame Demo\", page_icon=\"📊\")\n\nst.markdown(\"# DataFrame Demo\")\nst.sidebar.header(\"DataFrame Demo\")\nst.write(\n    \"\"\"This demo shows how to use `st.write` to visualize Pandas DataFrames.\n(Data courtesy of the [UN Data Explorer](http://data.un.org/Explorer.aspx).)\"\"\"\n)\n\n\n@st.cache_data\ndef get_UN_data():\n    AWS_BUCKET_URL = \"http://streamlit-demo-data.s3-us-west-2.amazonaws.com\"\n    df = pd.read_csv(AWS_BUCKET_URL + \"/agri.csv.gz\")\n    return df.set_index(\"Region\")\n\n\ntry:\n    df = get_UN_data()\n    countries = st.multiselect(\n        \"Choose countries\", list(df.index), [\"China\", \"United States of America\"]\n    )\n    if not countries:\n        st.error(\"Please select at least one country.\")\n    else:\n        data = df.loc[countries]\n        data /= 1000000.0\n        st.write(\"### Gross Agricultural Production ($B)\", data.sort_index())\n\n        data = data.T.reset_index()\n        data = pd.melt(data, id_vars=[\"index\"]).rename(\n            columns={\"index\": \"year\", \"value\": \"Gross Agricultural Product ($B)\"}\n        )\n        chart = (\n            alt.Chart(data)\n            .mark_area(opacity=0.3)\n            .encode(\n                x=\"year:T\",\n                y=alt.Y(\"Gross Agricultural Product ($B):Q\", stack=None),\n                color=\"Region:N\",\n            )\n        )\n        st.altair_chart(chart, use_container_width=True)\nexcept URLError as e:\n    st.error(\n        \"\"\"\n        **This demo requires internet access.**\n        Connection error: %s\n    \"\"\"\n        % e.reason\n    )",
+    "crumbs": [
+      "Blog",
+      "Streamlit"
+    ]
+  },
+  {
+    "objectID": "datatables.html",
+    "href": "datatables.html",
+    "title": "Datatables",
+    "section": "",
+    "text": "Sure! Here’s a streamlined guide on Displaying Tables with DataTables Using Ajax and Fetch API. This guide assumes you have your backend (e.g., Django DRF) already set up to provide the necessary data via API endpoints.",
+    "crumbs": [
+      "Blog",
+      "Datatables"
+    ]
+  },
+  {
+    "objectID": "datatables.html#include-datatables-assets",
+    "href": "datatables.html#include-datatables-assets",
+    "title": "Datatables",
+    "section": "1. Include DataTables Assets",
+    "text": "1. Include DataTables Assets\nFirst, ensure you include jQuery and DataTables CSS/JS in your HTML.\n&lt;!DOCTYPE html&gt;\n&lt;html lang=\"en\"&gt;\n&lt;head&gt;\n    &lt;meta charset=\"UTF-8\"&gt;\n    &lt;title&gt;DataTables Example&lt;/title&gt;\n    &lt;!-- DataTables CSS --&gt;\n    &lt;link rel=\"stylesheet\" href=\"https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css\"&gt;\n&lt;/head&gt;\n&lt;body&gt;\n    &lt;table id=\"exampleTable\" class=\"display\" style=\"width:100%\"&gt;\n        &lt;thead&gt;\n            &lt;tr&gt;\n                &lt;th&gt;ID&lt;/th&gt;\n                &lt;th&gt;Name&lt;/th&gt;\n                &lt;th&gt;Email&lt;/th&gt;\n                &lt;th&gt;Department&lt;/th&gt;\n            &lt;/tr&gt;\n        &lt;/thead&gt;\n        &lt;tbody&gt;\n            &lt;!-- Data will be populated here --&gt;\n        &lt;/tbody&gt;\n    &lt;/table&gt;\n\n    &lt;!-- jQuery --&gt;\n    &lt;script src=\"https://code.jquery.com/jquery-3.6.0.min.js\"&gt;&lt;/script&gt;\n    &lt;!-- DataTables JS --&gt;\n    &lt;script src=\"https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js\"&gt;&lt;/script&gt;\n&lt;/body&gt;\n&lt;/html&gt;",
+    "crumbs": [
+      "Blog",
+      "Datatables"
+    ]
+  },
+  {
+    "objectID": "datatables.html#using-datatables-with-jquery-ajax",
+    "href": "datatables.html#using-datatables-with-jquery-ajax",
+    "title": "Datatables",
+    "section": "2. Using DataTables with jQuery Ajax",
+    "text": "2. Using DataTables with jQuery Ajax\nDataTables natively supports Ajax using jQuery. Here’s how to set it up:\n\nInitialize DataTables with Ajax\n&lt;script&gt;\n$(document).ready(function() {\n    $('#exampleTable').DataTable({\n        \"ajax\": {\n            \"url\": \"/api/data/\", // Your API endpoint\n            \"dataSrc\": \"\" // Adjust based on your API response structure\n        },\n        \"columns\": [\n            { \"data\": \"id\" },\n            { \"data\": \"name\" },\n            { \"data\": \"email\" },\n            { \"data\": \"department\" }\n        ]\n    });\n});\n&lt;/script&gt;\n\n\nExplanation:\n\najax.url: URL of your API endpoint.\najax.dataSrc: Key in your JSON response where data array is located. Use \"\" if the data is the root array.\ncolumns: Define which data fields to display in each column.",
+    "crumbs": [
+      "Blog",
+      "Datatables"
+    ]
+  },
+  {
+    "objectID": "datatables.html#using-datatables-with-fetch-api",
+    "href": "datatables.html#using-datatables-with-fetch-api",
+    "title": "Datatables",
+    "section": "3. Using DataTables with Fetch API",
+    "text": "3. Using DataTables with Fetch API\nWhile DataTables is optimized for jQuery’s Ajax, you can integrate it with the Fetch API using its API methods.\n\nFetch Data and Populate DataTables\n&lt;script&gt;\ndocument.addEventListener('DOMContentLoaded', function() {\n    fetch('/api/data/') // Your API endpoint\n        .then(response =&gt; response.json())\n        .then(data =&gt; {\n            $('#exampleTable').DataTable({\n                data: data, // Your data array\n                columns: [\n                    { data: 'id' },\n                    { data: 'name' },\n                    { data: 'email' },\n                    { data: 'department' }\n                ]\n            });\n        })\n        .catch(error =&gt; console.error('Error fetching data:', error));\n});\n&lt;/script&gt;\n\n\nExplanation:\n\nFetch Data: Use the Fetch API to retrieve data from the API endpoint.\nInitialize DataTables: Pass the fetched data to DataTables during initialization.",
+    "crumbs": [
+      "Blog",
+      "Datatables"
+    ]
+  },
+  {
+    "objectID": "datatables.html#handling-data-formatting",
+    "href": "datatables.html#handling-data-formatting",
+    "title": "Datatables",
+    "section": "4. Handling Data Formatting",
+    "text": "4. Handling Data Formatting\nEnsure your API returns data in a format compatible with DataTables. Typically, an array of objects where each object represents a row.\n\nSample JSON Response:\n[\n    {\n        \"id\": 1,\n        \"name\": \"John Doe\",\n        \"email\": \"john@example.com\",\n        \"department\": \"Engineering\"\n    },\n    {\n        \"id\": 2,\n        \"name\": \"Jane Smith\",\n        \"email\": \"jane@example.com\",\n        \"department\": \"Marketing\"\n    }\n]",
+    "crumbs": [
+      "Blog",
+      "Datatables"
+    ]
+  },
+  {
+    "objectID": "datatables.html#advanced-server-side-processing-with-fetch-api",
+    "href": "datatables.html#advanced-server-side-processing-with-fetch-api",
+    "title": "Datatables",
+    "section": "5. Advanced: Server-Side Processing with Fetch API",
+    "text": "5. Advanced: Server-Side Processing with Fetch API\nFor large datasets, handle pagination, sorting, and searching on the server.\n\nModify Fetch Request with Parameters\n&lt;script&gt;\ndocument.addEventListener('DOMContentLoaded', function() {\n    const table = $('#exampleTable').DataTable({\n        \"processing\": true,\n        \"serverSide\": true,\n        \"ajax\": function(data, callback, settings) {\n            // Map DataTables parameters to your API\n            const params = {\n                search: data.search.value,\n                order: data.order.map(order =&gt; ({\n                    column: data.columns[order.column].data,\n                    dir: order.dir\n                })),\n                start: data.start,\n                length: data.length\n            };\n\n            fetch(`/api/data/?search=${params.search}&start=${params.start}&length=${params.length}`)\n                .then(response =&gt; response.json())\n                .then(json =&gt; {\n                    callback({\n                        recordsTotal: json.total, // Total records\n                        recordsFiltered: json.filtered, // Records after filtering\n                        data: json.results // Data array\n                    });\n                })\n                .catch(error =&gt; console.error('Error fetching data:', error));\n        },\n        \"columns\": [\n            { \"data\": \"id\" },\n            { \"data\": \"name\" },\n            { \"data\": \"email\" },\n            { \"data\": \"department\" }\n        ]\n    });\n});\n&lt;/script&gt;\n\n\nExplanation:\n\nserverSide: true: Enables server-side processing.\nCustom ajax function: Handles sending parameters and processing the response to fit DataTables’ expectations.\nAPI Response: Should include total, filtered, and results fields.",
+    "crumbs": [
+      "Blog",
+      "Datatables"
+    ]
+  },
+  {
+    "objectID": "datatables.html#styling-and-responsiveness",
+    "href": "datatables.html#styling-and-responsiveness",
+    "title": "Datatables",
+    "section": "6. Styling and Responsiveness",
+    "text": "6. Styling and Responsiveness\nEnhance table appearance and ensure it adapts to different screen sizes.\n\nAdd Responsive Extension (Optional)\n&lt;!-- DataTables Responsive CSS --&gt;\n&lt;link rel=\"stylesheet\" href=\"https://cdn.datatables.net/responsive/2.4.1/css/responsive.dataTables.min.css\"&gt;\n&lt;!-- DataTables Responsive JS --&gt;\n&lt;script src=\"https://cdn.datatables.net/responsive/2.4.1/js/dataTables.responsive.min.js\"&gt;&lt;/script&gt;\n\n\nInitialize with Responsive Option\n$('#exampleTable').DataTable({\n    \"responsive\": true,\n    // ... other options\n});",
+    "crumbs": [
+      "Blog",
+      "Datatables"
+    ]
+  },
+  {
+    "objectID": "datatables.html#adding-export-buttons-optional",
+    "href": "datatables.html#adding-export-buttons-optional",
+    "title": "Datatables",
+    "section": "7. Adding Export Buttons (Optional)",
+    "text": "7. Adding Export Buttons (Optional)\nAllow users to export table data in various formats.\n\nInclude Buttons Extension\n&lt;!-- DataTables Buttons CSS --&gt;\n&lt;link rel=\"stylesheet\" href=\"https://cdn.datatables.net/buttons/2.3.6/css/buttons.dataTables.min.css\"&gt;\n&lt;!-- DataTables Buttons JS --&gt;\n&lt;script src=\"https://cdn.datatables.net/buttons/2.3.6/js/dataTables.buttons.min.js\"&gt;&lt;/script&gt;\n&lt;script src=\"https://cdn.datatables.net/buttons/2.3.6/js/buttons.html5.min.js\"&gt;&lt;/script&gt;\n&lt;script src=\"https://cdn.datatables.net/buttons/2.3.6/js/buttons.print.min.js\"&gt;&lt;/script&gt;\n\n\nInitialize with Buttons\n$('#exampleTable').DataTable({\n    \"dom\": 'Bfrtip',\n    \"buttons\": [\n        'copy', 'csv', 'excel', 'pdf', 'print'\n    ],\n    // ... other options\n});",
+    "crumbs": [
+      "Blog",
+      "Datatables"
+    ]
+  },
+  {
+    "objectID": "ajax.html",
+    "href": "ajax.html",
+    "title": "Ajax",
+    "section": "",
+    "text": "1. What is AJAX?\n\nAJAX is a combination of several technologies that work together to send asynchronous HTTP requests from the client (browser) to the server and receive responses to update the UI dynamically, without refreshing the whole page.\nWhile the “XML” in AJAX stands for XML (eXtensible Markup Language), JSON (JavaScript Object Notation) is now more commonly used for data transfer due to its lighter weight and JavaScript-friendly syntax.\n\n\n\n2. Core Components of AJAX\n\nXMLHttpRequest (XHR): The primary tool for AJAX, responsible for sending HTTP requests and receiving responses asynchronously.\nJavaScript: Handles the user interface and communicates with the server.\nHTML/CSS: The basic structure and styling of the web page.\nServer-Side Scripting: Processes the request (e.g., Python, PHP, Node.js) and returns a response.\nData Formats: JSON (widely used today) or XML are used to send structured data between client and server.\n\n\n\n3. How AJAX Works\n\nA user action triggers the AJAX request (e.g., clicking a button).\nJavaScript creates an XMLHttpRequest object and configures it with the HTTP method (GET, POST, etc.) and the endpoint (API or URL).\nThe request is sent to the server.\nThe server processes the request and sends back a response (usually in JSON format).\nThe JavaScript code on the client side processes the response and updates the page accordingly (e.g., displaying new data or content).\n\n\n\n4. Basic Example of an AJAX Call\nHere’s a simple AJAX call using the XMLHttpRequest object to fetch data from a server.\nvar xhr = new XMLHttpRequest();\nxhr.open(\"GET\", \"https://api.example.com/data\", true);  // true means asynchronous\nxhr.onload = function() {\n  if (xhr.status === 200) {\n    var data = JSON.parse(xhr.responseText);\n    console.log(data);\n  }\n};\nxhr.send();\n\n\n5. AJAX Using Fetch API (Modern Approach)\nThe Fetch API is a modern alternative to XMLHttpRequest, making it simpler to work with AJAX in JavaScript. It uses Promises for handling responses.\nExample using the fetch() function:\nfetch('https://api.example.com/data')\n  .then(response =&gt; response.json())\n  .then(data =&gt; {\n    console.log(data);\n  })\n  .catch(error =&gt; {\n    console.error('Error:', error);\n  });\n\n\n6. AJAX with jQuery\njQuery offers simplified syntax for making AJAX requests, although it’s less commonly used today due to modern native JavaScript alternatives like the Fetch API.\nExample using jQuery’s $.ajax():\n$.ajax({\n  url: 'https://api.example.com/data',\n  method: 'GET',\n  success: function(data) {\n    console.log(data);\n  },\n  error: function(error) {\n    console.error('Error:', error);\n  }\n});\n\n\n7. AJAX Methods\n\nGET: Used to request data from the server without modifying it.\nPOST: Used to send data to the server to create or update resources.\nPUT: Similar to POST but typically used for updating existing resources.\nDELETE: Used to delete resources on the server.\n\n\n\n8. Advantages of AJAX\n\nAsynchronous Requests: The user can continue interacting with the page while the data is being fetched or sent.\nBetter User Experience: Web applications feel more dynamic, responsive, and faster without full-page reloads.\nPartial Page Updates: Only specific parts of the page get updated (e.g., a comment section), improving performance and reducing server load.\n\n\n\n9. Common AJAX Use Cases\n\nForm Submission: Submitting forms asynchronously without reloading the page (e.g., login, signup).\nLive Search: Fetching search results as the user types, such as Google’s search suggestions.\nPagination: Loading more content dynamically as the user scrolls (infinite scroll).\nUpdating Parts of a Page: Refreshing specific sections like notifications, comments, or chat messages.\n\n\n\n10. Error Handling\nError handling in AJAX requests is important to ensure smooth operation, especially if the server fails to respond or returns an error.\nExample:\nfetch('https://api.example.com/data')\n  .then(response =&gt; {\n    if (!response.ok) {\n      throw new Error('Network response was not ok');\n    }\n    return response.json();\n  })\n  .then(data =&gt; console.log(data))\n  .catch(error =&gt; console.error('There was a problem with your fetch operation:', error));\n\n\n11. Security Considerations\n\nCross-Origin Resource Sharing (CORS): Browsers prevent AJAX requests to different domains unless the server explicitly allows it via CORS headers.\nSame-Origin Policy: A security measure that restricts scripts running on a page from making requests to a domain different from the one that served the web page.\nAuthentication: Token-based authentication (e.g., OAuth, JWT) is commonly used to authenticate users before making AJAX requests to protect sensitive data.\n\n\n\n12. Limitations of AJAX\n\nSEO: Since content loaded by AJAX is not immediately present in the HTML, search engines may have difficulty indexing it. Server-side rendering is often preferred for SEO-critical pages.\nComplexity: Handling multiple AJAX requests and their responses can make code more complex. This can lead to callback hell in deeply nested callbacks (mitigated by Promises or async/await in modern JavaScript).\nBrowser Support: Older browsers may not fully support all AJAX features, though this is less of a concern with modern browsers.\n\n\n\n13. Tools and Libraries for AJAX\n\nAxios: A promise-based HTTP client that makes it easier to work with AJAX, supporting request/response interception and automatically converting JSON data.\nFetch API: A modern, native JavaScript API for making HTTP requests, simplifying the process compared to XMLHttpRequest.\njQuery: Though less commonly used today, jQuery simplifies AJAX requests with built-in methods like $.ajax() and $.get().\n\n\n\n14. AJAX with Promises and Async/Await\nUsing Promises or async/await helps avoid callback hell and makes the code easier to read and maintain.\n\nExample with async/await:\nasync function fetchData() {\n  try {\n    const response = await fetch('https://api.example.com/data');\n    const data = await response.json();\n    console.log(data);\n  } catch (error) {\n    console.error('Error:', error);\n  }\n}\n\nfetchData();\n\n\n\n\n\n Back to top",
+    "crumbs": [
+      "Blog",
+      "Ajax"
+    ]
+  },
+  {
+    "objectID": "Flutter/dart.html",
+    "href": "Flutter/dart.html",
+    "title": "Dart",
+    "section": "",
+    "text": "void main() {\n  for (int i = 0; i &lt; 10; i++) {\n    print('hello ${i + 1}');\n  }\n}",
+    "crumbs": [
+      "Blog",
+      "Flutter",
+      "Dart"
+    ]
+  },
+  {
+    "objectID": "Flutter/dart.html#for-loop",
+    "href": "Flutter/dart.html#for-loop",
+    "title": "Dart",
+    "section": "",
+    "text": "void main() {\n  for (int i = 0; i &lt; 10; i++) {\n    print('hello ${i + 1}');\n  }\n}",
+    "crumbs": [
+      "Blog",
+      "Flutter",
+      "Dart"
+    ]
+  },
+  {
+    "objectID": "Flutter/dart.html#variables",
+    "href": "Flutter/dart.html#variables",
+    "title": "Dart",
+    "section": "Variables",
+    "text": "Variables\n\nInteger\nvoid main() {\n  int age = 30;\n  print(age);\n}\n\n\nString\nvoid main() {\n  String name = 'ben';\n  name = 'ken';\n  print(name);\n}\n\n\nBool\nvoid main() {\n  bool isNight = false;\n  print(isNight);\n}\n\n\nDynamic variable\nvoid main() {\n  dynamic name = 'ben';\n  name = 30;\n  print(name);\n}",
+    "crumbs": [
+      "Blog",
+      "Flutter",
+      "Dart"
+    ]
+  },
+  {
+    "objectID": "Flutter/dart.html#functions",
+    "href": "Flutter/dart.html#functions",
+    "title": "Dart",
+    "section": "Functions",
+    "text": "Functions\nvoid main() {\n  String greet = greeting();\n  int age = getAge();\n  print('${greet} and age:${age}');\n}\n\nString greeting() {\n  return 'hello';\n}\n\nint getAge() {\n  return 30;\n}",
+    "crumbs": [
+      "Blog",
+      "Flutter",
+      "Dart"
+    ]
+  },
+  {
+    "objectID": "Flutter/dart.html#function-simplified",
+    "href": "Flutter/dart.html#function-simplified",
+    "title": "Dart",
+    "section": "Function simplified",
+    "text": "Function simplified\nvoid main() {\n  String greet = greeting();\n  int age = getAge();\n  print('${greet} and age:${age}');\n}\n\nString greeting() =&gt; 'hello';\n\nint getAge() =&gt; 30;",
+    "crumbs": [
+      "Blog",
+      "Flutter",
+      "Dart"
+    ]
+  },
+  {
+    "objectID": "Flutter/dart.html#list-array",
+    "href": "Flutter/dart.html#list-array",
+    "title": "Dart",
+    "section": "List (array)",
+    "text": "List (array)\nvoid main() {\n  List&lt;String&gt; names = ['ben', 'kim', 'charlie'];\n  \n  names.add('jeff');\n  names.remove('kim');\n  \n  print(names);\n}",
+    "crumbs": [
+      "Blog",
+      "Flutter",
+      "Dart"
+    ]
+  },
+  {
+    "objectID": "Flutter/dart.html#classes",
+    "href": "Flutter/dart.html#classes",
+    "title": "Dart",
+    "section": "Classes",
+    "text": "Classes\nvoid main() {\n  User user1 = User('ben', 25);\n  print(user1.username);\n  user1.login();\n}\n\n\nclass User {\n  late String username;\n  late int age;\n  \n  User(String name, int age){\n    this.username = name;\n    this.age = age;\n  }\n  \n  void login() {\n    print('user logged in');\n  }\n  \n}",
+    "crumbs": [
+      "Blog",
+      "Flutter",
+      "Dart"
+    ]
+  },
+  {
+    "objectID": "Flutter/dart.html#inheritance",
+    "href": "Flutter/dart.html#inheritance",
+    "title": "Dart",
+    "section": "Inheritance",
+    "text": "Inheritance\nclass SuperUser extends User {\n  SuperUser(String username, int age):super(username, age);\n    \n  void publish() {\n    print('Super user ${this.username}');\n  }\n}",
+    "crumbs": [
+      "Blog",
+      "Flutter",
+      "Dart"
+    ]
+  },
+  {
+    "objectID": "Flutter/riverpod.html",
+    "href": "Flutter/riverpod.html",
+    "title": "Riverpod",
+    "section": "",
+    "text": "Back to top",
+    "crumbs": [
+      "Blog",
+      "Flutter",
+      "Riverpod"
+    ]
+  },
+  {
+    "objectID": "css.html",
+    "href": "css.html",
+    "title": "CSS",
+    "section": "",
+    "text": "Purpose: CSS is used to style and layout web pages. It allows you to apply styles like fonts, colors, spacing, and positioning to HTML elements.\n\n\nHow It Works: CSS rules are applied to HTML elements to control their appearance on the web page. These rules can be applied inline, internally within the HTML document, or externally via a separate CSS file.",
+    "crumbs": [
+      "Blog",
+      "CSS"
+    ]
+  },
+  {
+    "objectID": "css.html#introduction-to-css",
+    "href": "css.html#introduction-to-css",
+    "title": "CSS",
+    "section": "",
+    "text": "Purpose: CSS is used to style and layout web pages. It allows you to apply styles like fonts, colors, spacing, and positioning to HTML elements.\n\n\nHow It Works: CSS rules are applied to HTML elements to control their appearance on the web page. These rules can be applied inline, internally within the HTML document, or externally via a separate CSS file.",
+    "crumbs": [
+      "Blog",
+      "CSS"
+    ]
+  },
+  {
+    "objectID": "css.html#basic-syntax",
+    "href": "css.html#basic-syntax",
+    "title": "CSS",
+    "section": "Basic Syntax",
+    "text": "Basic Syntax\n\nSelectors: CSS selectors are used to select the HTML elements you want to style.\nProperties and Values: CSS properties define the styles (e.g., color, font-size), and values specify the behavior of these properties (e.g., red, 16px).\n\nh1 { color: blue; font-size: 24px; }",
+    "crumbs": [
+      "Blog",
+      "CSS"
+    ]
+  },
+  {
+    "objectID": "css.html#types-of-css",
+    "href": "css.html#types-of-css",
+    "title": "CSS",
+    "section": "Types of CSS",
+    "text": "Types of CSS\n\nInline CSS: Applied directly to an HTML element using the style attribute.\n\n&lt;h1 style=\"color: blue; font-size: 24px;\"&gt;Hello World&lt;/h1&gt;\n\nInternal CSS: Defined within a &lt;style&gt; block inside the &lt;head&gt; section of the HTML document.\n\n&lt;style&gt;\n    h1 {\n        color: blue;\n        font-size: 24px;\n    }\n&lt;/style&gt;\n\nExternal CSS: Linked from an external file using the &lt;link&gt; tag in the &lt;head&gt; section.\n\n&lt;link rel=\"stylesheet\" href=\"styles.css\"&gt;",
+    "crumbs": [
+      "Blog",
+      "CSS"
+    ]
+  },
+  {
+    "objectID": "css.html#selectors-in-css",
+    "href": "css.html#selectors-in-css",
+    "title": "CSS",
+    "section": "Selectors in CSS",
+    "text": "Selectors in CSS\n\nUniversal Selector (*): Selects all elements.\nElement Selector: Selects elements by their name (e.g., p, h1).\nClass Selector (.classname): Selects elements by their class attribute.\nID Selector (#idname): Selects a single element by its ID.\nAttribute Selector: Selects elements based on their attributes.\nPseudo-Classes and Pseudo-Elements:\n\nPseudo-Classes: :hover, :active, :focus – Apply styles based on user interaction.\nPseudo-Elements: ::before, ::after – Insert content before or after an element.\n\n\n\nExample\n\n.example-class {\n    color: red;\n}\n\n#example-id {\n    color: green;\n}\n\na:hover {\n    text-decoration: underline;\n}",
+    "crumbs": [
+      "Blog",
+      "CSS"
+    ]
+  },
+  {
+    "objectID": "css.html#css-properties",
+    "href": "css.html#css-properties",
+    "title": "CSS",
+    "section": "CSS Properties",
+    "text": "CSS Properties\n\nColor and Background:\n\ncolor: Sets the text color.\nbackground-color: Sets the background color of an element.\nbackground-image: Sets an image as the background.\n\nText and Font:\n\nfont-family: Sets the font of the text.\nfont-size: Sets the size of the text.\nfont-weight: Sets the boldness of the text.\ntext-align: Aligns the text horizontally (left, right, center).\ntext-decoration: Underlines, overlines, or strikes through text.\n\nBox Model:\n\nBox Model Components: Content, padding, border, and margin.\nwidth and height: Set the width and height of an element.\npadding: Creates space inside the element, between the content and the border.\nborder: Sets the border around the element.\nmargin: Creates space outside the element, separating it from other elements.\n\n\n\nExample\n\ndiv {\n    width: 300px;\n    padding: 20px;\n    border: 1px solid black;\n    margin: 10px;\n}\n\nPositioning:\n\nStatic (default): Elements are positioned according to the normal flow of the document.\nRelative: Positioned relative to its normal position.\nAbsolute: Positioned relative to its nearest positioned ancestor.\nFixed: Positioned relative to the browser window, stays fixed when scrolling.\nSticky: Switches between relative and fixed, depending on the scroll position.\n\n\n.relative {\n    position: relative;\n    top: 10px;\n    left: 20px;\n}\n\nDisplay and Visibility:\n\ndisplay: Controls the display type of an element (e.g., block, inline, inline-block, none).\nvisibility: Controls the visibility of an element (visible, hidden).\n\nOverflow:\n\noverflow: Controls what happens when content overflows an element’s box (visible, hidden, scroll, auto).\n\nFlexbox:\n\nFlexible Box Layout: A modern layout module that provides an efficient way to lay out, align, and distribute space among items in a container.\ndisplay: flex: Enables flexbox for an element.\njustify-content: Aligns flex items along the main axis.\nalign-items: Aligns flex items along the cross axis.\nflex-direction: Defines the direction of the flex items (row, column). &gt; Example ```css .container { display: flex; justify-content: space-between; align-items: center; }\n\n\n\n- Grid Layout:\n  - CSS Grid Layout: A powerful layout system that allows you to create grid-based layouts.\n  - `display: grid`: Enables grid layout for an element.\n  - `grid-template-columns`: Defines the columns of the grid.\n  - `grid-template-rows`: Defines the rows of the grid.\n  - `gap`: Sets the spacing between grid items.\n\n&gt; Example\n```css\n.grid-container {\n    display: grid;\n    grid-template-columns: 1fr 1fr 1fr;\n    grid-template-rows: auto;\n    gap: 10px;\n}",
+    "crumbs": [
+      "Blog",
+      "CSS"
+    ]
+  },
+  {
+    "objectID": "css.html#responsive-design-with-css",
+    "href": "css.html#responsive-design-with-css",
+    "title": "CSS",
+    "section": "Responsive Design with CSS",
+    "text": "Responsive Design with CSS\n\nMedia Queries: Used to apply styles based on the device’s characteristics, such as screen width, height, and orientation.\n\n@media (max-width: 600px) {\n    body {\n        background-color: lightblue;\n    }\n}\n\nViewport Meta Tag: Ensures proper scaling and sizing on mobile devices.\n\n&lt;meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"&gt;\n\nFlexible Units:\n\nRelative Units: em, rem, %, vw, vh.\nAbsolute Units: px, pt, in, cm.\n\nResponsive Images:\n\nmax-width: 100%: Ensures images scale down when the container is smaller than the image.",
+    "crumbs": [
+      "Blog",
+      "CSS"
+    ]
+  },
+  {
+    "objectID": "css.html#css-frameworks",
+    "href": "css.html#css-frameworks",
+    "title": "CSS",
+    "section": "CSS Frameworks",
+    "text": "CSS Frameworks\n\nBootstrap: A popular front-end framework that includes a responsive grid system, pre-built components, and utility classes.\nFoundation: A responsive front-end framework that provides a grid system and UI components.\nBulma: A modern CSS framework based on Flexbox.\n\n&lt;link rel=\"stylesheet\" href=\"https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css\"&gt;",
+    "crumbs": [
+      "Blog",
+      "CSS"
+    ]
+  },
+  {
+    "objectID": "css.html#preprocessors",
+    "href": "css.html#preprocessors",
+    "title": "CSS",
+    "section": "Preprocessors",
+    "text": "Preprocessors\n\nSass (Syntactically Awesome Style Sheets): A CSS preprocessor that allows the use of variables, nested rules, mixins, and functions.\nLESS: Another CSS preprocessor similar to Sass, but with a different syntax. &gt; Example\n\n$primary-color: #333;\n\nbody {\n    color: $primary-color;\n}\n\n.container {\n    width: 80%;\n    margin: 0 auto;\n}",
+    "crumbs": [
+      "Blog",
+      "CSS"
+    ]
+  },
+  {
+    "objectID": "css.html#advanced-css-techniques",
+    "href": "css.html#advanced-css-techniques",
+    "title": "CSS",
+    "section": "Advanced CSS Techniques",
+    "text": "Advanced CSS Techniques\n\nTransitions: Smoothly animate changes to CSS properties.\nAnimations: Create complex animations using keyframes.\nTransformations: Rotate, scale, skew, or translate elements.\nCustom Properties (CSS Variables): Define reusable values with custom properties.\n\n\nExample\n\n.box {\n    width: 100px;\n    height: 100px;\n    background-color: red;\n    transition: background-color 0.5s ease;\n}\n\n.box:hover {\n    background-color: blue;\n}\n\n@keyframes example {\n    from {background-color: red;}\n    to {background-color: yellow;}\n}\n\n.animated-box {\n    animation: example 2s infinite;\n}",
+    "crumbs": [
+      "Blog",
+      "CSS"
+    ]
+  },
+  {
+    "objectID": "css.html#css-grid-and-flexbox",
+    "href": "css.html#css-grid-and-flexbox",
+    "title": "CSS",
+    "section": "CSS Grid and Flexbox",
+    "text": "CSS Grid and Flexbox\n\nCSS Grid: Best for two-dimensional layouts, allowing for both rows and columns.\nFlexbox: Best for one-dimensional layouts, controlling the layout of items along a single axis. &gt; Example (CSS Grid)\n\n.grid-container {\n    display: grid;\n    grid-template-columns: repeat(3, 1fr);\n    grid-gap: 10px;\n}\n\n.grid-item {\n    background-color: lightgrey;\n    padding: 20px;\n    text-align: center;\n}\n\nExample (Flexbox)\n\n.flex-container {\n    display: flex;\n    justify-content: space-between;\n}\n\n.flex-item {\n    background-color: lightgrey;\n    padding: 20px;\n    text-align: center;\n}",
+    "crumbs": [
+      "Blog",
+      "CSS"
+    ]
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Front_End",
+    "section": "",
+    "text": "This file will become your README and also the index of your documentation.",
+    "crumbs": [
+      "Blog",
+      "Front_End"
+    ]
+  },
+  {
+    "objectID": "index.html#developer-guide",
+    "href": "index.html#developer-guide",
+    "title": "Front_End",
+    "section": "Developer Guide",
+    "text": "Developer Guide\nIf you are new to using nbdev here are some useful pointers to get you started.\n\nInstall Front_End in Development mode\n# make sure Front_End package is installed in development mode\n$ pip install -e .\n\n# make changes under nbs/ directory\n# ...\n\n# compile to have changes apply to Front_End\n$ nbdev_prepare",
+    "crumbs": [
+      "Blog",
+      "Front_End"
+    ]
+  },
+  {
+    "objectID": "index.html#usage",
+    "href": "index.html#usage",
+    "title": "Front_End",
+    "section": "Usage",
+    "text": "Usage\n\nInstallation\nInstall latest from the GitHub repository:\n$ pip install git+https://github.com/bthek1/Front_End.git\nor from conda\n$ conda install -c bthek1 Front_End\nor from pypi\n$ pip install Front_End\n\n\nDocumentation\nDocumentation can be found hosted on this GitHub repository’s pages. Additionally you can find package manager specific guidelines on conda and pypi respectively.",
+    "crumbs": [
+      "Blog",
+      "Front_End"
+    ]
+  },
+  {
+    "objectID": "index.html#how-to-use",
+    "href": "index.html#how-to-use",
+    "title": "Front_End",
+    "section": "How to use",
+    "text": "How to use\nFill me in please! Don’t forget code examples:\n\n1+1\n\n2",
+    "crumbs": [
+      "Blog",
+      "Front_End"
+    ]
+  },
+  {
+    "objectID": "React/node.html",
+    "href": "React/node.html",
+    "title": "Node",
+    "section": "",
+    "text": "If you have root access, you can omit the ‘sudo’ command as you already have full administrative privileges.\n\n\n\nsudo apt-get update\nsudo apt-get install -y ca-certificates curl gnupg\nsudo mkdir -p /etc/apt/keyrings\ncurl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key | sudo gpg --dearmor -o /etc/apt/keyrings/nodesource.gpg\n\n\n\nNODE_MAJOR=20\necho \"deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_$NODE_MAJOR.x nodistro main\" | sudo tee /etc/apt/sources.list.d/nodesource.list\n\nOptional: NODE_MAJOR can be changed depending on the version you need.\nNODE_MAJOR=16\nNODE_MAJOR=18\nNODE_MAJOR=20\nNODE_MAJOR=21\n\n\n\n\nsudo apt-get update\nsudo apt-get install nodejs -y",
+    "crumbs": [
+      "Blog",
+      "React",
+      "Node"
+    ]
+  },
+  {
+    "objectID": "React/node.html#installation-instructions-node.js",
+    "href": "React/node.html#installation-instructions-node.js",
+    "title": "Node",
+    "section": "",
+    "text": "If you have root access, you can omit the ‘sudo’ command as you already have full administrative privileges.\n\n\n\nsudo apt-get update\nsudo apt-get install -y ca-certificates curl gnupg\nsudo mkdir -p /etc/apt/keyrings\ncurl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key | sudo gpg --dearmor -o /etc/apt/keyrings/nodesource.gpg\n\n\n\nNODE_MAJOR=20\necho \"deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_$NODE_MAJOR.x nodistro main\" | sudo tee /etc/apt/sources.list.d/nodesource.list\n\nOptional: NODE_MAJOR can be changed depending on the version you need.\nNODE_MAJOR=16\nNODE_MAJOR=18\nNODE_MAJOR=20\nNODE_MAJOR=21\n\n\n\n\nsudo apt-get update\nsudo apt-get install nodejs -y",
+    "crumbs": [
+      "Blog",
+      "React",
+      "Node"
+    ]
+  },
+  {
+    "objectID": "React/node.html#uninstall-nodejs-ubuntu-debian-packages",
+    "href": "React/node.html#uninstall-nodejs-ubuntu-debian-packages",
+    "title": "Node",
+    "section": "Uninstall nodejs Ubuntu & Debian packages",
+    "text": "Uninstall nodejs Ubuntu & Debian packages\n\nTo completely remove Node.js installed from the deb.nodesource.com package methods above:\n\n\nuse sudo on Ubuntu or run this as root on debian\n\napt-get purge nodejs &&\\\nrm -r /etc/apt/sources.list.d/nodesource.list &&\\\nrm -r /etc/apt/keyrings/nodesource.gpg",
+    "crumbs": [
+      "Blog",
+      "React",
+      "Node"
+    ]
+  },
+  {
+    "objectID": "highcharts.html",
+    "href": "highcharts.html",
+    "title": "High Charts",
+    "section": "",
+    "text": "First, set up your Django project and install the necessary dependencies:\npip install django djangorestframework\nCreate a new Django project and app:\ndjango-admin startproject myproject\ncd myproject\npython manage.py startapp charts\nAdd the following to INSTALLED_APPS in myproject/settings.py:\nINSTALLED_APPS = [\n    # other apps\n    'rest_framework',\n    'charts',  # your new app\n]\n\n\n\nIn the charts/models.py, define a model that holds the data you want to visualize using Highcharts. For example, let’s create a model for sales data:\nfrom django.db import models\n\nclass SalesData(models.Model):\n    date = models.DateField()\n    revenue = models.DecimalField(max_digits=10, decimal_places=2)\n\n    def __str__(self):\n        return f\"{self.date}: {self.revenue}\"\n\n\n\nIn charts/serializers.py, create a serializer to convert the SalesData model into JSON format:\nfrom rest_framework import serializers\nfrom .models import SalesData\n\nclass SalesDataSerializer(serializers.ModelSerializer):\n    class Meta:\n        model = SalesData\n        fields = ['date', 'revenue']\n\n\n\nIn charts/views.py, create an API view that fetches and returns the sales data:\nfrom rest_framework import generics\nfrom .models import SalesData\nfrom .serializers import SalesDataSerializer\n\nclass SalesDataList(generics.ListAPIView):\n    queryset = SalesData.objects.all()\n    serializer_class = SalesDataSerializer\n\n\n\nIn charts/urls.py, create a route for the API view:\nfrom django.urls import path\nfrom .views import SalesDataList\n\nurlpatterns = [\n    path('sales/', SalesDataList.as_view(), name='sales-data'),\n]\nIn your main myproject/urls.py, include the charts app URLs:\nfrom django.urls import path, include\n\nurlpatterns = [\n    # other URLs\n    path('api/', include('charts.urls')),\n]\n\n\n\nRun the migrations and create some sample data for testing:\npython manage.py makemigrations\npython manage.py migrate\nIn the Django admin or shell, create a few SalesData records for testing.",
+    "crumbs": [
+      "Blog",
+      "High Charts"
+    ]
+  },
+  {
+    "objectID": "highcharts.html#setting-up-a-django-drf-project",
+    "href": "highcharts.html#setting-up-a-django-drf-project",
+    "title": "High Charts",
+    "section": "",
+    "text": "First, set up your Django project and install the necessary dependencies:\npip install django djangorestframework\nCreate a new Django project and app:\ndjango-admin startproject myproject\ncd myproject\npython manage.py startapp charts\nAdd the following to INSTALLED_APPS in myproject/settings.py:\nINSTALLED_APPS = [\n    # other apps\n    'rest_framework',\n    'charts',  # your new app\n]\n\n\n\nIn the charts/models.py, define a model that holds the data you want to visualize using Highcharts. For example, let’s create a model for sales data:\nfrom django.db import models\n\nclass SalesData(models.Model):\n    date = models.DateField()\n    revenue = models.DecimalField(max_digits=10, decimal_places=2)\n\n    def __str__(self):\n        return f\"{self.date}: {self.revenue}\"\n\n\n\nIn charts/serializers.py, create a serializer to convert the SalesData model into JSON format:\nfrom rest_framework import serializers\nfrom .models import SalesData\n\nclass SalesDataSerializer(serializers.ModelSerializer):\n    class Meta:\n        model = SalesData\n        fields = ['date', 'revenue']\n\n\n\nIn charts/views.py, create an API view that fetches and returns the sales data:\nfrom rest_framework import generics\nfrom .models import SalesData\nfrom .serializers import SalesDataSerializer\n\nclass SalesDataList(generics.ListAPIView):\n    queryset = SalesData.objects.all()\n    serializer_class = SalesDataSerializer\n\n\n\nIn charts/urls.py, create a route for the API view:\nfrom django.urls import path\nfrom .views import SalesDataList\n\nurlpatterns = [\n    path('sales/', SalesDataList.as_view(), name='sales-data'),\n]\nIn your main myproject/urls.py, include the charts app URLs:\nfrom django.urls import path, include\n\nurlpatterns = [\n    # other URLs\n    path('api/', include('charts.urls')),\n]\n\n\n\nRun the migrations and create some sample data for testing:\npython manage.py makemigrations\npython manage.py migrate\nIn the Django admin or shell, create a few SalesData records for testing.",
+    "crumbs": [
+      "Blog",
+      "High Charts"
+    ]
+  },
+  {
+    "objectID": "highcharts.html#frontend-integration-highcharts-setup",
+    "href": "highcharts.html#frontend-integration-highcharts-setup",
+    "title": "High Charts",
+    "section": "2. Frontend Integration: Highcharts Setup",
+    "text": "2. Frontend Integration: Highcharts Setup\nOnce you have the Django DRF API serving data, you can set up Highcharts on the frontend to visualize it.\n\na. Setting Up Highcharts in a Django Template\nIn the charts/templates/charts/index.html file, include Highcharts via CDN and fetch data using JavaScript. For example:\n&lt;!DOCTYPE html&gt;\n&lt;html lang=\"en\"&gt;\n&lt;head&gt;\n    &lt;meta charset=\"UTF-8\"&gt;\n    &lt;meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"&gt;\n    &lt;title&gt;Sales Data&lt;/title&gt;\n    &lt;script src=\"https://code.highcharts.com/highcharts.js\"&gt;&lt;/script&gt;\n    &lt;script src=\"https://code.highcharts.com/modules/exporting.js\"&gt;&lt;/script&gt;\n&lt;/head&gt;\n&lt;body&gt;\n    &lt;div id=\"container\"&gt;&lt;/div&gt;\n\n    &lt;script&gt;\n        document.addEventListener(\"DOMContentLoaded\", function () {\n            fetch('/api/sales/')\n                .then(response =&gt; response.json())\n                .then(data =&gt; {\n                    const categories = data.map(item =&gt; item.date);\n                    const revenues = data.map(item =&gt; parseFloat(item.revenue));\n\n                    Highcharts.chart('container', {\n                        chart: {\n                            type: 'line'\n                        },\n                        title: {\n                            text: 'Sales Revenue Over Time'\n                        },\n                        xAxis: {\n                            categories: categories\n                        },\n                        yAxis: {\n                            title: {\n                                text: 'Revenue (USD)'\n                            }\n                        },\n                        series: [{\n                            name: 'Revenue',\n                            data: revenues\n                        }]\n                    });\n                });\n        });\n    &lt;/script&gt;\n&lt;/body&gt;\n&lt;/html&gt;\n\n\nb. Serving the Template\nIn charts/views.py, create a view to serve the HTML page that contains the Highcharts:\nfrom django.shortcuts import render\n\ndef index(request):\n    return render(request, 'charts/index.html')\nUpdate charts/urls.py to serve this view:\nfrom django.urls import path\nfrom .views import SalesDataList, index\n\nurlpatterns = [\n    path('sales/', SalesDataList.as_view(), name='sales-data'),\n    path('', index, name='index'),\n]",
+    "crumbs": [
+      "Blog",
+      "High Charts"
+    ]
+  },
+  {
+    "objectID": "highcharts.html#handling-data-from-django-drf-in-highcharts",
+    "href": "highcharts.html#handling-data-from-django-drf-in-highcharts",
+    "title": "High Charts",
+    "section": "3. Handling Data from Django DRF in Highcharts",
+    "text": "3. Handling Data from Django DRF in Highcharts\nWhen fetching data from Django DRF, you often deal with JSON arrays or objects. Highcharts requires the data to be processed into a specific format.\n\nExample of Mapping API Data to Highcharts\nfetch('/api/sales/')\n    .then(response =&gt; response.json())\n    .then(data =&gt; {\n        const categories = data.map(item =&gt; item.date);\n        const revenues = data.map(item =&gt; parseFloat(item.revenue));\n\n        Highcharts.chart('container', {\n            chart: {\n                type: 'column'  // Type of chart\n            },\n            title: {\n                text: 'Monthly Sales Revenue'\n            },\n            xAxis: {\n                categories: categories\n            },\n            yAxis: {\n                title: {\n                    text: 'Revenue (USD)'\n                }\n            },\n            series: [{\n                name: 'Revenue',\n                data: revenues\n            }]\n        });\n    });",
+    "crumbs": [
+      "Blog",
+      "High Charts"
+    ]
+  },
+  {
+    "objectID": "highcharts.html#customizing-highcharts-in-django-projects",
+    "href": "highcharts.html#customizing-highcharts-in-django-projects",
+    "title": "High Charts",
+    "section": "4. Customizing Highcharts in Django Projects",
+    "text": "4. Customizing Highcharts in Django Projects\n\na. Customizing Chart Types\nYou can change the chart type (e.g., line, column, pie) by modifying the chart.type property. Highcharts supports multiple chart types, such as line, bar, pie, scatter, and more.\nExample:\nchart: {\n    type: 'bar'  // Bar chart instead of a line chart\n}\n\n\nb. Adding Tooltips and Data Labels\nYou can add tooltips and data labels for better interactivity and user experience:\ntooltip: {\n    pointFormat: '{series.name}: &lt;b&gt;{point.y:.2f}&lt;/b&gt;&lt;br/&gt;',\n    valueSuffix: ' USD'\n},\nplotOptions: {\n    series: {\n        dataLabels: {\n            enabled: true,\n            format: '{point.y:.2f}'\n        }\n    }\n}\n\n\nc. Handling Time Series Data\nIf you’re working with time series data (e.g., date-based data), you can configure the x-axis to be a datetime axis:\nxAxis: {\n    type: 'datetime',\n    categories: data.map(item =&gt; new Date(item.date).getTime()),  // Convert dates to timestamps\n    labels: {\n        format: '{value:%Y-%m-%d}'  // Format the date labels\n    }\n}",
+    "crumbs": [
+      "Blog",
+      "High Charts"
+    ]
+  },
+  {
+    "objectID": "highcharts.html#real-time-updates-in-highcharts-with-drf",
+    "href": "highcharts.html#real-time-updates-in-highcharts-with-drf",
+    "title": "High Charts",
+    "section": "5. Real-Time Updates in Highcharts with DRF",
+    "text": "5. Real-Time Updates in Highcharts with DRF\nTo update Highcharts in real-time, you can either use: - Polling: Periodically fetch new data from the DRF API using JavaScript setInterval. - WebSockets: Use Django Channels to push real-time updates to the frontend.\n\nExample: Polling Data for Real-Time Updates\nsetInterval(() =&gt; {\n    fetch('/api/sales/')\n        .then(response =&gt; response.json())\n        .then(data =&gt; {\n            const categories = data.map(item =&gt; item.date);\n            const revenues = data.map(item =&gt; parseFloat(item.revenue));\n\n            const chart = Highcharts.chart('container', {\n                series: [{\n                    data: revenues\n                }],\n                xAxis: {\n                    categories: categories\n                }\n            });\n            chart.redraw();  // Update the chart with new data\n        });\n}, 5000);  // Fetch new data every 5 seconds",
+    "crumbs": [
+      "Blog",
+      "High Charts"
+    ]
+  },
+  {
+    "objectID": "highcharts.html#exporting-charts",
+    "href": "highcharts.html#exporting-charts",
+    "title": "High Charts",
+    "section": "6. Exporting Charts",
+    "text": "6. Exporting Charts\nHighcharts has built-in support for exporting charts as PNG, JPEG, PDF, or SVG. You can enable exporting by including the exporting.js module and adding export buttons.\n\nExample:\n&lt;script src=\"https://code.highcharts.com/modules/exporting.js\"&gt;&lt;/script&gt;\n\nHighcharts.chart('container', {\n    exporting: {\n        enabled: true  // Adds export buttons for saving chart as PNG, PDF, etc.\n    }\n});",
+    "crumbs": [
+      "Blog",
+      "High Charts"
+    ]
+  },
+  {
+    "objectID": "highcharts.html#common-highcharts-modules",
+    "href": "highcharts.html#common-highcharts-modules",
+    "title": "High Charts",
+    "section": "7. Common Highcharts Modules",
+    "text": "7. Common Highcharts Modules\nHighcharts provides several additional modules that you can include in your Django DRF project: - Highcharts Stock: For financial and stock charts. - Highcharts Maps: For visualizing geographical data. - Highcharts Gantt: For Gantt charts and project management timelines.\nInclude these as separate modules:\n&lt;script src=\"https://code.highcharts.com/stock/highstock.js\"&gt;&lt;/script&gt;\n&lt;script src=\"https://code.highcharts.com/maps/modules/map\n\n.js\"&gt;&lt;/script&gt;",
+    "crumbs": [
+      "Blog",
+      "High Charts"
+    ]
+  },
+  {
+    "objectID": "highcharts.html#recommanded-data-structure-from-drf-with-ajax-with-fetch-api",
+    "href": "highcharts.html#recommanded-data-structure-from-drf-with-ajax-with-fetch-api",
+    "title": "High Charts",
+    "section": "Recommanded Data Structure from DRF with Ajax with Fetch API",
+    "text": "Recommanded Data Structure from DRF with Ajax with Fetch API\n\nWhen working with Django REST Framework (DRF) and sending data for use with Highcharts (a popular charting library) via AJAX using Fetch API, the structure of your JSON response from the DRF API must be properly formatted to match the expected data structure for Highcharts.\n\n\nRecommended JSON Structure for Highcharts Series Chart\nHighcharts accepts a specific format for its data, particularly for series-based charts (e.g., line charts, column charts). Here’s a general overview of the JSON structure for series data in Highcharts:\n{\n  \"chart\": {\n    \"type\": \"line\"  // Chart type (e.g., 'line', 'column', etc.)\n  },\n  \"title\": {\n    \"text\": \"Example Chart Title\"\n  },\n  \"xAxis\": {\n    \"categories\": [\"Jan\", \"Feb\", \"Mar\", \"Apr\", \"May\"]  // Labels for X-axis\n  },\n  \"series\": [\n    {\n      \"name\": \"Series 1\",\n      \"data\": [29.9, 71.5, 106.4, 129.2, 144.0]  // Data points for Series 1\n    },\n    {\n      \"name\": \"Series 2\",\n      \"data\": [34.9, 68.5, 98.4, 124.2, 145.0]  // Data points for Series 2\n    }\n  ]\n}\nFor a typical line or column chart in Highcharts, you will need to return two main pieces of data: 1. Categories (X-axis): A list of values representing the categories (e.g., months, days, time points). 2. Series (Y-axis): An array of objects where each object represents a series of data points with a name (label for the series) and data (the actual data points).\n\n\nExample DRF JSON Response\nYour DRF view should return a similar JSON structure that can be easily consumed by the front-end JavaScript using the Fetch API. Here’s how you might structure the JSON in your Django view:\n{\n  \"chart_type\": \"line\",  // Optional: Provide chart type from the backend\n  \"categories\": [\"Jan\", \"Feb\", \"Mar\", \"Apr\", \"May\"],  // X-axis categories\n  \"series\": [\n    {\n      \"name\": \"Series 1\",\n      \"data\": [29.9, 71.5, 106.4, 129.2, 144.0]  // Y-axis data points for Series 1\n    },\n    {\n      \"name\": \"Series 2\",\n      \"data\": [34.9, 68.5, 98.4, 124.2, 145.0]  // Y-axis data points for Series 2\n    }\n  ]\n}\n\n\nExample Django DRF View\nHere’s how you can set up your Django view to return this data:\nfrom rest_framework.response import Response\nfrom rest_framework.views import APIView\n\nclass HighchartsDataView(APIView):\n    def get(self, request, *args, **kwargs):\n        data = {\n            \"chart_type\": \"line\",\n            \"categories\": [\"Jan\", \"Feb\", \"Mar\", \"Apr\", \"May\"],\n            \"series\": [\n                {\n                    \"name\": \"Series 1\",\n                    \"data\": [29.9, 71.5, 106.4, 129.2, 144.0]\n                },\n                {\n                    \"name\": \"Series 2\",\n                    \"data\": [34.9, 68.5, 98.4, 124.2, 145.0]\n                }\n            ]\n        }\n        return Response(data)\n\n\nExample JavaScript Fetch API to Fetch and Use Data in Highcharts\nOn the front-end, you can use the Fetch API to request data from your DRF API and use it to render a Highcharts chart:\ndocument.addEventListener('DOMContentLoaded', function () {\n  fetch('http://localhost:8000/api/highcharts-data/')\n    .then(response =&gt; response.json())\n    .then(data =&gt; {\n      Highcharts.chart('container', {\n        chart: {\n          type: data.chart_type  // Dynamic chart type from API\n        },\n        title: {\n          text: 'Django DRF Highcharts Example'\n        },\n        xAxis: {\n          categories: data.categories  // X-axis categories from API\n        },\n        series: data.series  // Series data from API\n      });\n    })\n    .catch(error =&gt; console.error('Error fetching data:', error));\n});\n\n\nPoints to Consider:\n\nDynamic Data: The data in your DRF response could be dynamically generated based on queries (e.g., fetching data from a database). You should ensure the categories (X-axis) and series data are generated correctly.\nChart Customization: You can also return additional chart customization options (such as the chart_type or title) from the DRF API if the chart configuration needs to be dynamic.\nEfficient Data Transfer: Depending on the size of your data, you may want to optimize the payload size (e.g., avoid sending unnecessary data or compress responses).\nCORS: If your front end is hosted separately from your Django API, ensure that CORS is correctly configured to allow the front-end application to access your API.\nAuthentication: If your API is protected (e.g., requiring authentication), make sure you handle token-based or session-based authentication in your AJAX requests.\n\n\n\nConclusion\nFor a typical Highcharts series chart in a Django DRF project, the JSON structure should include: - categories (for the X-axis). - series (an array of objects containing series names and data points).\nBy following this structure, you can easily integrate your Django DRF back end with a Highcharts front end using the Fetch API to retrieve data asynchronously.",
+    "crumbs": [
+      "Blog",
+      "High Charts"
+    ]
+  }
+]
