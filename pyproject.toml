@@ -1,3 +1,30 @@
 [build-system]
-requires = ["setuptools>=64.0"]
+requires = ["setuptools>=64"]
 build-backend = "setuptools.build_meta"
+
+[project]
+name = "Front_End"
+dynamic = ["version"]
+description = ""
+readme = "README.md"
+requires-python = ">=3.7"
+license = {text = "Apache-2.0"}
+authors = [{name = "Benedict Thekkel", email = "bthekkel1@gmail.com"}]
+keywords = ['nbdev', 'jupyter', 'notebook', 'python']
+classifiers = ["Natural Language :: English", "Intended Audience :: Developers", "Development Status :: 3 - Alpha", "Programming Language :: Python :: 3", "Programming Language :: Python :: 3 :: Only"]
+dependencies = []
+
+[project.urls]
+Repository = "https://github.com/bthek1/Front_End"
+Documentation = "https://bthek1.github.io/Front_End"
+
+[project.entry-points.nbdev]
+Front_End = "Front_End._modidx:d"
+
+[tool.setuptools.dynamic]
+version = {attr = "Front_End.__version__"}
+
+[tool.setuptools.packages.find]
+include = ["Front_End"]
+
+[tool.nbdev]
