@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="250" height="250">
+  <polygon points="125,20 150,100 230,100 160,150 185,230 125,180 65,230 90,150 20,100 100,100" fill="gold" stroke="orange" stroke-width="3">
+    <animate attributeName="fill" values="gold;yellow;orange;gold" dur="3s" repeatCount="indefinite"/>
+    <animate attributeName="stroke-width" values="3;6;3" dur="2s" repeatCount="indefinite"/>
+  </polygon>
+</svg>
