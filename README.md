@@ -21,7 +21,7 @@ Python libraries that generate the interface, ordered by how much control they g
 | [Gradio](01_2_Gradio.ipynb) | The same idea aimed at model demos, an input, an output, and a shareable link |
 | [Plotly Dash](01_3_Plotly_Dash.ipynb) | Flask, Plotly.js, and React underneath, exposed as Python. More work than Streamlit, more control in return |
 | [fastHTML](05_fastHTML.ipynb) | HTML generated from Python, without the JavaScript layer |
-| Grafana | Moved to [IaaS](https://bthek1.github.io/IaaS_docs/Observability/02_Grafana.html), alongside the rest of the observability stack |
+| Grafana | Moved to [IaaS](https://bthek1.github.io/IaaS_docs/Observability/13_Grafana.html), alongside the rest of the observability stack |
 
 ------------------------------------------------------------------------
 
