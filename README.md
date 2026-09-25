@@ -7,7 +7,44 @@ There are two routes to a user interface here, and the site covers both without 
 
 The first is the real one: HTML, CSS, JavaScript, then a framework, a bundler, a linter, and a build step. The second is to skip it, and let a Python library generate the interface. That is the right answer more often than front-end developers like to admit, particularly for a dashboard or a model demo, which is most of what gets built in this collection.
 
+Before either route there is a third thing, which is deciding what the interface should be at all. The design pages below cover that, and they are the only part of this site that is not about a tool.
+
 Nearly every page assumes a Django REST Framework backend, because that is what these interfaces are put in front of. See [Back End](https://bthek1.github.io/Back_End/) for that half.
+
+------------------------------------------------------------------------
+
+## Design: UI and UX
+
+Twelve pages on designing the interface rather than building it, ordered the way the work runs: understand
+people, structure the content, design the behaviour, then the surface, then evaluate it. Every page ends with
+a section on how that discipline fails in practice, which is usually the fastest part to read.
+
+**Understanding users and content**
+
+| Page | Covers |
+|----|----|
+| [UX Research](UI_UX/01_UX_Research.ipynb) | Interviews, contextual inquiry, surveys, diary studies, affinity mapping, personas and jobs-to-be-done, journey maps, and how many participants is enough |
+| [Information Architecture](UI_UX/02_Information_Architecture.ipynb) | Content inventory, organisation schemes, the four navigation models, labelling, card sorting, tree testing, search, and URLs as interface |
+
+**Designing behaviour and surface**
+
+| Page | Covers |
+|----|----|
+| [Interaction Design](UI_UX/03_Interaction_Design.ipynb) | Flows, the eight screen states nobody designs, affordances and signifiers, feedback timing, forms, progressive disclosure, undo over confirmation, and Nielsen’s ten heuristics |
+| [Visual Design Foundations](UI_UX/04_Visual_Design_Foundations.ipynb) | Hierarchy, grids, the spacing scale, type scale and measure, colour as roles rather than a palette, Gestalt grouping, elevation, and icons |
+| [Design Systems and Tokens](UI_UX/05_Design_Systems_and_Tokens.ipynb) | The three token tiers, naming by role, one source of truth to many platforms, theming light and dark, component API design, versioning, and when not to build a system |
+| [Responsive and Multiplatform](UI_UX/06_Responsive_and_Multiplatform.ipynb) | Content-driven breakpoints, fluid type with `clamp()`, container queries, touch versus pointer versus keyboard, platform conventions, density, internationalisation and right-to-left |
+| [Content Design and Motion](UI_UX/08_Content_Design_and_Motion.ipynb) | Voice and tone, microcopy, error messages that say what to do, empty states, readability, then animation duration and easing, and perceived performance |
+
+**Constraints and validation**
+
+| Page | Covers |
+|----|----|
+| [Accessibility](UI_UX/07_Accessibility.ipynb) | WCAG 2.2 AA, POUR, semantic HTML over ARIA, keyboard and focus management, accessible names and live regions, contrast, the 2.2 additions, alt text, and how to test |
+| [Prototyping and Handoff](UI_UX/09_Prototyping_and_Handoff.ipynb) | Choosing fidelity, wireframing with real content, Figma auto layout, variants and variables, what a developer actually needs, and design QA |
+| [Usability Evaluation](UI_UX/10_Usability_Evaluation.ipynb) | Heuristic evaluation, running a session, writing tasks that do not leak the answer, facilitating without helping, severity rating, and testing with disabled participants |
+| [Measurement and Experimentation](UI_UX/11_Measurement_and_Experimentation.ipynb) | Event schema design, funnels, session replay and heatmaps, A/B testing and its limits, HEART, Core Web Vitals, SUS and NPS, and the usual statistical traps |
+| [Process and Ethics](UI_UX/12_Process_and_Ethics.ipynb) | The double diamond, dual-track delivery, design ops, the dark pattern catalogue and why it is now a legal question, consent and privacy, and inclusive design |
 
 ------------------------------------------------------------------------
 
@@ -96,11 +133,10 @@ The mobile and desktop route, where one codebase targets Android, iOS, Linux, Wi
 ## Not Covered Yet
 
 - **No Vue, Svelte, or Angular.** React is the only JavaScript framework covered.
-- **Nothing on accessibility**, which is the omission that matters most in a front-end reference.
 - **No testing.** Neither component testing nor browser automation appears anywhere.
 - **Nothing on state management in React** specifically. Riverpod covers it for Flutter, but Redux, Zustand, and the modern alternatives are absent.
-- **No responsive or mobile-web design page**, despite Bootstrap being covered.
 - **Four stubs at two to three cells**: [React Init](React/01_React_Init.ipynb), [Fetch API](Javascript/01_Fetch_API.ipynb), [jQuery](Javascript/02_JQuery.ipynb), and [Google Analytics](17_1_Google_Analytics.ipynb).
-- Web performance, bundle size, and Core Web Vitals go unmentioned even though Webpack and metrics both have pages.
+- **No build-level performance page.** Bundle size and code splitting go unmentioned even though Webpack has a page. Core Web Vitals are covered as a design constraint in [Responsive and Multiplatform](UI_UX/06_Responsive_and_Multiplatform.ipynb) and [Measurement and Experimentation](UI_UX/11_Measurement_and_Experimentation.ipynb), but not as a build concern.
+- **No worked design example.** The design pages are principles and mechanics; none of them takes one screen from research through to built component.
 
 ------------------------------------------------------------------------
