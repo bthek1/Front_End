@@ -1,0 +1,1664 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.18">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Benedict Thekkel">
+<meta name="description" content="Hierarchy, layout, spacing, type and colour: the raw material of every interface surface.">
+
+<title>Visual Design Foundations – Front_End</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../UI_UX/design_systems_and_tokens.html" rel="next">
+<link href="../UI_UX/interaction_design.html" rel="prev">
+<link href="../favi.svg" rel="icon" type="image/svg+xml">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-b85bc7c33db8c58e0ec93c3465666fed.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-87623689d22b060bad1eefbb2b768960.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-25b2f706efb754904913775f52671bcd.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/bootstrap/bootstrap-87623689d22b060bad1eefbb2b768960.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../styles.css">
+<meta property="og:title" content="Visual Design Foundations – Front_End">
+<meta property="og:description" content="Hierarchy, layout, spacing, type and colour: the raw material of every interface surface.">
+<meta property="og:image" content="https://bthek1.github.io/Front_End/UI_UX/Logo.svg">
+<meta property="og:site_name" content="Front_End">
+<meta name="twitter:title" content="Visual Design Foundations – Front_End">
+<meta name="twitter:description" content="Hierarchy, layout, spacing, type and colour: the raw material of every interface surface.">
+<meta name="twitter:image" content="https://bthek1.github.io/Front_End/UI_UX/Logo.svg">
+<meta name="twitter:card" content="summary_large_image">
+</head>
+
+<body class="nav-sidebar floating nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a href="../index.html" class="navbar-brand navbar-brand-logo">
+    <img src="../Logo.svg" alt="Benedict Thekkel" class="navbar-logo light-content">
+    <img src="../Logo.svg" alt="Benedict Thekkel" class="navbar-logo dark-content">
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-deep-learning" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Deep Learning</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-deep-learning">    
+        <li>
+    <a class="dropdown-item" href="https://bthek1.github.io/FastAI_course/">
+ <span class="dropdown-text">Fast AI course</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://bthek1.github.io/DL_methods/">
+ <span class="dropdown-text">DL Methods</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://bthek1.github.io/DL_tasks/">
+ <span class="dropdown-text">DL Tasks</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-ml-techniques" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">ML Techniques</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-ml-techniques">    
+        <li>
+    <a class="dropdown-item" href="https://bthek1.github.io/ML_methods/">
+ <span class="dropdown-text">ML Methods</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://bthek1.github.io/TimeSeriesML/">
+ <span class="dropdown-text">Time series</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-web" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Web</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-web">    
+        <li>
+    <a class="dropdown-item" href="https://bthek1.github.io/WEB_doc/">
+ <span class="dropdown-text">Web Development</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://bthek1.github.io/Front_End/">
+ <span class="dropdown-text">Front End</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://bthek1.github.io/Back_End/">
+ <span class="dropdown-text">Back End</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://bthek1.github.io/IaaS_docs/">
+ <span class="dropdown-text">IaaS</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-tools" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Tools</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-tools">    
+        <li>
+    <a class="dropdown-item" href="https://bthek1.github.io/Software_Tools/">
+ <span class="dropdown-text">Software Tools</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://bthek1.github.io/Hardware_Tools/">
+ <span class="dropdown-text">Hardware Tools</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://bthek1.github.io/Python_Libs/">
+ <span class="dropdown-text">Python Libraries</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://bthek1.github.io/nbdevAuto/">
+ <span class="dropdown-text">Nbdev Automation</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://bthek1.github.io/ROS2_docs/">
+ <span class="dropdown-text">ROS 2</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-business" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Business</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-business">    
+        <li>
+    <a class="dropdown-item" href="https://bthek1.github.io/Business_doc/">
+ <span class="dropdown-text">Business Doc</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://bthek1.github.io/Philosophy_doc/">
+ <span class="dropdown-text">Ideas Doc</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://bthek1.github.io/Finances/">
+ <span class="dropdown-text">Finances</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://bthek1.github.io/Other/">
+ <span class="dropdown-text">Other</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="https://bthek1.github.io/bthek1_blog/"> 
+<span class="menu-text">Blog</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-help" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Help</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-help">    
+        <li>
+    <a class="dropdown-item" href="https://github.com/bthek1/bthek1_blog/issues"><i class="bi bi-bug" role="img">
+</i> 
+ <span class="dropdown-text">Report a Bug</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://github.com/bthek1/bthek1_blog/issues"><i class="bi bi-chat-right-text" role="img">
+</i> 
+ <span class="dropdown-text">Ask a Question</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://github.com/bthek1/bthek1_blog/issues"><i class="bi bi-question-circle" role="img">
+</i> 
+ <span class="dropdown-text">FAQ</span></a>
+  </li>  
+    </ul>
+  </li>
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools tools-wide">
+    <a href="https://github.com/bthek1" title="" class="quarto-navigation-tool px-1" aria-label="Github"><i class="bi bi-github"></i></a>
+    <a href="https://www.linkedin.com/in/benedict-thekkel/" title="" class="quarto-navigation-tool px-1" aria-label="Linkedin"><i class="bi bi-linkedin"></i></a>
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+  <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
+  <div class="quarto-reader-toggle-btn">
+  <i class="bi"></i>
+  </div>
+</a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../UI_UX/ux_research.html">UI UX</a></li><li class="breadcrumb-item"><a href="../UI_UX/visual_design_foundations.html">Visual Design Foundations</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Front End</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../1_streamlit.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Streamlit</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../2_gradio.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Gradio</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../3_plotly_dash.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Plotly Dash</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../html.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">HTML</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../fasthtml.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">fastHTML</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../css.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">CSS</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../bootstrap.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Bootstrap</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../node.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Node</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../npm.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">npm</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../typescript.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Typescript</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../webpack.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Webpack</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../js_prettier.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Prettier</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../eslint.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ESLint</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../markdown.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Markdown</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../http_headers.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">HTTP Message Headers</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../0_website_metrics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Website Metrics</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../1_google_analytics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Google Analytics</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../svgs.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">SVG</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../surveyjs.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">SurveyJS JSON Format Reference</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Flutter</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Flutter/flutter_setup.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Flutter Setup</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Flutter/widgets.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">App development</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Flutter/dart.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Dart</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Flutter/riverpod.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Riverpod</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">Javascript</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Javascript/javascript.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Javascript</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Javascript/fetch_api.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Fetch API</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Javascript/jquery.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">JQuery</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Javascript/highcharts.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">High Charts</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Javascript/datatables.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Datatables</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">React</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../React/react_init.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">React Init</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../React/react_overview.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">React Overview</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../React/react_setup.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">React Setup</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../React/react_libraries.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">React Libraries</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../React/react_&amp;_django.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">React and Django</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../React/react_docker.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">React Docker</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+ <span class="menu-text">SEO</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../SEO/seo.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">SEO</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
+ <span class="menu-text">UI UX</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../UI_UX/ux_research.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">UX Research</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../UI_UX/information_architecture.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Information Architecture</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../UI_UX/interaction_design.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Interaction Design</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../UI_UX/visual_design_foundations.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Visual Design Foundations</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../UI_UX/design_systems_and_tokens.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Design Systems and Tokens</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../UI_UX/responsive_and_multiplatform.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Responsive and Multiplatform</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../UI_UX/accessibility.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Accessibility</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../UI_UX/content_design_and_motion.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Content Design and Motion</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../UI_UX/prototyping_and_handoff.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Prototyping and Handoff</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../UI_UX/usability_evaluation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Usability Evaluation</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../UI_UX/measurement_and_experimentation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Measurement and Experimentation</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../UI_UX/process_and_ethics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Process and Ethics</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#visual-hierarchy" id="toc-visual-hierarchy" class="nav-link active" data-scroll-target="#visual-hierarchy">1. Visual hierarchy</a></li>
+  <li><a href="#layout-and-grids" id="toc-layout-and-grids" class="nav-link" data-scroll-target="#layout-and-grids">2. Layout and grids</a></li>
+  <li><a href="#spacing" id="toc-spacing" class="nav-link" data-scroll-target="#spacing">3. Spacing</a></li>
+  <li><a href="#typography" id="toc-typography" class="nav-link" data-scroll-target="#typography">4. Typography</a></li>
+  <li><a href="#colour" id="toc-colour" class="nav-link" data-scroll-target="#colour">5. Colour</a></li>
+  <li><a href="#gestalt-principles" id="toc-gestalt-principles" class="nav-link" data-scroll-target="#gestalt-principles">6. Gestalt principles</a></li>
+  <li><a href="#elevation-depth-and-borders" id="toc-elevation-depth-and-borders" class="nav-link" data-scroll-target="#elevation-depth-and-borders">7. Elevation, depth and borders</a></li>
+  <li><a href="#icons" id="toc-icons" class="nav-link" data-scroll-target="#icons">8. Icons</a></li>
+  <li><a href="#how-visual-design-fails" id="toc-how-visual-design-fails" class="nav-link" data-scroll-target="#how-visual-design-fails">9. How visual design fails</a></li>
+  <li><a href="#where-this-goes-next" id="toc-where-this-goes-next" class="nav-link" data-scroll-target="#where-this-goes-next">Where this goes next</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.dev/bthek1/Front_End/blob/main/UI_UX/04_Visual_Design_Foundations.ipynb" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/bthek1/Front_End/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../UI_UX/ux_research.html">UI UX</a></li><li class="breadcrumb-item"><a href="../UI_UX/visual_design_foundations.html">Visual Design Foundations</a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title">Visual Design Foundations</h1>
+</div>
+
+<div>
+  <div class="description">
+    Hierarchy, layout, spacing, type and colour: the raw material of every interface surface.
+  </div>
+</div>
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Benedict Thekkel </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<!-- WARNING: THIS FILE WAS AUTOGENERATED! DO NOT EDIT! -->
+<p>Visual design in an interface is not decoration. It is the mechanism by which a reader knows what matters, what belongs together, and where to look next, before reading a single word. A screen with correct content and no hierarchy is genuinely harder to use than a plain one with hierarchy, because the reader has to construct the structure themselves every time they look at it.</p>
+<p>Five variables do nearly all of the work:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Variable</th>
+<th>Controls</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Size</strong></td>
+<td>Importance. The strongest and bluntest signal available</td>
+</tr>
+<tr class="even">
+<td><strong>Weight</strong></td>
+<td>Emphasis without changing the space a thing occupies</td>
+</tr>
+<tr class="odd">
+<td><strong>Colour</strong></td>
+<td>Category and state, never meaning on its own</td>
+</tr>
+<tr class="even">
+<td><strong>Space</strong></td>
+<td>Grouping. The most underused variable in most interfaces</td>
+</tr>
+<tr class="odd">
+<td><strong>Position</strong></td>
+<td>Reading order and relative priority</td>
+</tr>
+</tbody>
+</table>
+<p>The sections below take these in the order you would actually apply them: hierarchy first, then the grid that positions things, then the spacing scale, then type, then colour.</p>
+<hr>
+<section id="visual-hierarchy" class="level2">
+<h2 class="anchored" data-anchor-id="visual-hierarchy">1. Visual hierarchy</h2>
+<p>Before anything else, decide the order in which a first-time viewer should notice things. There should be one clear first place for the eye to land per screen, and a deliberate second and third.</p>
+<svg viewbox="0 0 640 200" width="100%" style="max-width:640px" role="img" aria-label="Two panels: the left has no hierarchy with all text the same size, the right has a clear heading, supporting text, and one primary button">
+<g fill="none" stroke="currentColor" stroke-opacity=".35"> <rect x="8" y="8" width="296" height="184" rx="6"></rect> <rect x="336" y="8" width="296" height="184" rx="6"></rect> </g> <text x="20" y="28" font-size="10" fill="currentColor" fill-opacity=".6">NO HIERARCHY</text> <text x="348" y="28" font-size="10" fill="currentColor" fill-opacity=".6">HIERARCHY</text> <g fill="currentColor" font-size="13"> <text x="20" y="60">Monthly usage report</text> <text x="20" y="82">Your usage rose 12% this month</text> <text x="20" y="104">Compared to the same month last year</text> <text x="20" y="126">View the full breakdown</text> <text x="20" y="148">Download CSV</text> <text x="20" y="170">Manage alert thresholds</text> </g> <text x="348" y="66" font-size="20" font-weight="700" fill="currentColor">Usage up 12%</text> <text x="348" y="90" font-size="12" fill="currentColor" fill-opacity=".75">Monthly report, October 2026</text> <text x="348" y="112" font-size="11" fill="currentColor" fill-opacity=".55">Compared with October 2025</text> <rect x="348" y="128" width="112" height="30" rx="5" fill="#2563eb"></rect> <text x="404" y="147" font-size="12" fill="#fff" text-anchor="middle">View breakdown</text> <text x="476" y="147" font-size="12" fill="#2563eb">Download CSV</text> <text x="348" y="180" font-size="11" fill="currentColor" fill-opacity=".55">Manage alert thresholds</text>
+</svg>
+<p>Both panels contain the same six pieces of information. The right one has decided which matters.</p>
+<p><strong>The technique is contrast, and contrast requires difference.</strong> Two headings at 17 px and 19 px do not read as two levels, they read as an inconsistency. If two things have different importance, make the difference obvious; if they have the same importance, make them identical.</p>
+<p><strong>Squint at it.</strong> Blur the screen, or look at it from across the room. Whatever still stands out is your real hierarchy, and it is frequently not the one you intended. This is the cheapest visual design test available.</p>
+<p><strong>One primary action per view.</strong> Three buttons of equal weight is the same as no primary action. Primary gets the filled treatment, secondary gets an outline or a plain text button, tertiary goes in a menu.</p>
+<hr>
+</section>
+<section id="layout-and-grids" class="level2">
+<h2 class="anchored" data-anchor-id="layout-and-grids">2. Layout and grids</h2>
+<p>A grid exists so that alignment decisions are made once instead of per element. The 12-column grid is the common default because 12 divides by 2, 3, 4 and 6, giving halves, thirds, quarters and sixths without fractional widths.</p>
+<svg viewbox="0 0 640 150" width="100%" style="max-width:640px" role="img" aria-label="A 12 column grid with gutters, showing a 12-wide header, then an 8 plus 4 split, then three 4-wide cards">
+<g> <g fill="currentColor" fill-opacity=".08"> <rect x="16" y="24" width="40" height="110"></rect><rect x="64" y="24" width="40" height="110"></rect> <rect x="112" y="24" width="40" height="110"></rect><rect x="160" y="24" width="40" height="110"></rect> <rect x="208" y="24" width="40" height="110"></rect><rect x="256" y="24" width="40" height="110"></rect> <rect x="304" y="24" width="40" height="110"></rect><rect x="352" y="24" width="40" height="110"></rect> <rect x="400" y="24" width="40" height="110"></rect><rect x="448" y="24" width="40" height="110"></rect> <rect x="496" y="24" width="40" height="110"></rect><rect x="544" y="24" width="40" height="110"></rect> </g> <text x="16" y="16" font-size="9" fill="currentColor" fill-opacity=".6">12 columns, 8 px gutters, fixed margins</text> <rect x="16" y="28" width="568" height="22" rx="3" fill="#2563eb" fill-opacity=".55"></rect> <text x="24" y="43" font-size="10" fill="currentColor">span 12</text> <rect x="16" y="58" width="376" height="34" rx="3" fill="#2563eb" fill-opacity=".35"></rect> <text x="24" y="79" font-size="10" fill="currentColor">span 8</text> <rect x="400" y="58" width="184" height="34" rx="3" fill="#2563eb" fill-opacity=".2"></rect> <text x="408" y="79" font-size="10" fill="currentColor">span 4</text> <rect x="16" y="100" width="184" height="30" rx="3" fill="#2563eb" fill-opacity=".28"></rect> <rect x="208" y="100" width="184" height="30" rx="3" fill="#2563eb" fill-opacity=".28"></rect> <rect x="400" y="100" width="184" height="30" rx="3" fill="#2563eb" fill-opacity=".28"></rect> <text x="24" y="119" font-size="10" fill="currentColor">4</text> <text x="216" y="119" font-size="10" fill="currentColor">4</text> <text x="408" y="119" font-size="10" fill="currentColor">4</text> </g>
+</svg>
+<p><strong>In CSS you rarely need a column framework any more.</strong> Grid and flexbox express the intent directly:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode css code-with-copy"><code class="sourceCode css"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">.page</span> {</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">display</span><span class="ch">:</span> <span class="dv">grid</span><span class="op">;</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="kw">grid-template-columns</span><span class="ch">:</span> <span class="fu">repeat(</span><span class="dv">12</span><span class="op">,</span> <span class="fu">minmax(</span><span class="dv">0</span><span class="op">,</span> <span class="dv">1</span><span class="dt">fr</span><span class="fu">))</span><span class="op">;</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="kw">gap</span><span class="ch">:</span> <span class="dv">1</span><span class="dt">rem</span><span class="op">;</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="kw">max-width</span><span class="ch">:</span> <span class="dv">72</span><span class="dt">rem</span><span class="op">;</span>       <span class="co">/* a measure cap, not a device width */</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="kw">margin-inline</span><span class="ch">:</span> <span class="bu">auto</span><span class="op">;</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="kw">padding-inline</span><span class="ch">:</span> <span class="dv">1</span><span class="dt">rem</span><span class="op">;</span>   <span class="co">/* the gutter that keeps text off the edge */</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="fu">.main</span>  { <span class="kw">grid-column</span><span class="ch">:</span> <span class="dv">span 8</span><span class="op">;</span> }</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="fu">.aside</span> { <span class="kw">grid-column</span><span class="ch">:</span> <span class="dv">span 4</span><span class="op">;</span> }</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="co">/* Auto-fitting cards need no breakpoints at all. */</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="fu">.cards</span> {</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>  <span class="kw">display</span><span class="ch">:</span> <span class="dv">grid</span><span class="op">;</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>  <span class="kw">grid-template-columns</span><span class="ch">:</span> <span class="fu">repeat(</span><span class="dv">auto-fit</span><span class="op">,</span> <span class="fu">minmax(</span><span class="dv">16</span><span class="dt">rem</span><span class="op">,</span> <span class="dv">1</span><span class="dt">fr</span><span class="fu">))</span><span class="op">;</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>  <span class="kw">gap</span><span class="ch">:</span> <span class="dv">1</span><span class="dt">rem</span><span class="op">;</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Note <code>minmax(0, 1fr)</code> rather than <code>1fr</code>: without it, a long unbreakable string can force a column wider than its share and blow out the layout.</p>
+<p><strong>Alignment is the cheapest quality signal there is.</strong> Fewer alignment edges reads as more deliberate. Pick a left edge and hold it down the whole page; the eye notices a 3 px inconsistency without being able to name it.</p>
+<p><strong>Cap the content width, not the viewport.</strong> A text column should stop at a readable measure regardless of how wide the window is. See section 4.</p>
+<hr>
+</section>
+<section id="spacing" class="level2">
+<h2 class="anchored" data-anchor-id="spacing">3. Spacing</h2>
+<p>Spacing is how grouping is communicated, and it is the variable most often left to chance. The mechanism is the Gestalt principle of proximity: things near each other are read as related, whatever the borders say.</p>
+<svg viewbox="0 0 640 128" width="100%" style="max-width:640px" role="img" aria-label="Left: a label and field with even spacing, ambiguous grouping. Right: tight label-to-field spacing and wide group spacing, so pairs are obvious">
+<g fill="none" stroke="currentColor" stroke-opacity=".3"> <rect x="8" y="8" width="296" height="112" rx="6"></rect><rect x="336" y="8" width="296" height="112" rx="6"></rect> </g> <text x="20" y="24" font-size="9" fill="currentColor" fill-opacity=".6">EVEN SPACING: pairs unclear</text> <text x="348" y="24" font-size="9" fill="currentColor" fill-opacity=".6">PROXIMITY: pairs obvious</text> <g font-size="10" fill="currentColor"> <text x="20" y="44">Site name</text> <rect x="20" y="50" width="130" height="14" rx="2" fill="none" stroke="currentColor" stroke-opacity=".45"></rect> <text x="20" y="80">Meter ID</text> <rect x="20" y="86" width="130" height="14" rx="2" fill="none" stroke="currentColor" stroke-opacity=".45"></rect> <text x="348" y="40">Site name</text> <rect x="348" y="44" width="130" height="14" rx="2" fill="none" stroke="currentColor" stroke-opacity=".45"></rect> <text x="348" y="88">Meter ID</text> <rect x="348" y="92" width="130" height="14" rx="2" fill="none" stroke="currentColor" stroke-opacity=".45"></rect> </g> <g stroke="#2563eb" stroke-width="1"> <line x1="170" y1="44" x2="170" y2="64"></line><line x1="166" y1="44" x2="174" y2="44"></line><line x1="166" y1="64" x2="174" y2="64"></line> <line x1="170" y1="64" x2="170" y2="86"></line> <line x1="498" y1="32" x2="498" y2="58"></line><line x1="494" y1="32" x2="502" y2="32"></line><line x1="494" y1="58" x2="502" y2="58"></line> <line x1="498" y1="58" x2="498" y2="80"></line><line x1="494" y1="80" x2="502" y2="80"></line> </g> <text x="180" y="58" font-size="9" fill="#2563eb">16</text> <text x="180" y="80" font-size="9" fill="#2563eb">16</text> <text x="508" y="48" font-size="9" fill="#2563eb">6</text> <text x="508" y="74" font-size="9" fill="#2563eb">24</text>
+</svg>
+<p><strong>The rule: space within a group must be smaller than space between groups.</strong> A label 6 px from its field and 24 px from the next pair needs no lines, boxes or shading to be understood. If you find yourself adding borders to clarify grouping, the spacing is usually wrong.</p>
+<p><strong>Use a scale, not arbitrary numbers.</strong> A 4 px base with doubling steps is the common choice, since it lands on whole pixels at every zoom level and gives roughly the right granularity:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode css code-with-copy"><code class="sourceCode css"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="in">:root</span> {</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="va">--space-1</span><span class="ch">:</span> <span class="dv">0.25</span><span class="dt">rem</span><span class="op">;</span>  <span class="co">/*  4px  icon to label            */</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="va">--space-2</span><span class="ch">:</span> <span class="dv">0.5</span><span class="dt">rem</span><span class="op">;</span>   <span class="co">/*  8px  inside a control          */</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="va">--space-3</span><span class="ch">:</span> <span class="dv">0.75</span><span class="dt">rem</span><span class="op">;</span>  <span class="co">/* 12px  label to field            */</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="va">--space-4</span><span class="ch">:</span> <span class="dv">1</span><span class="dt">rem</span><span class="op">;</span>     <span class="co">/* 16px  between fields            */</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="va">--space-6</span><span class="ch">:</span> <span class="dv">1.5</span><span class="dt">rem</span><span class="op">;</span>   <span class="co">/* 24px  between field groups      */</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  <span class="va">--space-8</span><span class="ch">:</span> <span class="dv">2</span><span class="dt">rem</span><span class="op">;</span>     <span class="co">/* 32px  between card sections     */</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  <span class="va">--space-12</span><span class="ch">:</span> <span class="dv">3</span><span class="dt">rem</span><span class="op">;</span>    <span class="co">/* 48px  between page sections     */</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>  <span class="va">--space-16</span><span class="ch">:</span> <span class="dv">4</span><span class="dt">rem</span><span class="op">;</span>    <span class="co">/* 64px  major page divisions      */</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Two habits that follow from a scale:</p>
+<ul>
+<li><strong>Only ever use values from it.</strong> The moment a 13 px gap appears, the system stops guaranteeing rhythm, and the next person copies the 13.</li>
+<li><strong>Apply space in one direction.</strong> Margin-bottom on stacked elements, or better, <code>gap</code> on the container. Mixing top and bottom margins makes collapsing margins your problem and every gap becomes a subtraction puzzle.</li>
+</ul>
+<p><strong>White space is not wasted space.</strong> The most common note on a first draft interface is that everything needs more room. Density is occasionally correct, for a trading screen or a log viewer, but it should be a decision you can defend rather than the result of filling the viewport.</p>
+<hr>
+</section>
+<section id="typography" class="level2">
+<h2 class="anchored" data-anchor-id="typography">4. Typography</h2>
+<p>Most interface text is set by four decisions: the family, the scale, the measure, and the line height.</p>
+<p><strong>A type scale gives you distinguishable sizes.</strong> Pick a base of 16 px, because that is the browser default and shrinking it fights the user’s own settings, then generate steps by a ratio. 1.25 (major third) is a safe interface ratio; 1.2 is tighter for dense applications; 1.333 and above suits marketing pages.</p>
+<svg viewbox="0 0 640 176" width="100%" style="max-width:640px" role="img" aria-label="A type scale from 12 to 39 pixels, each step labelled with its size and role">
+<g fill="currentColor"> <text x="16" y="26" font-size="12">12 / 16 caption, table meta</text> <text x="16" y="50" font-size="14">14 / 20 secondary body, labels</text> <text x="16" y="76" font-size="16">16 / 24 body, the default</text> <text x="16" y="104" font-size="20" font-weight="600">20 / 28 h3</text> <text x="16" y="136" font-size="25" font-weight="600">25 / 32 h2</text> <text x="16" y="172" font-size="31" font-weight="700">31 / 40 h1</text> </g>
+</svg>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode css code-with-copy"><code class="sourceCode css"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="in">:root</span> {</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="va">--text-xs</span><span class="ch">:</span> <span class="dv">0.75</span><span class="dt">rem</span><span class="op">;</span>    <span class="co">/* 12px */</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="va">--text-sm</span><span class="ch">:</span> <span class="dv">0.875</span><span class="dt">rem</span><span class="op">;</span>   <span class="co">/* 14px */</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="va">--text-base</span><span class="ch">:</span> <span class="dv">1</span><span class="dt">rem</span><span class="op">;</span>     <span class="co">/* 16px */</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="va">--text-lg</span><span class="ch">:</span> <span class="dv">1.25</span><span class="dt">rem</span><span class="op">;</span>    <span class="co">/* 20px */</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  <span class="va">--text-xl</span><span class="ch">:</span> <span class="dv">1.5625</span><span class="dt">rem</span><span class="op">;</span>  <span class="co">/* 25px */</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  <span class="va">--text-2xl</span><span class="ch">:</span> <span class="dv">1.9375</span><span class="dt">rem</span><span class="op">;</span> <span class="co">/* 31px */</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Measure: 45 to 75 characters per line, with 66 as a good target.</strong> Beyond about 80 the eye loses the line when it returns to the left edge; below about 40 the rhythm breaks. Set it in <code>ch</code> units so it tracks the font rather than guessing pixel widths:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode css code-with-copy"><code class="sourceCode css"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">.prose</span> { <span class="kw">max-width</span><span class="ch">:</span> <span class="dv">66</span><span class="dt">ch</span><span class="op">;</span> }</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Line height scales inversely with size.</strong> Body text wants 1.5; a large heading wants 1.1 to 1.25, because at that size generous leading pulls the words apart. Set line height unitless so it inherits proportionally.</p>
+<p><strong>Weight and case.</strong></p>
+<ul>
+<li>Two or three weights are enough: regular for body, semibold or bold for headings, plus one more if you need it. Loading six weights costs real download time for a distinction nobody notices.</li>
+<li><strong>Avoid all caps for anything longer than a couple of words.</strong> Uppercase removes the word shapes that fast reading depends on, which measurably slows reading.</li>
+<li>Light weights below 300 at small sizes fail contrast in practice even when the colour maths passes, because thin strokes carry less ink.</li>
+</ul>
+<p><strong>Alignment.</strong> Left-aligned (or start-aligned, which handles right-to-left correctly) for body text. Centre only short runs such as a heading or an empty-state message. Justified text creates rivers of white space in a browser, which lacks proper hyphenation control, so avoid it.</p>
+<p><strong>Numbers in tables need tabular figures</strong>, or the columns will not line up as the digits change:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode css code-with-copy"><code class="sourceCode css"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">.metric</span> { <span class="kw">font-variant-numeric</span><span class="ch">:</span> <span class="dv">tabular-nums</span><span class="op">;</span> }</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Use a system font stack unless a custom face earns its cost.</strong> It renders instantly, matches the platform, and covers every script the user has installed.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode css code-with-copy"><code class="sourceCode css"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>body {</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">font-family</span><span class="ch">:</span> <span class="dv">system-ui</span><span class="op">,</span> <span class="dv">-apple-system</span><span class="op">,</span> <span class="st">"Segoe UI"</span><span class="op">,</span> <span class="dv">Roboto</span><span class="op">,</span> <span class="dv">Helvetica</span><span class="op">,</span> <span class="dv">Arial</span><span class="op">,</span> <span class="dv">sans-serif</span><span class="op">;</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<hr>
+</section>
+<section id="colour" class="level2">
+<h2 class="anchored" data-anchor-id="colour">5. Colour</h2>
+<p>The mistake with colour is treating it as a palette of pretty values. Treat it as a set of <strong>roles</strong> instead, each with a defined job, and pick values that satisfy those jobs.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Role</th>
+<th>Job</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Surface / background</td>
+<td>The ground everything sits on, usually two or three levels</td>
+</tr>
+<tr class="even">
+<td>Text</td>
+<td>Primary, secondary, disabled: a small ramp, not one colour</td>
+</tr>
+<tr class="odd">
+<td>Border</td>
+<td>Separation where space alone is not enough</td>
+</tr>
+<tr class="even">
+<td>Accent / primary</td>
+<td>One colour, for the primary action and active state</td>
+</tr>
+<tr class="odd">
+<td>Semantic</td>
+<td>Success, warning, danger, info. Fixed meanings, used nowhere else</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Neutrals do most of the work.</strong> A good interface is largely greys, with colour reserved for meaning. If everything is coloured, colour signals nothing. The 60-30-10 guideline is a reasonable starting ratio: 60 percent dominant neutral, 30 percent secondary, 10 percent accent.</p>
+<p><strong>Build a ramp, not a swatch.</strong> One hue at nine or ten lightness steps gives you hover states, borders, and tints without inventing new colours:</p>
+<svg viewbox="0 0 640 74" width="100%" style="max-width:640px" role="img" aria-label="A blue ramp from 50 to 900 and a neutral grey ramp from 50 to 900, each in ten steps">
+<g> <rect x="16" y="8" width="60" height="24" fill="#eff6ff"></rect><rect x="78" y="8" width="60" height="24" fill="#dbeafe"></rect> <rect x="140" y="8" width="60" height="24" fill="#bfdbfe"></rect><rect x="202" y="8" width="60" height="24" fill="#93c5fd"></rect> <rect x="264" y="8" width="60" height="24" fill="#60a5fa"></rect><rect x="326" y="8" width="60" height="24" fill="#3b82f6"></rect> <rect x="388" y="8" width="60" height="24" fill="#2563eb"></rect><rect x="450" y="8" width="60" height="24" fill="#1d4ed8"></rect> <rect x="512" y="8" width="60" height="24" fill="#1e40af"></rect><rect x="574" y="8" width="50" height="24" fill="#172554"></rect> <rect x="16" y="40" width="60" height="24" fill="#f8fafc"></rect><rect x="78" y="40" width="60" height="24" fill="#f1f5f9"></rect> <rect x="140" y="40" width="60" height="24" fill="#e2e8f0"></rect><rect x="202" y="40" width="60" height="24" fill="#cbd5e1"></rect> <rect x="264" y="40" width="60" height="24" fill="#94a3b8"></rect><rect x="326" y="40" width="60" height="24" fill="#64748b"></rect> <rect x="388" y="40" width="60" height="24" fill="#475569"></rect><rect x="450" y="40" width="60" height="24" fill="#334155"></rect> <rect x="512" y="40" width="60" height="24" fill="#1e293b"></rect><rect x="574" y="40" width="50" height="24" fill="#0f172a"></rect> <g font-size="9" fill="currentColor" fill-opacity=".7"> <text x="16" y="6">50</text><text x="326" y="6">500</text><text x="574" y="6">950</text> </g> </g>
+</svg>
+<p><strong>Use a perceptual colour space for the maths.</strong> HSL lies about lightness: <code>hsl(60 100% 50%)</code> (yellow) and <code>hsl(240 100% 50%)</code> (blue) claim the same 50 percent and are wildly different to the eye. OKLCH fixes this, so a ramp built in OKLCH has steps that actually look evenly spaced, and two hues at the same lightness really match.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode css code-with-copy"><code class="sourceCode css"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="in">:root</span> {</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="co">/* lightness, chroma, hue: evenly stepped and predictable */</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="va">--accent-400</span><span class="ch">:</span> <span class="fu">oklch(</span><span class="dv">70</span><span class="dt">%</span> <span class="dv">0.14</span> <span class="dv">250</span><span class="fu">)</span><span class="op">;</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="va">--accent-500</span><span class="ch">:</span> <span class="fu">oklch(</span><span class="dv">62</span><span class="dt">%</span> <span class="dv">0.16</span> <span class="dv">250</span><span class="fu">)</span><span class="op">;</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  <span class="va">--accent-600</span><span class="ch">:</span> <span class="fu">oklch(</span><span class="dv">54</span><span class="dt">%</span> <span class="dv">0.17</span> <span class="dv">250</span><span class="fu">)</span><span class="op">;</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Colour must never be the only carrier of meaning.</strong> Roughly 1 in 12 men has a colour vision deficiency, and red-green is the common one, which is exactly the pair most status indicators use. Add an icon, a shape, a label or a pattern. This is a WCAG requirement and it is also just better design, since it survives a greyscale printout and a bright afternoon on a phone. Details in <a href="../UI_UX/accessibility.html">Accessibility</a>.</p>
+<p><strong>Contrast minimums</strong> (WCAG 2.2 AA): 4.5:1 for normal text, 3:1 for text at 24 px or 19 px bold and above, 3:1 for the visible boundary of interactive components and meaningful graphics. Check with a contrast tool rather than by eye, since eye judgement of contrast is unreliable.</p>
+<p><strong>Design light and dark together, not dark as an afterthought.</strong> Dark mode is not inverted light mode. Saturated colours vibrate on dark grounds and need to be desaturated; pure black backgrounds with pure white text produce halation, so use a very dark grey with a slightly dimmed white; and shadows stop working as elevation cues, so depth has to come from surface lightness instead. Tokens make this a table of values rather than a second stylesheet, which is the subject of the next notebook.</p>
+<hr>
+</section>
+<section id="gestalt-principles" class="level2">
+<h2 class="anchored" data-anchor-id="gestalt-principles">6. Gestalt principles</h2>
+<p>The rules by which the visual system groups things before conscious reading. Five of them matter daily.</p>
+<svg viewbox="0 0 640 110" width="100%" style="max-width:640px" role="img" aria-label="Diagrams of proximity, similarity, common region, continuity and closure">
+<g fill="currentColor"> <g><circle cx="24" cy="46" r="5"></circle><circle cx="40" cy="46" r="5"></circle><circle cx="74" cy="46" r="5"></circle><circle cx="90" cy="46" r="5"></circle> <text x="24" y="80" font-size="9" fill-opacity=".7">Proximity</text></g> <g><circle cx="150" cy="46" r="5"></circle><rect x="167" y="41" width="10" height="10"></rect><circle cx="196" cy="46" r="5"></circle><rect x="213" y="41" width="10" height="10"></rect> <text x="150" y="80" font-size="9" fill-opacity=".7">Similarity</text></g> <g><rect x="272" y="26" width="76" height="40" rx="5" fill="none" stroke="currentColor" stroke-opacity=".5"></rect> <circle cx="292" cy="46" r="5"></circle><circle cx="310" cy="46" r="5"></circle><circle cx="328" cy="46" r="5"></circle> <text x="272" y="80" font-size="9" fill-opacity=".7">Common region</text></g> <g><path d="M400 62 C 420 26, 448 26, 468 62" fill="none" stroke="currentColor" stroke-opacity=".6"></path> <circle cx="400" cy="62" r="3"></circle><circle cx="434" cy="34" r="3"></circle><circle cx="468" cy="62" r="3"></circle> <text x="400" y="80" font-size="9" fill-opacity=".7">Continuity</text></g> <g><path d="M540 28 A 22 22 0 1 1 540 68" fill="none" stroke="currentColor" stroke-opacity=".6" stroke-width="2"></path> <text x="524" y="80" font-size="9" fill-opacity=".7">Closure</text></g> </g>
+</svg>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Principle</th>
+<th>Statement</th>
+<th>Interface use</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Proximity</strong></td>
+<td>Near things are related</td>
+<td>The primary grouping tool. See section 3</td>
+</tr>
+<tr class="even">
+<td><strong>Similarity</strong></td>
+<td>Alike things are related</td>
+<td>Same styling implies same kind. So do not style two different kinds identically</td>
+</tr>
+<tr class="odd">
+<td><strong>Common region</strong></td>
+<td>A shared enclosure groups</td>
+<td>Cards and panels. Weaker than proximity, so do not rely on a border to fix bad spacing</td>
+</tr>
+<tr class="even">
+<td><strong>Continuity</strong></td>
+<td>The eye follows a line</td>
+<td>Alignment along an edge creates an implied path down the page</td>
+</tr>
+<tr class="odd">
+<td><strong>Closure</strong></td>
+<td>The eye completes a shape</td>
+<td>Why a partly visible row communicates “scroll for more”</td>
+</tr>
+</tbody>
+</table>
+<p>Two corollaries worth stating outright:</p>
+<ul>
+<li><strong>Similarity cuts both ways.</strong> If two elements look the same, users will expect them to behave the same. A clickable card next to a non-clickable card in the same style is a design bug, not a user error.</li>
+<li><strong>Proximity beats a border.</strong> When spacing and enclosure disagree, spacing wins. That is why a form with even spacing inside a box is still ambiguous.</li>
+</ul>
+<hr>
+</section>
+<section id="elevation-depth-and-borders" class="level2">
+<h2 class="anchored" data-anchor-id="elevation-depth-and-borders">7. Elevation, depth and borders</h2>
+<p>Depth answers “what is on top of what”, which matters for menus, dialogs, sticky headers and drag operations.</p>
+<p><strong>Three tools, in order of subtlety:</strong> background lightness, border, shadow. Use the least that works.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode css code-with-copy"><code class="sourceCode css"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="in">:root</span> {</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="va">--shadow-1</span><span class="ch">:</span> <span class="dv">0</span> <span class="dv">1</span><span class="dt">px</span> <span class="dv">2</span><span class="dt">px</span> <span class="fu">rgb(</span><span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> / <span class="dv">.06</span><span class="fu">)</span><span class="op">;</span>                        <span class="co">/* resting card    */</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="va">--shadow-2</span><span class="ch">:</span> <span class="dv">0</span> <span class="dv">2</span><span class="dt">px</span> <span class="dv">8</span><span class="dt">px</span> <span class="fu">rgb(</span><span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> / <span class="dv">.08</span><span class="fu">)</span><span class="op">;</span>                        <span class="co">/* hovered, raised */</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="va">--shadow-3</span><span class="ch">:</span> <span class="dv">0</span> <span class="dv">8</span><span class="dt">px</span> <span class="dv">24</span><span class="dt">px</span> <span class="fu">rgb(</span><span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> / <span class="dv">.12</span><span class="fu">)</span><span class="op">;</span>                       <span class="co">/* dropdown        */</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  <span class="va">--shadow-4</span><span class="ch">:</span> <span class="dv">0</span> <span class="dv">16</span><span class="dt">px</span> <span class="dv">48</span><span class="dt">px</span> <span class="fu">rgb(</span><span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> / <span class="dv">.18</span><span class="fu">)</span><span class="op">;</span>                      <span class="co">/* modal           */</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Keep a consistent light source.</strong> If one shadow is offset downward, all of them are. Mixed shadow directions read as sloppiness even to people who cannot say why.</p>
+<p><strong>A shadow is a semantic signal, not a decoration.</strong> Reserve the deeper levels for things that genuinely float and are dismissible. A static card with a modal-sized shadow makes the whole hierarchy unreadable.</p>
+<p><strong>Elevation does not translate to dark mode.</strong> A black shadow on a near-black surface is invisible, so depth in dark themes comes from making the raised surface lighter than its ground. That is one more reason to express elevation as a token with a per-theme value rather than a hard-coded shadow.</p>
+<p><strong>Prefer a border to a shadow for anything static</strong>, and prefer a background change to a border where you can get away with it. Borders at full strength box the page in; a border at low contrast (a neutral-200 rather than neutral-400) separates without shouting.</p>
+<hr>
+</section>
+<section id="icons" class="level2">
+<h2 class="anchored" data-anchor-id="icons">8. Icons</h2>
+<p>Icons are a compression format. They save space and speed recognition for concepts the user already knows, and they hide functionality for everything else.</p>
+<ul>
+<li><strong>Use one icon set.</strong> Mixed stroke weights and corner radii between sets are immediately visible and look like a mistake. Pick one (Lucide, Phosphor, Material Symbols, Heroicons) and stay in it.</li>
+<li><strong>Label anything ambiguous.</strong> Only a handful of icons are genuinely universal: close, search, print, plus a few platform conventions. A three-dot menu, a bookmark, a share glyph and anything domain-specific need words. Icon-only toolbars are a recognised usability problem, not a modern aesthetic.</li>
+<li><strong>If it must be icon-only, give it an accessible name and a tooltip.</strong> <code>aria-label</code> for assistive technology and a visible tooltip on hover and focus for everyone else.</li>
+<li><strong>Match the optical size to the text</strong>, typically 1 em to 1.25 em beside body text, and align to the cap height rather than the line box.</li>
+<li><strong>Prefer inline SVG</strong> for anything that must inherit colour or change with state. <code>currentColor</code> makes an icon follow its text automatically, which is why every SVG in this notebook uses it.</li>
+<li><strong>Decorative icons get <code>aria-hidden="true"</code></strong>, so a screen reader does not announce a meaningless graphic next to the label it duplicates.</li>
+</ul>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!-- Icon plus text: the icon is decorative, the text is the name --&gt;</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">button</span><span class="dt">&gt;&lt;</span><span class="kw">svg</span><span class="ot"> aria-hidden</span><span class="op">=</span><span class="st">"true"</span><span class="ot"> width</span><span class="op">=</span><span class="st">"16"</span><span class="ot"> height</span><span class="op">=</span><span class="st">"16"</span><span class="dt">&gt;</span>...<span class="dt">&lt;/</span><span class="kw">svg</span><span class="dt">&gt;</span> Delete site<span class="dt">&lt;/</span><span class="kw">button</span><span class="dt">&gt;</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!-- Icon only: the icon must carry the name --&gt;</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">button</span><span class="ot"> aria-label</span><span class="op">=</span><span class="st">"Delete site"</span><span class="ot"> title</span><span class="op">=</span><span class="st">"Delete site"</span><span class="dt">&gt;&lt;</span><span class="kw">svg</span><span class="ot"> aria-hidden</span><span class="op">=</span><span class="st">"true"</span><span class="dt">&gt;</span>...<span class="dt">&lt;/</span><span class="kw">svg</span><span class="dt">&gt;&lt;/</span><span class="kw">button</span><span class="dt">&gt;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><a href="../svgs.html">SVG</a> covers the format itself in depth.</p>
+<hr>
+</section>
+<section id="how-visual-design-fails" class="level2">
+<h2 class="anchored" data-anchor-id="how-visual-design-fails">9. How visual design fails</h2>
+<ul>
+<li><strong>No hierarchy.</strong> Everything at 14 px in the same grey. Squint at the screen and nothing emerges.</li>
+<li><strong>Too many type sizes and weights</strong>, usually because each screen was designed alone. Six sizes that differ by 1 px each communicate less than three that differ clearly.</li>
+<li><strong>Arbitrary spacing.</strong> 13 px here, 18 px there, and grouping that has to be rescued with borders.</li>
+<li><strong>Colour as decoration.</strong> Accent colour on six elements, so the primary action no longer stands out.</li>
+<li><strong>Colour as the only signal.</strong> Red and green status dots with no icon or label.</li>
+<li><strong>Contrast traded for aesthetics.</strong> Light grey placeholder text on white is the most common accessibility failure in visual design, and it fails for everyone on a phone outdoors, not only for people with low vision.</li>
+<li><strong>Shadows everywhere.</strong> When every element floats, nothing does.</li>
+<li><strong>Centred body text</strong>, which forces the eye to find a new left edge on every line.</li>
+<li><strong>Full-width text on a large monitor.</strong> A 200-character line is unreadable no matter how good the type is.</li>
+<li><strong>Dark mode by inversion</strong>, producing vibrating saturated colours and invisible elevation.</li>
+</ul>
+<hr>
+</section>
+<section id="where-this-goes-next" class="level2">
+<h2 class="anchored" data-anchor-id="where-this-goes-next">Where this goes next</h2>
+<ul>
+<li><a href="../UI_UX/design_systems_and_tokens.html">Design Systems and Tokens</a> turns every scale in this notebook into named values a whole team can use, and is how light and dark stay in step.</li>
+<li><a href="../UI_UX/responsive_and_multiplatform.html">Responsive and Multiplatform</a> covers how these layouts behave as the viewport changes.</li>
+<li><a href="../UI_UX/accessibility.html">Accessibility</a> holds the contrast requirements, target sizes and colour independence rules this notebook keeps pointing at.</li>
+<li><a href="../UI_UX/content_design_and_motion.html">Content Design and Motion</a> covers the words inside the hierarchy.</li>
+</ul>
+<p>On the implementation side: <a href="../css.html">CSS</a> for the properties, <a href="../bootstrap.html">Bootstrap</a> for a ready-made grid and component set, and <a href="../svgs.html">SVG</a> for vector assets and icons.</p>
+<hr>
+
+
+</section>
+
+<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/bthek1\.github\.io\/Front_End");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<script src="https://utteranc.es/client.js" repo="quarto-dev/quarto-web" issue-term="pathname" theme="github-light" crossorigin="anonymous" async="">
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../UI_UX/interaction_design.html" class="pagination-link" aria-label="Interaction Design">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Interaction Design</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../UI_UX/design_systems_and_tokens.html" class="pagination-link" aria-label="Design Systems and Tokens">
+        <span class="nav-page-text">Design Systems and Tokens</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item">
+    <a class="nav-link active" href="../index.html" aria-current="page">
+<p>Trademark</p>
+</a>
+  </li>  
+    <li class="nav-item">
+    <a class="nav-link" href="https://github.com/bthek1/bthek1_blog/issues">
+<p>FAQ</p>
+</a>
+  </li>  
+    <li class="nav-item">
+    <a class="nav-link" href="https://bthek1.github.io/bthek1_blog/index.html">
+<p>License</p>
+</a>
+  </li>  
+    <li class="nav-item">
+    <a class="nav-link" href="../index.html">
+<p>Trademark</p>
+</a>
+  </li>  
+</ul>
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.dev/bthek1/Front_End/blob/main/UI_UX/04_Visual_Design_Foundations.ipynb" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/bthek1/Front_End/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+    <div class="nav-footer-right">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/bthek1">
+      <i class="bi bi-github" role="img" aria-label="Github">
+</i> 
+    </a>
+  </li>  
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://www.linkedin.com/in/benedict-thekkel/">
+      <i class="bi bi-linkedin" role="img" aria-label="Linkedin">
+</i> 
+    </a>
+  </li>  
+</ul>
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

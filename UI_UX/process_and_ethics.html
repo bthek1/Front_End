@@ -1,0 +1,1581 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.18">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Benedict Thekkel">
+<meta name="description" content="How design work is organised, and the lines it should not cross.">
+
+<title>Process and Ethics – Front_End</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../UI_UX/measurement_and_experimentation.html" rel="prev">
+<link href="../favi.svg" rel="icon" type="image/svg+xml">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-b85bc7c33db8c58e0ec93c3465666fed.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-87623689d22b060bad1eefbb2b768960.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-25b2f706efb754904913775f52671bcd.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/bootstrap/bootstrap-87623689d22b060bad1eefbb2b768960.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../styles.css">
+<meta property="og:title" content="Process and Ethics – Front_End">
+<meta property="og:description" content="How design work is organised, and the lines it should not cross.">
+<meta property="og:image" content="https://bthek1.github.io/Front_End/UI_UX/Logo.svg">
+<meta property="og:site_name" content="Front_End">
+<meta name="twitter:title" content="Process and Ethics – Front_End">
+<meta name="twitter:description" content="How design work is organised, and the lines it should not cross.">
+<meta name="twitter:image" content="https://bthek1.github.io/Front_End/UI_UX/Logo.svg">
+<meta name="twitter:card" content="summary_large_image">
+</head>
+
+<body class="nav-sidebar floating nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a href="../index.html" class="navbar-brand navbar-brand-logo">
+    <img src="../Logo.svg" alt="Benedict Thekkel" class="navbar-logo light-content">
+    <img src="../Logo.svg" alt="Benedict Thekkel" class="navbar-logo dark-content">
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-deep-learning" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Deep Learning</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-deep-learning">    
+        <li>
+    <a class="dropdown-item" href="https://bthek1.github.io/FastAI_course/">
+ <span class="dropdown-text">Fast AI course</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://bthek1.github.io/DL_methods/">
+ <span class="dropdown-text">DL Methods</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://bthek1.github.io/DL_tasks/">
+ <span class="dropdown-text">DL Tasks</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-ml-techniques" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">ML Techniques</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-ml-techniques">    
+        <li>
+    <a class="dropdown-item" href="https://bthek1.github.io/ML_methods/">
+ <span class="dropdown-text">ML Methods</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://bthek1.github.io/TimeSeriesML/">
+ <span class="dropdown-text">Time series</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-web" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Web</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-web">    
+        <li>
+    <a class="dropdown-item" href="https://bthek1.github.io/WEB_doc/">
+ <span class="dropdown-text">Web Development</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://bthek1.github.io/Front_End/">
+ <span class="dropdown-text">Front End</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://bthek1.github.io/Back_End/">
+ <span class="dropdown-text">Back End</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://bthek1.github.io/IaaS_docs/">
+ <span class="dropdown-text">IaaS</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-tools" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Tools</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-tools">    
+        <li>
+    <a class="dropdown-item" href="https://bthek1.github.io/Software_Tools/">
+ <span class="dropdown-text">Software Tools</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://bthek1.github.io/Hardware_Tools/">
+ <span class="dropdown-text">Hardware Tools</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://bthek1.github.io/Python_Libs/">
+ <span class="dropdown-text">Python Libraries</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://bthek1.github.io/nbdevAuto/">
+ <span class="dropdown-text">Nbdev Automation</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://bthek1.github.io/ROS2_docs/">
+ <span class="dropdown-text">ROS 2</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-business" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Business</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-business">    
+        <li>
+    <a class="dropdown-item" href="https://bthek1.github.io/Business_doc/">
+ <span class="dropdown-text">Business Doc</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://bthek1.github.io/Philosophy_doc/">
+ <span class="dropdown-text">Ideas Doc</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://bthek1.github.io/Finances/">
+ <span class="dropdown-text">Finances</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://bthek1.github.io/Other/">
+ <span class="dropdown-text">Other</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="https://bthek1.github.io/bthek1_blog/"> 
+<span class="menu-text">Blog</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-help" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Help</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-help">    
+        <li>
+    <a class="dropdown-item" href="https://github.com/bthek1/bthek1_blog/issues"><i class="bi bi-bug" role="img">
+</i> 
+ <span class="dropdown-text">Report a Bug</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://github.com/bthek1/bthek1_blog/issues"><i class="bi bi-chat-right-text" role="img">
+</i> 
+ <span class="dropdown-text">Ask a Question</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://github.com/bthek1/bthek1_blog/issues"><i class="bi bi-question-circle" role="img">
+</i> 
+ <span class="dropdown-text">FAQ</span></a>
+  </li>  
+    </ul>
+  </li>
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools tools-wide">
+    <a href="https://github.com/bthek1" title="" class="quarto-navigation-tool px-1" aria-label="Github"><i class="bi bi-github"></i></a>
+    <a href="https://www.linkedin.com/in/benedict-thekkel/" title="" class="quarto-navigation-tool px-1" aria-label="Linkedin"><i class="bi bi-linkedin"></i></a>
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+  <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
+  <div class="quarto-reader-toggle-btn">
+  <i class="bi"></i>
+  </div>
+</a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../UI_UX/ux_research.html">UI UX</a></li><li class="breadcrumb-item"><a href="../UI_UX/process_and_ethics.html">Process and Ethics</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Front End</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../1_streamlit.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Streamlit</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../2_gradio.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Gradio</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../3_plotly_dash.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Plotly Dash</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../html.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">HTML</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../fasthtml.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">fastHTML</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../css.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">CSS</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../bootstrap.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Bootstrap</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../node.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Node</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../npm.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">npm</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../typescript.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Typescript</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../webpack.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Webpack</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../js_prettier.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Prettier</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../eslint.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ESLint</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../markdown.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Markdown</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../http_headers.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">HTTP Message Headers</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../0_website_metrics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Website Metrics</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../1_google_analytics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Google Analytics</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../svgs.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">SVG</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../surveyjs.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">SurveyJS JSON Format Reference</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Flutter</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Flutter/flutter_setup.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Flutter Setup</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Flutter/widgets.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">App development</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Flutter/dart.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Dart</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Flutter/riverpod.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Riverpod</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">Javascript</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Javascript/javascript.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Javascript</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Javascript/fetch_api.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Fetch API</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Javascript/jquery.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">JQuery</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Javascript/highcharts.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">High Charts</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Javascript/datatables.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Datatables</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">React</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../React/react_init.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">React Init</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../React/react_overview.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">React Overview</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../React/react_setup.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">React Setup</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../React/react_libraries.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">React Libraries</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../React/react_&amp;_django.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">React and Django</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../React/react_docker.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">React Docker</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+ <span class="menu-text">SEO</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../SEO/seo.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">SEO</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
+ <span class="menu-text">UI UX</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../UI_UX/ux_research.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">UX Research</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../UI_UX/information_architecture.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Information Architecture</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../UI_UX/interaction_design.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Interaction Design</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../UI_UX/visual_design_foundations.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Visual Design Foundations</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../UI_UX/design_systems_and_tokens.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Design Systems and Tokens</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../UI_UX/responsive_and_multiplatform.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Responsive and Multiplatform</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../UI_UX/accessibility.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Accessibility</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../UI_UX/content_design_and_motion.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Content Design and Motion</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../UI_UX/prototyping_and_handoff.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Prototyping and Handoff</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../UI_UX/usability_evaluation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Usability Evaluation</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../UI_UX/measurement_and_experimentation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Measurement and Experimentation</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../UI_UX/process_and_ethics.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Process and Ethics</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#the-double-diamond" id="toc-the-double-diamond" class="nav-link active" data-scroll-target="#the-double-diamond">1. The double diamond</a></li>
+  <li><a href="#design-thinking-lean-ux-and-where-design-sits-in-delivery" id="toc-design-thinking-lean-ux-and-where-design-sits-in-delivery" class="nav-link" data-scroll-target="#design-thinking-lean-ux-and-where-design-sits-in-delivery">2. Design thinking, lean UX, and where design sits in delivery</a></li>
+  <li><a href="#design-ops-and-keeping-it-running" id="toc-design-ops-and-keeping-it-running" class="nav-link" data-scroll-target="#design-ops-and-keeping-it-running">3. Design ops and keeping it running</a></li>
+  <li><a href="#dark-patterns" id="toc-dark-patterns" class="nav-link" data-scroll-target="#dark-patterns">4. Dark patterns</a></li>
+  <li><a href="#consent-privacy-and-data-in-interfaces" id="toc-consent-privacy-and-data-in-interfaces" class="nav-link" data-scroll-target="#consent-privacy-and-data-in-interfaces">5. Consent, privacy and data in interfaces</a></li>
+  <li><a href="#inclusive-design" id="toc-inclusive-design" class="nav-link" data-scroll-target="#inclusive-design">6. Inclusive design</a></li>
+  <li><a href="#how-process-and-ethics-fail" id="toc-how-process-and-ethics-fail" class="nav-link" data-scroll-target="#how-process-and-ethics-fail">7. How process and ethics fail</a></li>
+  <li><a href="#where-this-goes-next" id="toc-where-this-goes-next" class="nav-link" data-scroll-target="#where-this-goes-next">Where this goes next</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.dev/bthek1/Front_End/blob/main/UI_UX/12_Process_and_Ethics.ipynb" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/bthek1/Front_End/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../UI_UX/ux_research.html">UI UX</a></li><li class="breadcrumb-item"><a href="../UI_UX/process_and_ethics.html">Process and Ethics</a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title">Process and Ethics</h1>
+</div>
+
+<div>
+  <div class="description">
+    How design work is organised, and the lines it should not cross.
+  </div>
+</div>
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Benedict Thekkel </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<!-- WARNING: THIS FILE WAS AUTOGENERATED! DO NOT EDIT! -->
+<p>Two subjects that decide whether the rest of this collection gets used. <strong>Process</strong> is how design work fits into delivery, which determines whether research happens before decisions or after them. <strong>Ethics</strong> is the set of limits on what you build, which matters most precisely when a metric says the unethical version performs better.</p>
+<p>The process half is deliberately short, because process is the part most likely to be prescribed by someone else and least likely to be improved by adding ceremony. The useful content is the small number of ideas worth stealing from each framework.</p>
+<hr>
+<section id="the-double-diamond" class="level2">
+<h2 class="anchored" data-anchor-id="the-double-diamond">1. The double diamond</h2>
+<p>The most useful process diagram in design, from the UK Design Council. Two diamonds: the first finds the right problem, the second finds the right solution, and each has a diverging and a converging half.</p>
+<pre class="mermaid"><code>flowchart LR
+    S["Starting&lt;br/&gt;point"] --&gt; D1["Discover&lt;br/&gt;diverge: research,&lt;br/&gt;look widely"]
+    D1 --&gt; DEF["Define&lt;br/&gt;converge: frame&lt;br/&gt;one problem"]
+    DEF --&gt; D2["Develop&lt;br/&gt;diverge: many&lt;br/&gt;solutions"]
+    D2 --&gt; DEL["Deliver&lt;br/&gt;converge: build,&lt;br/&gt;test, ship"]
+    DEL --&gt; O["Outcome"]
+    DEL -.-&gt; D1</code></pre>
+<p><strong>The load-bearing idea is the first diamond.</strong> Most teams start at Develop, because a solution has already been named in the request, so the problem is never framed and never questioned. The discipline of the double diamond is insisting that “add a dashboard” is a proposed solution, and the problem behind it is still unstated.</p>
+<p><strong>Diverge before converging, in both diamonds.</strong> Generate several problem framings and several solutions before narrowing. Teams habitually generate one of each and then refine it, which is how a mediocre first idea becomes a polished mediocre product.</p>
+<p><strong>It is not linear.</strong> Delivery reveals things that send you back to Discover. The diagram is a set of modes, not a schedule.</p>
+<hr>
+</section>
+<section id="design-thinking-lean-ux-and-where-design-sits-in-delivery" class="level2">
+<h2 class="anchored" data-anchor-id="design-thinking-lean-ux-and-where-design-sits-in-delivery">2. Design thinking, lean UX, and where design sits in delivery</h2>
+<p><strong>Design thinking</strong> is the five-mode framing popularised by IDEO and Stanford: empathise, define, ideate, prototype, test. It is essentially the double diamond with different labels, and its contribution is making the modes explicit and nameable in a mixed team.</p>
+<p><strong>It has earned its criticism.</strong> As commonly practised it becomes a workshop ritual: sticky notes, a “how might we”, an afternoon of ideation, and no research and no follow-through. The critique worth taking seriously is that it can substitute the appearance of a process for actual investigation, and that facilitated ideation by people with no domain knowledge produces confident shallow ideas. <strong>Use the modes; skip the theatre.</strong></p>
+<p><strong>Lean UX</strong> applies the build, measure, learn loop to design: state an assumption, define the smallest thing that would test it, run it, then decide. Its strength is that it treats a design as a hypothesis rather than a specification, which keeps teams from defending a design instead of testing it. Its risk is that “smallest testable thing” degrades into shipping unfinished work to users and calling the complaints data.</p>
+<p><strong>The practical arrangement in an agile team is dual track.</strong></p>
+<pre class="mermaid"><code>flowchart LR
+    subgraph Discovery["Discovery track: continuous"]
+      R["Research"] --&gt; V["Validate ideas"] --&gt; READY["Validated, ready to build"]
+    end
+    subgraph Delivery["Delivery track: sprints"]
+      READY --&gt; B["Build"] --&gt; SHIP["Ship"] --&gt; M["Measure"]
+    end
+    M -.-&gt; R</code></pre>
+<p>Discovery runs continuously and feeds a backlog of understood, validated work; delivery pulls from it. The alternative, where design happens inside the same sprint as implementation, guarantees that design is always a sprint behind and always rushed.</p>
+<p><strong>What actually matters more than the framework:</strong></p>
+<ul>
+<li><strong>Designers and developers talk daily</strong>, not at a handoff.</li>
+<li><strong>Research happens before the decision</strong>, not after, so it can still change something.</li>
+<li><strong>Someone owns the problem</strong>, not just the tickets.</li>
+<li><strong>Users are seen regularly</strong> by the whole team. A standing cadence, even one session a fortnight, changes a team’s instincts more than any process document.</li>
+</ul>
+<hr>
+</section>
+<section id="design-ops-and-keeping-it-running" class="level2">
+<h2 class="anchored" data-anchor-id="design-ops-and-keeping-it-running">3. Design ops and keeping it running</h2>
+<p>Design ops is the unglamorous work that makes design repeatable: tooling, file structure, the component pipeline, research participant recruitment, a shared vocabulary, and documentation of decisions.</p>
+<p><strong>The most valuable pieces, in order.</strong></p>
+<ol type="1">
+<li><strong>A participant recruitment pipeline.</strong> The single biggest practical blocker to regular research is finding people. A standing panel, a recruiter, or an in-product intercept turns a two-week task into a two-day one, and research frequency is the thing that most improves design quality.</li>
+<li><strong>A decision log.</strong> Not a specification. A short record of what was decided and why, so the same argument is not relitigated every six months. This is the artefact teams most regret not keeping.</li>
+<li><strong>An owned design system</strong>, covered in <a href="../UI_UX/design_systems_and_tokens.html">Design Systems and Tokens</a>.</li>
+<li><strong>A definition of done that includes design QA</strong>, with the keyboard, zoom, empty-state and dark-mode checks from <a href="../UI_UX/prototyping_and_handoff.html">Prototyping and Handoff</a> section 6.</li>
+<li><strong>A research repository.</strong> Findings that cannot be found are re-gathered. Even a tagged folder of one-page summaries beats nothing.</li>
+</ol>
+<p><strong>Resist adding ceremony.</strong> Design ops fails the same way process fails: by adding meetings and templates instead of removing friction. The test for any new process artefact is whether it saves more time than it costs within a quarter.</p>
+<hr>
+</section>
+<section id="dark-patterns" class="level2">
+<h2 class="anchored" data-anchor-id="dark-patterns">4. Dark patterns</h2>
+<p>A dark pattern is an interface deliberately designed to make a user do something they did not intend. The distinguishing feature is that it works <strong>against</strong> the user’s interest and <strong>for</strong> the business’s, and that it relies on the user not noticing.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Pattern</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Roach motel</strong></td>
+<td>Easy to get into, hard to get out of. One-click signup, cancellation by phone during business hours</td>
+</tr>
+<tr class="even">
+<td><strong>Confirmshaming</strong></td>
+<td>An opt-out worded to shame. “No thanks, I prefer paying full price”</td>
+</tr>
+<tr class="odd">
+<td><strong>Misdirection</strong></td>
+<td>Visual hierarchy steering the eye to the profitable choice while the neutral one is grey text</td>
+</tr>
+<tr class="even">
+<td><strong>Forced continuity</strong></td>
+<td>A free trial that silently becomes a charge, with no reminder</td>
+</tr>
+<tr class="odd">
+<td><strong>Sneak into basket</strong></td>
+<td>An added item or insurance the user did not select</td>
+</tr>
+<tr class="even">
+<td><strong>Privacy Zuckering</strong></td>
+<td>Sharing settings defaulted open, buried, and reset after updates</td>
+</tr>
+<tr class="odd">
+<td><strong>Hidden costs</strong></td>
+<td>Fees revealed only at the last step, after the effort is sunk</td>
+</tr>
+<tr class="even">
+<td><strong>Bait and switch</strong></td>
+<td>The expected outcome of an action is not what happens</td>
+</tr>
+<tr class="odd">
+<td><strong>Nagging</strong></td>
+<td>Repeated interruption until the user gives in, with no permanent decline</td>
+</tr>
+<tr class="even">
+<td><strong>Fake urgency and scarcity</strong></td>
+<td>Countdown timers that reset, “3 people are viewing” fabricated</td>
+</tr>
+<tr class="odd">
+<td><strong>Trick questions</strong></td>
+<td>Double negatives in consent checkboxes</td>
+</tr>
+<tr class="even">
+<td><strong>Obstruction</strong></td>
+<td>Deliberate friction on the path the business does not want</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Three reasons to refuse them beyond the obvious one.</strong></p>
+<ul>
+<li><strong>They are increasingly illegal.</strong> The GDPR requires consent to be freely given, specific and as easy to withdraw as to give. The EU Digital Services Act, the California Consumer Privacy Act and several other regimes name deceptive design specifically. Regulators have issued substantial fines for cookie banners alone.</li>
+<li><strong>They win in the short run and lose in the long run.</strong> A dark pattern reliably wins a two-week conversion test, which is exactly why A/B testing on a short window is the mechanism that selects for them. The costs arrive later as churn, chargebacks, support load and reputation.</li>
+<li><strong>They are corrosive internally.</strong> A team that gets used to trading user interest for a metric keeps doing it, and the line moves.</li>
+</ul>
+<p><strong>The useful working test.</strong> Would you be comfortable explaining this design to the user, out loud, in plain words? “We made the cancel link grey and put it in the footer so fewer people find it” fails immediately. A second version of the same test: would this still work if the user fully understood it? Persuasion survives understanding; manipulation does not.</p>
+<p><strong>Distinguish persuasion from manipulation.</strong> Making a good option prominent, defaulting to the safe setting, reducing friction on a useful path: all legitimate. The line is whether the design depends on the user misunderstanding it.</p>
+<hr>
+</section>
+<section id="consent-privacy-and-data-in-interfaces" class="level2">
+<h2 class="anchored" data-anchor-id="consent-privacy-and-data-in-interfaces">5. Consent, privacy and data in interfaces</h2>
+<p>Privacy is an interface problem as much as a legal or engineering one, because consent is expressed through a design.</p>
+<p><strong>What valid consent looks like.</strong></p>
+<ul>
+<li><strong>Freely given.</strong> Refusing must be as easy as accepting. “Accept all” as a prominent button beside “Manage preferences” as grey text is not equivalence, and regulators have said so explicitly.</li>
+<li><strong>Specific.</strong> Separate purposes get separate choices. A single toggle covering analytics and advertising is not specific.</li>
+<li><strong>Unbundled from service.</strong> Access cannot be conditioned on consent to unnecessary processing.</li>
+<li><strong>Revocable, easily.</strong> Withdrawing must be as simple as granting, and findable later. A banner that appears once and can never be reopened fails this.</li>
+<li><strong>Opt-in, not pre-ticked.</strong> Pre-checked consent boxes are invalid under the GDPR.</li>
+</ul>
+<p><strong>Design habits that follow.</strong></p>
+<ul>
+<li><strong>Collect the minimum.</strong> Every field is a liability. Ask why before adding one.</li>
+<li><strong>Explain in plain language at the point of collection.</strong> Why this field, what happens to it, who sees it. Explaining at collection time is worth more than a complete privacy policy nobody opens.</li>
+<li><strong>Default to private.</strong> A sharing setting should start closed, and should not be reopened by a product update.</li>
+<li><strong>Make deletion real and visible.</strong> If the user can delete an account, say what is deleted, what is retained and for how long.</li>
+<li><strong>Show what you hold.</strong> An accessible view of the data held about a person is both a legal right in many jurisdictions and a trust mechanism.</li>
+<li><strong>Mask by default in session replay</strong> (see <a href="../UI_UX/measurement_and_experimentation.html">Measurement and Experimentation</a> section 3), and never log personal data in analytics event properties.</li>
+</ul>
+<p><strong>Research ethics, which is the same principle applied to participants.</strong></p>
+<ul>
+<li><strong>Informed consent</strong> before recording: what is recorded, who sees it, how long it is kept, how to withdraw.</li>
+<li><strong>The right to stop</strong> at any point, with no consequence and with payment regardless.</li>
+<li><strong>Pay people</strong> for their time, at a rate that is not insulting.</li>
+<li><strong>Anonymise in reporting.</strong> Quotes without names, faces blurred in clips shared widely.</li>
+<li><strong>Store recordings with the same care as production data</strong>, with a defined retention period and actual deletion at the end of it.</li>
+<li><strong>Do not deceive.</strong> If a study requires any withholding, the withholding must be harmless and the participant must be told at the end.</li>
+<li><strong>Extra care with vulnerable participants</strong>, including children, people in crisis and anyone whose relationship to you involves a power imbalance, such as your own employees.</li>
+</ul>
+<hr>
+</section>
+<section id="inclusive-design" class="level2">
+<h2 class="anchored" data-anchor-id="inclusive-design">6. Inclusive design</h2>
+<p><strong>Accessibility and inclusive design are not the same thing.</strong> Accessibility is the outcome of a product being usable by people with disabilities, measured against standards such as WCAG. Inclusive design is the method of designing so that a wide range of people can participate, and it covers far more than disability: language, literacy, numeracy, income, connectivity, device age, gender, age, culture, and circumstance.</p>
+<p><strong>The Microsoft Inclusive Design principles are the clearest framing:</strong></p>
+<ol type="1">
+<li><strong>Recognise exclusion.</strong> Every design decision includes some people and excludes others. Naming who is excluded is the whole technique.</li>
+<li><strong>Solve for one, extend to many.</strong> Designing for a specific constrained case produces a better general solution. Captions were built for deaf viewers and are now used by most people watching video in public.</li>
+<li><strong>Learn from diversity.</strong> People at the edges of your assumptions are the ones who teach you where the assumptions are.</li>
+</ol>
+<p><strong>The persona spectrum is the most practical tool here.</strong> For any ability, consider permanent, temporary and situational cases, because the situational group is enormous and makes the business case obvious:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Ability</th>
+<th>Permanent</th>
+<th>Temporary</th>
+<th>Situational</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Vision</td>
+<td>Blind</td>
+<td>Eye surgery recovery</td>
+<td>Bright sunlight, driving</td>
+</tr>
+<tr class="even">
+<td>Hearing</td>
+<td>Deaf</td>
+<td>Ear infection</td>
+<td>Noisy cafe, sleeping baby nearby</td>
+</tr>
+<tr class="odd">
+<td>Motor</td>
+<td>Missing arm</td>
+<td>Broken wrist</td>
+<td>Holding a child, wearing gloves</td>
+</tr>
+<tr class="even">
+<td>Cognitive</td>
+<td>Learning disability</td>
+<td>Concussion, medication</td>
+<td>Distraction, stress, an unfamiliar language</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Assumptions worth checking in every design.</strong></p>
+<ul>
+<li><strong>Names.</strong> Not everyone has a first and last name, or an alphabet you expected, or fewer than 30 characters.</li>
+<li><strong>Addresses.</strong> Not every country has postcodes, states, or street numbers.</li>
+<li><strong>Gender.</strong> If you do not need it, do not ask. If you do, say why and allow more than two options.</li>
+<li><strong>Literacy and numeracy.</strong> Plain language is an inclusion measure, not only a style preference.</li>
+<li><strong>Connectivity and device.</strong> A mid-range phone on intermittent mobile data is the realistic baseline for a large share of users, not an edge case.</li>
+<li><strong>Money.</strong> A design that assumes a credit card, or a data plan without limits, excludes people.</li>
+<li><strong>Time and attention.</strong> Interfaces are used by exhausted, interrupted people, not by the rested reviewer in a quiet room.</li>
+</ul>
+<hr>
+</section>
+<section id="how-process-and-ethics-fail" class="level2">
+<h2 class="anchored" data-anchor-id="how-process-and-ethics-fail">7. How process and ethics fail</h2>
+<p><strong>Process.</strong></p>
+<ul>
+<li><strong>Design starting at Develop</strong>, with the solution already named in the request and the problem never framed.</li>
+<li><strong>Research after the decision</strong>, so it can only validate or be ignored.</li>
+<li><strong>Design inside the delivery sprint</strong>, so it is permanently rushed and permanently behind.</li>
+<li><strong>Ceremony instead of contact.</strong> Workshops, templates and rituals substituting for talking to users.</li>
+<li><strong>No decision log</strong>, so the same debates recur indefinitely and institutional memory lives in one person’s head.</li>
+<li><strong>A designer as a service desk</strong> receiving specifications, which wastes the one role whose job is to question the problem.</li>
+<li><strong>Accessibility as a release gate</strong> rather than a design constraint, guaranteeing either a rush of last-minute fixes or a waiver.</li>
+</ul>
+<p><strong>Ethics.</strong></p>
+<ul>
+<li><strong>The metric deciding.</strong> A short conversion test will reliably prefer the manipulative variant, which is a fact about the measurement window, not about what is right.</li>
+<li><strong>“Everyone does it.”</strong> True of most dark patterns and irrelevant, and increasingly false as a legal defence.</li>
+<li><strong>Consent as a compliance artefact</strong>, designed to be accepted rather than understood.</li>
+<li><strong>Data collected because it is cheap</strong>, creating liability with no question attached.</li>
+<li><strong>Inclusion treated as a checklist</strong> at the end, rather than an assumption audit at the start.</li>
+<li><strong>Nobody empowered to say no.</strong> The most important structural point in this notebook: if no one in the process can refuse a manipulative design, the outcome is already decided.</li>
+</ul>
+<hr>
+</section>
+<section id="where-this-goes-next" class="level2">
+<h2 class="anchored" data-anchor-id="where-this-goes-next">Where this goes next</h2>
+<p>This is the last notebook in the sequence. The threads it ties back to:</p>
+<ul>
+<li><a href="../UI_UX/ux_research.html">UX Research</a> is the first diamond in practice, and its participant ethics are section 5 above.</li>
+<li><a href="../UI_UX/accessibility.html">Accessibility</a> is the standards half of what section 6 frames as a method.</li>
+<li><a href="../UI_UX/measurement_and_experimentation.html">Measurement and Experimentation</a> is where the short-window metric problem in section 7 originates, and where data minimisation applies directly.</li>
+<li><a href="../UI_UX/prototyping_and_handoff.html">Prototyping and Handoff</a> holds the design review and design QA practices that section 3 depends on.</li>
+<li><a href="../UI_UX/design_systems_and_tokens.html">Design Systems and Tokens</a> covers the governance model that is design ops applied to components.</li>
+</ul>
+<hr>
+
+
+</section>
+
+<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/bthek1\.github\.io\/Front_End");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<script src="https://utteranc.es/client.js" repo="quarto-dev/quarto-web" issue-term="pathname" theme="github-light" crossorigin="anonymous" async="">
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../UI_UX/measurement_and_experimentation.html" class="pagination-link" aria-label="Measurement and Experimentation">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Measurement and Experimentation</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item">
+    <a class="nav-link active" href="../index.html" aria-current="page">
+<p>Trademark</p>
+</a>
+  </li>  
+    <li class="nav-item">
+    <a class="nav-link" href="https://github.com/bthek1/bthek1_blog/issues">
+<p>FAQ</p>
+</a>
+  </li>  
+    <li class="nav-item">
+    <a class="nav-link" href="https://bthek1.github.io/bthek1_blog/index.html">
+<p>License</p>
+</a>
+  </li>  
+    <li class="nav-item">
+    <a class="nav-link" href="../index.html">
+<p>Trademark</p>
+</a>
+  </li>  
+</ul>
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.dev/bthek1/Front_End/blob/main/UI_UX/12_Process_and_Ethics.ipynb" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/bthek1/Front_End/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+    <div class="nav-footer-right">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/bthek1">
+      <i class="bi bi-github" role="img" aria-label="Github">
+</i> 
+    </a>
+  </li>  
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://www.linkedin.com/in/benedict-thekkel/">
+      <i class="bi bi-linkedin" role="img" aria-label="Linkedin">
+</i> 
+    </a>
+  </li>  
+</ul>
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

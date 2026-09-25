@@ -1,0 +1,1758 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.18">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Benedict Thekkel">
+<meta name="description" content="Turning one-off decisions into named, versioned, reusable values and components.">
+
+<title>Design Systems and Tokens – Front_End</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../UI_UX/responsive_and_multiplatform.html" rel="next">
+<link href="../UI_UX/visual_design_foundations.html" rel="prev">
+<link href="../favi.svg" rel="icon" type="image/svg+xml">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-b85bc7c33db8c58e0ec93c3465666fed.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-87623689d22b060bad1eefbb2b768960.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-25b2f706efb754904913775f52671bcd.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/bootstrap/bootstrap-87623689d22b060bad1eefbb2b768960.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../styles.css">
+<meta property="og:title" content="Design Systems and Tokens – Front_End">
+<meta property="og:description" content="Turning one-off decisions into named, versioned, reusable values and components.">
+<meta property="og:image" content="https://bthek1.github.io/Front_End/UI_UX/Logo.svg">
+<meta property="og:site_name" content="Front_End">
+<meta name="twitter:title" content="Design Systems and Tokens – Front_End">
+<meta name="twitter:description" content="Turning one-off decisions into named, versioned, reusable values and components.">
+<meta name="twitter:image" content="https://bthek1.github.io/Front_End/UI_UX/Logo.svg">
+<meta name="twitter:card" content="summary_large_image">
+</head>
+
+<body class="nav-sidebar floating nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a href="../index.html" class="navbar-brand navbar-brand-logo">
+    <img src="../Logo.svg" alt="Benedict Thekkel" class="navbar-logo light-content">
+    <img src="../Logo.svg" alt="Benedict Thekkel" class="navbar-logo dark-content">
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-deep-learning" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Deep Learning</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-deep-learning">    
+        <li>
+    <a class="dropdown-item" href="https://bthek1.github.io/FastAI_course/">
+ <span class="dropdown-text">Fast AI course</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://bthek1.github.io/DL_methods/">
+ <span class="dropdown-text">DL Methods</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://bthek1.github.io/DL_tasks/">
+ <span class="dropdown-text">DL Tasks</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-ml-techniques" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">ML Techniques</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-ml-techniques">    
+        <li>
+    <a class="dropdown-item" href="https://bthek1.github.io/ML_methods/">
+ <span class="dropdown-text">ML Methods</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://bthek1.github.io/TimeSeriesML/">
+ <span class="dropdown-text">Time series</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-web" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Web</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-web">    
+        <li>
+    <a class="dropdown-item" href="https://bthek1.github.io/WEB_doc/">
+ <span class="dropdown-text">Web Development</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://bthek1.github.io/Front_End/">
+ <span class="dropdown-text">Front End</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://bthek1.github.io/Back_End/">
+ <span class="dropdown-text">Back End</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://bthek1.github.io/IaaS_docs/">
+ <span class="dropdown-text">IaaS</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-tools" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Tools</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-tools">    
+        <li>
+    <a class="dropdown-item" href="https://bthek1.github.io/Software_Tools/">
+ <span class="dropdown-text">Software Tools</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://bthek1.github.io/Hardware_Tools/">
+ <span class="dropdown-text">Hardware Tools</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://bthek1.github.io/Python_Libs/">
+ <span class="dropdown-text">Python Libraries</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://bthek1.github.io/nbdevAuto/">
+ <span class="dropdown-text">Nbdev Automation</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://bthek1.github.io/ROS2_docs/">
+ <span class="dropdown-text">ROS 2</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-business" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Business</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-business">    
+        <li>
+    <a class="dropdown-item" href="https://bthek1.github.io/Business_doc/">
+ <span class="dropdown-text">Business Doc</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://bthek1.github.io/Philosophy_doc/">
+ <span class="dropdown-text">Ideas Doc</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://bthek1.github.io/Finances/">
+ <span class="dropdown-text">Finances</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://bthek1.github.io/Other/">
+ <span class="dropdown-text">Other</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="https://bthek1.github.io/bthek1_blog/"> 
+<span class="menu-text">Blog</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-help" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Help</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-help">    
+        <li>
+    <a class="dropdown-item" href="https://github.com/bthek1/bthek1_blog/issues"><i class="bi bi-bug" role="img">
+</i> 
+ <span class="dropdown-text">Report a Bug</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://github.com/bthek1/bthek1_blog/issues"><i class="bi bi-chat-right-text" role="img">
+</i> 
+ <span class="dropdown-text">Ask a Question</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://github.com/bthek1/bthek1_blog/issues"><i class="bi bi-question-circle" role="img">
+</i> 
+ <span class="dropdown-text">FAQ</span></a>
+  </li>  
+    </ul>
+  </li>
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools tools-wide">
+    <a href="https://github.com/bthek1" title="" class="quarto-navigation-tool px-1" aria-label="Github"><i class="bi bi-github"></i></a>
+    <a href="https://www.linkedin.com/in/benedict-thekkel/" title="" class="quarto-navigation-tool px-1" aria-label="Linkedin"><i class="bi bi-linkedin"></i></a>
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+  <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
+  <div class="quarto-reader-toggle-btn">
+  <i class="bi"></i>
+  </div>
+</a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../UI_UX/ux_research.html">UI UX</a></li><li class="breadcrumb-item"><a href="../UI_UX/design_systems_and_tokens.html">Design Systems and Tokens</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Front End</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../1_streamlit.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Streamlit</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../2_gradio.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Gradio</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../3_plotly_dash.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Plotly Dash</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../html.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">HTML</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../fasthtml.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">fastHTML</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../css.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">CSS</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../bootstrap.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Bootstrap</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../node.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Node</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../npm.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">npm</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../typescript.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Typescript</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../webpack.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Webpack</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../js_prettier.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Prettier</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../eslint.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ESLint</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../markdown.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Markdown</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../http_headers.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">HTTP Message Headers</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../0_website_metrics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Website Metrics</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../1_google_analytics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Google Analytics</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../svgs.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">SVG</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../surveyjs.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">SurveyJS JSON Format Reference</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Flutter</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Flutter/flutter_setup.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Flutter Setup</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Flutter/widgets.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">App development</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Flutter/dart.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Dart</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Flutter/riverpod.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Riverpod</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">Javascript</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Javascript/javascript.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Javascript</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Javascript/fetch_api.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Fetch API</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Javascript/jquery.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">JQuery</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Javascript/highcharts.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">High Charts</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Javascript/datatables.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Datatables</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">React</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../React/react_init.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">React Init</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../React/react_overview.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">React Overview</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../React/react_setup.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">React Setup</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../React/react_libraries.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">React Libraries</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../React/react_&amp;_django.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">React and Django</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../React/react_docker.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">React Docker</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+ <span class="menu-text">SEO</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../SEO/seo.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">SEO</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
+ <span class="menu-text">UI UX</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../UI_UX/ux_research.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">UX Research</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../UI_UX/information_architecture.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Information Architecture</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../UI_UX/interaction_design.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Interaction Design</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../UI_UX/visual_design_foundations.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Visual Design Foundations</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../UI_UX/design_systems_and_tokens.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Design Systems and Tokens</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../UI_UX/responsive_and_multiplatform.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Responsive and Multiplatform</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../UI_UX/accessibility.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Accessibility</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../UI_UX/content_design_and_motion.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Content Design and Motion</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../UI_UX/prototyping_and_handoff.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Prototyping and Handoff</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../UI_UX/usability_evaluation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Usability Evaluation</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../UI_UX/measurement_and_experimentation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Measurement and Experimentation</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../UI_UX/process_and_ethics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Process and Ethics</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#tokens-the-three-tiers" id="toc-tokens-the-three-tiers" class="nav-link active" data-scroll-target="#tokens-the-three-tiers">1. Tokens: the three tiers</a></li>
+  <li><a href="#naming" id="toc-naming" class="nav-link" data-scroll-target="#naming">2. Naming</a></li>
+  <li><a href="#one-source-of-truth-many-outputs" id="toc-one-source-of-truth-many-outputs" class="nav-link" data-scroll-target="#one-source-of-truth-many-outputs">3. One source of truth, many outputs</a></li>
+  <li><a href="#theming" id="toc-theming" class="nav-link" data-scroll-target="#theming">4. Theming</a></li>
+  <li><a href="#components" id="toc-components" class="nav-link" data-scroll-target="#components">5. Components</a></li>
+  <li><a href="#governance-and-versioning" id="toc-governance-and-versioning" class="nav-link" data-scroll-target="#governance-and-versioning">6. Governance and versioning</a></li>
+  <li><a href="#when-not-to-build-one" id="toc-when-not-to-build-one" class="nav-link" data-scroll-target="#when-not-to-build-one">7. When not to build one</a></li>
+  <li><a href="#systems-worth-reading" id="toc-systems-worth-reading" class="nav-link" data-scroll-target="#systems-worth-reading">8. Systems worth reading</a></li>
+  <li><a href="#how-design-systems-fail" id="toc-how-design-systems-fail" class="nav-link" data-scroll-target="#how-design-systems-fail">9. How design systems fail</a></li>
+  <li><a href="#where-this-goes-next" id="toc-where-this-goes-next" class="nav-link" data-scroll-target="#where-this-goes-next">Where this goes next</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.dev/bthek1/Front_End/blob/main/UI_UX/05_Design_Systems_and_Tokens.ipynb" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/bthek1/Front_End/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../UI_UX/ux_research.html">UI UX</a></li><li class="breadcrumb-item"><a href="../UI_UX/design_systems_and_tokens.html">Design Systems and Tokens</a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title">Design Systems and Tokens</h1>
+</div>
+
+<div>
+  <div class="description">
+    Turning one-off decisions into named, versioned, reusable values and components.
+  </div>
+</div>
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Benedict Thekkel </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<!-- WARNING: THIS FILE WAS AUTOGENERATED! DO NOT EDIT! -->
+<p>A design system is the set of decisions a product has already made, written down in a form both designers and code can use. Its purpose is not consistency for its own sake. It is to stop a team re-deciding the same things, differently, every sprint.</p>
+<p>Three terms get used interchangeably and are not the same thing:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Thing</th>
+<th>What it is</th>
+<th>Lives as</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Style guide</strong></td>
+<td>Documentation of visual rules. Read by humans</td>
+<td>A page, a PDF</td>
+</tr>
+<tr class="even">
+<td><strong>Component library</strong></td>
+<td>Implemented, reusable components</td>
+<td>An npm package, a Figma library</td>
+</tr>
+<tr class="odd">
+<td><strong>Design system</strong></td>
+<td>Tokens, components, patterns, usage guidance, plus the process that maintains them</td>
+<td>All of the above, versioned, with owners</td>
+</tr>
+</tbody>
+</table>
+<p><strong>The part that most often gets skipped is the last clause.</strong> A component library with no owner, no versioning and no decision process is not a design system, it is a folder. It will drift, teams will fork it, and within a year there will be three buttons again.</p>
+<p>This notebook covers tokens (the values), components (the assembled units), and governance (what keeps them true). The raw material, meaning the scales and the colour theory, is in <a href="../UI_UX/visual_design_foundations.html">Visual Design Foundations</a>.</p>
+<hr>
+<section id="tokens-the-three-tiers" class="level2">
+<h2 class="anchored" data-anchor-id="tokens-the-three-tiers">1. Tokens: the three tiers</h2>
+<p>A design token is a named design decision. The value of naming it is not brevity, it is indirection: you can change what a name points at without hunting through code.</p>
+<p>The architecture that survives contact with reality has three tiers.</p>
+<pre class="mermaid"><code>flowchart LR
+    subgraph T1["Tier 1: primitives"]
+      A["blue-600 = oklch(54% .17 250)"]
+      B["space-4 = 1rem"]
+      C["grey-900 = #0f172a"]
+    end
+    subgraph T2["Tier 2: semantic"]
+      D["color-action"]
+      E["color-text-primary"]
+      F["space-field-gap"]
+    end
+    subgraph T3["Tier 3: component"]
+      G["button-bg"]
+      H["input-border"]
+      I["card-padding"]
+    end
+    A --&gt; D --&gt; G
+    C --&gt; E
+    B --&gt; F --&gt; I
+    D --&gt; H</code></pre>
+<p><strong>Tier 1, primitives.</strong> The raw palette and scales. Names describe the value: <code>blue-600</code>, <code>space-4</code>, <code>text-lg</code>, <code>radius-md</code>. No meaning attached, so they are safe to define once and rarely change.</p>
+<p><strong>Tier 2, semantic.</strong> Names describe the <em>job</em>: <code>color-action</code>, <code>color-text-secondary</code>, <code>color-border-subtle</code>, <code>color-danger</code>, <code>space-section-gap</code>. <strong>This tier is the one that earns the whole system</strong>, because it is where theming happens and where intent is recorded. <code>color-action</code> can be rebranded from blue to green by editing one line.</p>
+<p><strong>Tier 3, component.</strong> Optional, and only worth adding for components that need to vary independently: <code>button-primary-bg</code>, <code>input-border-rest</code>. Skip this tier until a real need appears, or you will maintain hundreds of aliases that all point straight through.</p>
+<p><strong>The rule that makes tokens work: application code references tier 2, never tier 1.</strong> The moment a component uses <code>blue-600</code> directly, it has opted out of theming and nobody will notice until dark mode ships.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode css code-with-copy"><code class="sourceCode css"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">/* Tier 1: primitives */</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="in">:root</span> {</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="va">--blue-500</span><span class="ch">:</span> <span class="fu">oklch(</span><span class="dv">62</span><span class="dt">%</span> <span class="dv">.16</span> <span class="dv">250</span><span class="fu">)</span><span class="op">;</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="va">--blue-600</span><span class="ch">:</span> <span class="fu">oklch(</span><span class="dv">54</span><span class="dt">%</span> <span class="dv">.17</span> <span class="dv">250</span><span class="fu">)</span><span class="op">;</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="va">--grey-50</span><span class="ch">:</span>  <span class="fu">oklch(</span><span class="dv">98</span><span class="dt">%</span> <span class="dv">.005</span> <span class="dv">250</span><span class="fu">)</span><span class="op">;</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="va">--grey-500</span><span class="ch">:</span> <span class="fu">oklch(</span><span class="dv">60</span><span class="dt">%</span> <span class="dv">.02</span> <span class="dv">250</span><span class="fu">)</span><span class="op">;</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  <span class="va">--grey-900</span><span class="ch">:</span> <span class="fu">oklch(</span><span class="dv">22</span><span class="dt">%</span> <span class="dv">.02</span> <span class="dv">250</span><span class="fu">)</span><span class="op">;</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  <span class="va">--red-600</span><span class="ch">:</span>  <span class="fu">oklch(</span><span class="dv">55</span><span class="dt">%</span> <span class="dv">.19</span> <span class="dv">25</span><span class="fu">)</span><span class="op">;</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="co">/* Tier 2: semantic. The only tier components are allowed to use. */</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="in">:root</span> {</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>  <span class="va">--color-surface</span><span class="ch">:</span>        <span class="fu">var(</span><span class="va">--grey-50</span><span class="fu">)</span><span class="op">;</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>  <span class="va">--color-text-primary</span><span class="ch">:</span>   <span class="fu">var(</span><span class="va">--grey-900</span><span class="fu">)</span><span class="op">;</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>  <span class="va">--color-text-secondary</span><span class="ch">:</span> <span class="fu">var(</span><span class="va">--grey-500</span><span class="fu">)</span><span class="op">;</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>  <span class="va">--color-action</span><span class="ch">:</span>         <span class="fu">var(</span><span class="va">--blue-600</span><span class="fu">)</span><span class="op">;</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>  <span class="va">--color-action-hover</span><span class="ch">:</span>   <span class="fu">var(</span><span class="va">--blue-500</span><span class="fu">)</span><span class="op">;</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>  <span class="va">--color-danger</span><span class="ch">:</span>         <span class="fu">var(</span><span class="va">--red-600</span><span class="fu">)</span><span class="op">;</span></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>  <span class="va">--color-border-subtle</span><span class="ch">:</span>  <span class="fu">oklch(</span><span class="dv">90</span><span class="dt">%</span> <span class="dv">.01</span> <span class="dv">250</span><span class="fu">)</span><span class="op">;</span></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>  <span class="va">--focus-ring</span><span class="ch">:</span>           <span class="fu">var(</span><span class="va">--blue-500</span><span class="fu">)</span><span class="op">;</span></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a><span class="co">/* Component: consumes tier 2 only */</span></span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a><span class="fu">.btn-primary</span> {</span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>  <span class="kw">background</span><span class="ch">:</span> <span class="fu">var(</span><span class="va">--color-action</span><span class="fu">)</span><span class="op">;</span></span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>  <span class="kw">color</span><span class="ch">:</span> <span class="fu">var(</span><span class="va">--color-on-action</span><span class="fu">)</span><span class="op">;</span></span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>  <span class="kw">padding</span><span class="ch">:</span> <span class="fu">var(</span><span class="va">--space-2</span><span class="fu">)</span> <span class="fu">var(</span><span class="va">--space-4</span><span class="fu">)</span><span class="op">;</span></span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>  <span class="kw">border-radius</span><span class="ch">:</span> <span class="fu">var(</span><span class="va">--radius-md</span><span class="fu">)</span><span class="op">;</span></span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a><span class="fu">.btn-primary</span><span class="in">:hover</span> { <span class="kw">background</span><span class="ch">:</span> <span class="fu">var(</span><span class="va">--color-action-hover</span><span class="fu">)</span><span class="op">;</span> }</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<hr>
+</section>
+<section id="naming" class="level2">
+<h2 class="anchored" data-anchor-id="naming">2. Naming</h2>
+<p>Naming is most of the difficulty, and a bad scheme is expensive to correct once a hundred components consume it.</p>
+<p><strong>Use a consistent ordered pattern.</strong> A common one is <code>category-concept-property-variant-state</code>, applied loosely but predictably:</p>
+<pre class="text"><code>color-text-primary
+color-text-primary-inverse
+color-bg-surface-raised
+color-border-input-error
+space-inline-sm
+radius-control
+shadow-overlay</code></pre>
+<p><strong>Name by role, never by appearance.</strong> This is the single most important naming rule and the one most often broken:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Do not</th>
+<th>Do</th>
+<th>Why</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>color-blue-button</code></td>
+<td><code>color-action</code></td>
+<td>The brand will change colour; the role will not</td>
+</tr>
+<tr class="even">
+<td><code>color-grey-light</code></td>
+<td><code>color-border-subtle</code></td>
+<td>“Light” is wrong in dark mode</td>
+</tr>
+<tr class="odd">
+<td><code>space-16</code> used semantically</td>
+<td><code>space-section-gap</code></td>
+<td>Encodes the decision, not the number</td>
+</tr>
+<tr class="even">
+<td><code>text-small-grey</code></td>
+<td><code>color-text-secondary</code></td>
+<td>Two properties fused into one name</td>
+</tr>
+</tbody>
+</table>
+<p>The dark mode test settles any naming argument: <strong>if a token name becomes false when the theme flips, the name describes appearance rather than role.</strong> <code>color-grey-light</code> is a lie in a dark theme. <code>color-border-subtle</code> stays true.</p>
+<p><strong>Other conventions worth fixing early.</strong> Pick one word per concept and never its synonyms (<code>bg</code> or <code>background</code>, not both). Use <code>-inverse</code> for text on a coloured ground, and <code>on-</code> prefixes if you prefer the Material convention (<code>color-on-action</code>). Keep abbreviations to a tiny agreed list. And write the name in one casing in the source of truth, letting the build emit whatever each platform wants.</p>
+<hr>
+</section>
+<section id="one-source-of-truth-many-outputs" class="level2">
+<h2 class="anchored" data-anchor-id="one-source-of-truth-many-outputs">3. One source of truth, many outputs</h2>
+<p>Tokens are most useful when the same values reach CSS, iOS, Android, Figma and documentation without anyone retyping them. The usual arrangement is a platform-neutral file, conventionally JSON, and a build step.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode json code-with-copy"><code class="sourceCode json"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"color"</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">"action"</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>      <span class="dt">"$value"</span><span class="fu">:</span> <span class="st">"{color.blue.600}"</span><span class="fu">,</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>      <span class="dt">"$type"</span><span class="fu">:</span> <span class="st">"color"</span><span class="fu">,</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>      <span class="dt">"$description"</span><span class="fu">:</span> <span class="st">"Primary action: filled buttons, active nav, links"</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">}</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">},</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"space"</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>    <span class="dt">"field-gap"</span><span class="fu">:</span> <span class="fu">{</span> <span class="dt">"$value"</span><span class="fu">:</span> <span class="st">"{space.4}"</span><span class="fu">,</span> <span class="dt">"$type"</span><span class="fu">:</span> <span class="st">"dimension"</span> <span class="fu">}</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">}</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>That shape is the <strong>W3C Design Tokens</strong> community format (<code>$value</code>, <code>$type</code>, <code>$description</code>, with <code>{}</code> references), which is worth adopting because tooling is converging on it. Style Dictionary and Tokens Studio both read and write it.</p>
+<pre class="mermaid"><code>flowchart LR
+    S["tokens.json&lt;br/&gt;(W3C format)"] --&gt; B["Style Dictionary build"]
+    B --&gt; CSS["CSS custom properties"]
+    B --&gt; TS["TypeScript constants"]
+    B --&gt; IOS["Swift / iOS"]
+    B --&gt; AND["Android XML"]
+    B --&gt; DOC["Docs site tables"]
+    F["Figma variables"] &lt;--&gt; S</code></pre>
+<p><strong>Keep the pipeline one-directional if you can.</strong> Two-way sync between Figma and a repository sounds appealing and produces merge conflicts nobody knows how to resolve. Pick which side is authoritative, and it is usually the repository, because that is the one with review, history and CI.</p>
+<p><strong>The value of the build step is enforcement.</strong> A token that exists in Figma and not in CSS is where drift starts. Generating both from one file makes drift a build failure rather than a slow divergence.</p>
+<hr>
+</section>
+<section id="theming" class="level2">
+<h2 class="anchored" data-anchor-id="theming">4. Theming</h2>
+<p>If tier 2 is doing its job, a theme is a table of overrides and nothing else.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode css code-with-copy"><code class="sourceCode css"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">/* Light is the default, defined on bare :root so it is never conditional */</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="in">:root</span> {</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="va">--color-surface</span><span class="ch">:</span> <span class="fu">var(</span><span class="va">--grey-50</span><span class="fu">)</span><span class="op">;</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="va">--color-surface-raised</span><span class="ch">:</span> <span class="cn">#fff</span><span class="op">;</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  <span class="va">--color-text-primary</span><span class="ch">:</span> <span class="fu">var(</span><span class="va">--grey-900</span><span class="fu">)</span><span class="op">;</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  <span class="va">--color-border-subtle</span><span class="ch">:</span> <span class="fu">oklch(</span><span class="dv">90</span><span class="dt">%</span> <span class="dv">.01</span> <span class="dv">250</span><span class="fu">)</span><span class="op">;</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>  <span class="va">--color-action</span><span class="ch">:</span> <span class="fu">var(</span><span class="va">--blue-600</span><span class="fu">)</span><span class="op">;</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>  <span class="va">--shadow-overlay</span><span class="ch">:</span> <span class="dv">0</span> <span class="dv">8</span><span class="dt">px</span> <span class="dv">24</span><span class="dt">px</span> <span class="fu">rgb(</span><span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> / <span class="dv">.12</span><span class="fu">)</span><span class="op">;</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="co">/* System preference, but never override an explicit light choice */</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="im">@media</span> <span class="fu">(</span><span class="kw">prefers-color-scheme</span><span class="ch">:</span> <span class="dv">dark</span><span class="fu">)</span> {</span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>  <span class="in">:root:not(</span><span class="ex">[</span><span class="ss">data-theme</span><span class="op">=</span><span class="st">"light"</span><span class="ex">]</span><span class="in">)</span> {</span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>    <span class="va">--color-surface</span><span class="ch">:</span> <span class="fu">oklch(</span><span class="dv">18</span><span class="dt">%</span> <span class="dv">.015</span> <span class="dv">250</span><span class="fu">)</span><span class="op">;</span></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>    <span class="va">--color-surface-raised</span><span class="ch">:</span> <span class="fu">oklch(</span><span class="dv">23</span><span class="dt">%</span> <span class="dv">.015</span> <span class="dv">250</span><span class="fu">)</span><span class="op">;</span>   <span class="co">/* depth by lightness, not shadow */</span></span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>    <span class="va">--color-text-primary</span><span class="ch">:</span> <span class="fu">oklch(</span><span class="dv">95</span><span class="dt">%</span> <span class="dv">.01</span> <span class="dv">250</span><span class="fu">)</span><span class="op">;</span></span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>    <span class="va">--color-border-subtle</span><span class="ch">:</span> <span class="fu">oklch(</span><span class="dv">32</span><span class="dt">%</span> <span class="dv">.015</span> <span class="dv">250</span><span class="fu">)</span><span class="op">;</span></span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>    <span class="va">--color-action</span><span class="ch">:</span> <span class="fu">oklch(</span><span class="dv">70</span><span class="dt">%</span> <span class="dv">.13</span> <span class="dv">250</span><span class="fu">)</span><span class="op">;</span>            <span class="co">/* desaturated: saturated blues vibrate on dark */</span></span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>    <span class="va">--shadow-overlay</span><span class="ch">:</span> <span class="dv">0</span> <span class="dv">8</span><span class="dt">px</span> <span class="dv">24</span><span class="dt">px</span> <span class="fu">rgb(</span><span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> / <span class="dv">.5</span><span class="fu">)</span><span class="op">;</span></span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a><span class="co">/* Explicit choice wins in both directions */</span></span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a><span class="in">:root</span><span class="ex">[</span><span class="ss">data-theme</span><span class="op">=</span><span class="st">"dark"</span><span class="ex">]</span> { <span class="co">/* same dark block */</span> }</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Three states, not two.</strong> Light, dark, and “follow the system”, which is the default. A toggle that only flips a class cannot express the third, so store the preference as <code>light</code>, <code>dark</code> or <code>system</code> and only stamp an attribute for the first two.</p>
+<p><strong>What changes in dark mode beyond swapping greys:</strong></p>
+<ul>
+<li><strong>Desaturate accents.</strong> A colour that reads correctly on white glows unpleasantly on near-black.</li>
+<li><strong>Avoid pure black and pure white.</strong> <code>#000</code> with <code>#fff</code> text causes halation, where the text appears to bleed. Use a very dark grey with a slightly dimmed white.</li>
+<li><strong>Elevation inverts.</strong> Raised surfaces get <em>lighter</em>, because a dark shadow on a dark ground is invisible.</li>
+<li><strong>Images and illustrations need attention.</strong> A screenshot with a white background becomes a glowing rectangle. Consider a <code>filter</code> for line art, or ship two assets.</li>
+<li><strong>Re-check contrast.</strong> Passing in light says nothing about dark; the ratios are independent.</li>
+</ul>
+<p><strong>Never define a colour only inside a media query.</strong> If the light value lives in <code>@media (prefers-color-scheme: light)</code> and a user has no preference set, the token is undefined. Bare <code>:root</code> carries the default; the media query only overrides.</p>
+<hr>
+</section>
+<section id="components" class="level2">
+<h2 class="anchored" data-anchor-id="components">5. Components</h2>
+<p>Tokens make values consistent. Components make behaviour consistent, which is the harder half.</p>
+<p><strong>Design the API, not just the appearance.</strong> A component’s props are its contract and are as much a design decision as its padding.</p>
+<pre class="tsx"><code>// Constrained variants beat open styling props.
+type ButtonProps = {
+  variant?: 'primary' | 'secondary' | 'ghost' | 'danger';
+  size?: 'sm' | 'md' | 'lg';
+  loading?: boolean;
+  disabled?: boolean;
+  iconStart?: ReactNode;
+  children: ReactNode;          // the label; never optional for an icon-only case
+};</code></pre>
+<p><strong>Rules that keep a component library usable.</strong></p>
+<ul>
+<li><strong>Enumerate variants; do not accept arbitrary styles.</strong> A <code>color</code> prop taking any string means the system no longer knows what exists. Adding a variant should be a deliberate, reviewed act.</li>
+<li><strong>Do not leak layout.</strong> A component should not set its own outer margin, because the parent owns spacing. This one rule prevents a large share of “why is there a gap here” bugs.</li>
+<li><strong>Handle every state in the component</strong>, including loading, disabled, error and focus, so consumers cannot forget them. A <code>loading</code> prop that also disables the button and preserves its width is a small thing that prevents layout jump everywhere it is used.</li>
+<li><strong>Accessibility belongs inside.</strong> Focus ring, <code>aria-*</code>, roles, keyboard handling and the accessible name requirement live in the component, so that correctness is the default rather than a per-use effort. This is the strongest practical argument for a component library at all.</li>
+<li><strong>Provide an escape hatch, and watch it.</strong> A <code>className</code> passthrough is pragmatic, but heavy use of it is the signal that the system is missing something real.</li>
+</ul>
+<p><strong>Anatomy documentation matters.</strong> For each component record its parts, its variants, its states, when to use it, and explicitly <strong>when not to</strong> with a pointer to the right alternative. The “when not to” section is what stops a tab bar being used for navigation between pages.</p>
+<p><strong>Consider headless primitives for complex controls.</strong> Combobox, dialog, menu, date picker and tooltip are each deceptively hard to get right for keyboard and screen reader use. Libraries such as Radix, React Aria or Headless UI supply behaviour and accessibility while leaving styling to your tokens. Building these from scratch is a recognised way to ship an inaccessible product.</p>
+<hr>
+</section>
+<section id="governance-and-versioning" class="level2">
+<h2 class="anchored" data-anchor-id="governance-and-versioning">6. Governance and versioning</h2>
+<p>This is the part that decides whether the system is alive in two years.</p>
+<p><strong>Name owners.</strong> A system with no owner becomes a system nobody trusts. That does not require a dedicated team: a rotating maintainer plus a review requirement works for a small product.</p>
+<p><strong>Decide how a change gets in.</strong> A lightweight, written path: propose, discuss, accept or reject with a recorded reason. The rejections matter as much as the additions, because a system that accepts everything becomes a catalogue rather than a set of decisions.</p>
+<p><strong>Version it properly.</strong> Semantic versioning, applied to design as well as code:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Change</th>
+<th>Bump</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Fix within the contract</td>
+<td>patch</td>
+<td>Correcting a focus ring offset</td>
+</tr>
+<tr class="even">
+<td>Additive, backwards compatible</td>
+<td>minor</td>
+<td>A new <code>ghost</code> button variant</td>
+</tr>
+<tr class="odd">
+<td>Breaking</td>
+<td>major</td>
+<td>Renaming a token, removing a variant, changing default spacing</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Renaming a token is a breaking change.</strong> It is tempting to treat design values as cosmetic, but a renamed token breaks every consumer. Deprecate with an alias, announce, then remove in a major release.</p>
+<p><strong>Adoption is measurable, so measure it.</strong> Count the proportion of components in the product that come from the system, and count the hard-coded colour and spacing values that bypass tokens. A linter can enforce the second one:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co">// stylelint: forbid raw colours so tokens stay the only route</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>rules<span class="op">:</span> {</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">'declaration-property-value-disallowed-list'</span><span class="op">:</span> {</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">'color'</span><span class="op">:</span> [<span class="st">'/^#/'</span><span class="op">,</span> <span class="st">'/^rgb/'</span>]<span class="op">,</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">'background-color'</span><span class="op">:</span> [<span class="st">'/^#/'</span><span class="op">,</span> <span class="st">'/^rgb/'</span>]<span class="op">,</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>  }<span class="op">,</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Support the consumers.</strong> A changelog, a migration note per breaking change, and a place to ask questions. Most design systems fail through friction rather than technical deficiency: if using the system is slower than writing the CSS by hand, people will write the CSS by hand and be right to.</p>
+<hr>
+</section>
+<section id="when-not-to-build-one" class="level2">
+<h2 class="anchored" data-anchor-id="when-not-to-build-one">7. When not to build one</h2>
+<p>A design system has a real and continuing cost. It is frequently the wrong investment.</p>
+<p><strong>Do not build one when:</strong></p>
+<ul>
+<li><strong>The product is still finding its shape.</strong> Systematising decisions you are about to discard slows you down twice.</li>
+<li><strong>There is one product, one designer and one developer.</strong> A shared stylesheet and a token file is the whole system you need, and it is enough.</li>
+<li><strong>Nobody will own it.</strong> An unowned system is worse than none, because it looks authoritative while being wrong.</li>
+<li><strong>An existing system would do.</strong> Adopting Material, Carbon, Fluent, shadcn/ui or Bootstrap and theming it through tokens is a legitimate and often better answer than building from zero. You inherit the accessibility work, which is the expensive part.</li>
+</ul>
+<p><strong>The honest minimum, and it covers a surprising number of projects:</strong> a token file, a documented type and spacing scale, and half a dozen components that carry their own accessibility. Start there and grow only on evidence of repeated duplication.</p>
+<p><strong>The signals that you have outgrown the minimum:</strong> three different buttons in the product, two teams disagreeing about spacing in review, a rebrand that requires touching hundreds of files, or a second platform arriving.</p>
+<hr>
+</section>
+<section id="systems-worth-reading" class="level2">
+<h2 class="anchored" data-anchor-id="systems-worth-reading">8. Systems worth reading</h2>
+<p>Existing systems are free, thoroughly documented design research. Read them for the reasoning, not to copy their look.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>System</th>
+<th>Owner</th>
+<th>Worth it for</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Material Design 3</strong></td>
+<td>Google</td>
+<td>The most complete token taxonomy and colour-role model anywhere; dynamic colour</td>
+</tr>
+<tr class="even">
+<td><strong>Human Interface Guidelines</strong></td>
+<td>Apple</td>
+<td>Platform conventions, touch target sizing, restraint</td>
+</tr>
+<tr class="odd">
+<td><strong>Carbon</strong></td>
+<td>IBM</td>
+<td>Enterprise data density, tables, and an unusually good accessibility section</td>
+</tr>
+<tr class="even">
+<td><strong>Fluent 2</strong></td>
+<td>Microsoft</td>
+<td>Cross-platform tokens and a well-argued layering model</td>
+</tr>
+<tr class="odd">
+<td><strong>Polaris</strong></td>
+<td>Shopify</td>
+<td>Content and tone guidance integrated with components, which most systems separate</td>
+</tr>
+<tr class="even">
+<td><strong>Atlassian Design System</strong></td>
+<td>Atlassian</td>
+<td>Practical component documentation and clear do/do-not examples</td>
+</tr>
+<tr class="odd">
+<td><strong>GOV.UK Design System</strong></td>
+<td>UK government</td>
+<td>The best-evidenced patterns in existence, each with published research; accessibility-first</td>
+</tr>
+<tr class="even">
+<td><strong>Primer</strong></td>
+<td>GitHub</td>
+<td>A real system evolving under a large legacy product</td>
+</tr>
+<tr class="odd">
+<td><strong>shadcn/ui</strong></td>
+<td>Community</td>
+<td>The copy-into-your-repo model: Radix behaviour plus Tailwind tokens, owned by you</td>
+</tr>
+</tbody>
+</table>
+<p><strong>GOV.UK deserves particular attention</strong> if you only read one. Every pattern cites the user research behind it, including patterns they tried and abandoned, which is rare and more instructive than a finished specification.</p>
+<p><strong>Note the trade-off in the shadcn model.</strong> Copying components into your repository gives full ownership and no version upgrades, which is excellent until a fix lands upstream and you have to port it yourself.</p>
+<hr>
+</section>
+<section id="how-design-systems-fail" class="level2">
+<h2 class="anchored" data-anchor-id="how-design-systems-fail">9. How design systems fail</h2>
+<ul>
+<li><strong>Built as a component catalogue with no usage guidance.</strong> Teams then use the wrong component correctly.</li>
+<li><strong>Tokens named for appearance</strong>, so the first theme change invalidates half the names.</li>
+<li><strong>Components consuming tier 1 directly</strong>, which silently opts them out of theming.</li>
+<li><strong>No owner.</strong> Drift, forks, three buttons.</li>
+<li><strong>Adoption assumed rather than measured.</strong> The system exists, the product does not use it, and nobody knows because nobody counted.</li>
+<li><strong>Too rigid too early.</strong> A system with no escape hatch gets bypassed entirely, which is worse than a system with a monitored one.</li>
+<li><strong>Figma and code out of sync</strong>, so neither is trusted and every ticket starts with a question about which is right.</li>
+<li><strong>Accessibility left to consumers.</strong> The single biggest missed opportunity: a component library is the one place where fixing focus handling once fixes it everywhere.</li>
+<li><strong>Documentation that describes the component rather than the decision.</strong> A page showing four button variants without saying when to use each is a screenshot, not documentation.</li>
+<li><strong>A rebrand that turns out to require code changes everywhere</strong>, which is the proof that the token indirection was never really in place.</li>
+</ul>
+<hr>
+</section>
+<section id="where-this-goes-next" class="level2">
+<h2 class="anchored" data-anchor-id="where-this-goes-next">Where this goes next</h2>
+<ul>
+<li><a href="../UI_UX/visual_design_foundations.html">Visual Design Foundations</a> is the source of the scales and colour reasoning that tokens formalise.</li>
+<li><a href="../UI_UX/responsive_and_multiplatform.html">Responsive and Multiplatform</a> covers tokens that vary by viewport and by platform.</li>
+<li><a href="../UI_UX/accessibility.html">Accessibility</a> is what components should be enforcing on behalf of their consumers.</li>
+<li><a href="../UI_UX/prototyping_and_handoff.html">Prototyping and Handoff</a> covers Figma components and variables, the design-side half of everything here.</li>
+</ul>
+<p>On the implementation side: <a href="../css.html">CSS</a> for custom properties, <a href="../bootstrap.html">Bootstrap</a> for an existing themeable system, <a href="../React/react_overview.html">React Overview</a> and <a href="../React/react_libraries.html">React Libraries</a> for component composition, and <a href="../npm.html">npm</a> for publishing and versioning the package itself.</p>
+<hr>
+
+
+</section>
+
+<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/bthek1\.github\.io\/Front_End");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<script src="https://utteranc.es/client.js" repo="quarto-dev/quarto-web" issue-term="pathname" theme="github-light" crossorigin="anonymous" async="">
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../UI_UX/visual_design_foundations.html" class="pagination-link" aria-label="Visual Design Foundations">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Visual Design Foundations</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../UI_UX/responsive_and_multiplatform.html" class="pagination-link" aria-label="Responsive and Multiplatform">
+        <span class="nav-page-text">Responsive and Multiplatform</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item">
+    <a class="nav-link active" href="../index.html" aria-current="page">
+<p>Trademark</p>
+</a>
+  </li>  
+    <li class="nav-item">
+    <a class="nav-link" href="https://github.com/bthek1/bthek1_blog/issues">
+<p>FAQ</p>
+</a>
+  </li>  
+    <li class="nav-item">
+    <a class="nav-link" href="https://bthek1.github.io/bthek1_blog/index.html">
+<p>License</p>
+</a>
+  </li>  
+    <li class="nav-item">
+    <a class="nav-link" href="../index.html">
+<p>Trademark</p>
+</a>
+  </li>  
+</ul>
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.dev/bthek1/Front_End/blob/main/UI_UX/05_Design_Systems_and_Tokens.ipynb" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/bthek1/Front_End/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+    <div class="nav-footer-right">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/bthek1">
+      <i class="bi bi-github" role="img" aria-label="Github">
+</i> 
+    </a>
+  </li>  
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://www.linkedin.com/in/benedict-thekkel/">
+      <i class="bi bi-linkedin" role="img" aria-label="Linkedin">
+</i> 
+    </a>
+  </li>  
+</ul>
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>
