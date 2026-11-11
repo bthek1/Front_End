@@ -102,7 +102,7 @@ Python libraries that generate the interface, ordered by how much control they g
 | [React Setup](React/03_React_Setup.ipynb) | Getting a project running |
 | [React Init](React/01_React_Init.ipynb) | The initial scaffold |
 | [React Libraries](React/04_React_Libraries.ipynb) | The npm add-ons worth knowing, grouped by what they do |
-| [React and Django](React/05_React_%26_Django.ipynb) | The full-stack pairing: project structure, how the two halves communicate, deployment, and practice |
+| [React and Django](React/05_React_and_Django.ipynb) | The full-stack pairing: project structure, how the two halves communicate, deployment, and practice |
 | [React with Docker](React/06_React_Docker.ipynb) | A production setup for Django, DRF, React, and PostgreSQL together, using multi-stage builds, Nginx for static files, and Compose to orchestrate it |
 
 ------------------------------------------------------------------------
