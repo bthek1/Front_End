@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 580" width="900" height="580" font-family="Helvetica, Arial, sans-serif" font-size="13">
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#475569"/>
+    </marker>
+  </defs>
+  <rect width="900" height="580" fill="#ffffff"/>
+  <path d="M430,56 L430,84" fill="none" stroke="#475569" stroke-width="1.6" marker-end="url(#a)"/>
+  <path d="M430,122 L430,148" fill="none" stroke="#475569" stroke-width="1.6" marker-end="url(#a)"/>
+  <path d="M430,198 L430,238" fill="none" stroke="#475569" stroke-width="1.6" marker-end="url(#a)"/>
+  <path d="M430,288 L430,338" fill="none" stroke="#475569" stroke-width="1.6" marker-end="url(#a)"/>
+  <path d="M430,376 L430,408" fill="none" stroke="#475569" stroke-width="1.6" marker-end="url(#a)"/>
+  <path d="M430,458 L430,508" fill="none" stroke="#475569" stroke-width="1.6" marker-end="url(#a)"/>
+  <path d="M503,173 L618,173" fill="none" stroke="#475569" stroke-width="1.6" marker-end="url(#a)"/>
+  <path d="M729,148 L729,103 L514,103" fill="none" stroke="#475569" stroke-width="1.6" marker-end="url(#a)"/>
+  <path d="M332,263 L222,263" fill="none" stroke="#475569" stroke-width="1.6" marker-end="url(#a)"/>
+  <path d="M528,263 L658,263" fill="none" stroke="#475569" stroke-width="1.6" marker-end="url(#a)"/>
+  <path d="M506.5,433 L658,433" fill="none" stroke="#475569" stroke-width="1.6" marker-end="url(#a)"/>
+  <path d="M745,408 L745,357 L504,357" fill="none" stroke="#475569" stroke-width="1.6" marker-end="url(#a)"/>
+  <rect x="350" y="20" width="160" height="36" rx="8" fill="#f1f5f9" stroke="#475569" stroke-width="1"/>
+  <text x="430.0" y="42.5" text-anchor="middle" font-weight="bold">Start: add a device</text>
+  <rect x="348" y="86" width="164" height="36" rx="8" fill="#f1f5f9" stroke="#475569" stroke-width="1"/>
+  <text x="430.0" y="108.5" text-anchor="middle" font-weight="bold">Enter serial number</text>
+  <polygon points="357.0,173 371.0,148.0 489.0,148.0 503.0,173 489.0,198.0 371.0,198.0" fill="#ffffff" stroke="#475569" stroke-width="1"/>
+  <text x="430" y="177.5" text-anchor="middle">Valid format?</text>
+  <rect x="620" y="150" width="218" height="48" rx="8" fill="#f1f5f9" stroke="#475569" stroke-width="1"/>
+  <text x="729.0" y="170.5" text-anchor="middle" font-weight="bold">Inline error</text>
+  <text x="729.0" y="186.5" text-anchor="middle" font-size="12" fill="#475569">explain the expected format</text>
+  <polygon points="332.0,263 346.0,238.0 514.0,238.0 528.0,263 514.0,288.0 346.0,288.0" fill="#ffffff" stroke="#475569" stroke-width="1"/>
+  <text x="430" y="267.5" text-anchor="middle">Found on the server?</text>
+  <rect x="20" y="239" width="200" height="48" rx="8" fill="#f1f5f9" stroke="#475569" stroke-width="1"/>
+  <text x="120.0" y="259.5" text-anchor="middle">Offer: check the number,</text>
+  <text x="120.0" y="275.5" text-anchor="middle">or register a new device</text>
+  <rect x="660" y="239" width="220" height="48" rx="8" fill="#f1f5f9" stroke="#475569" stroke-width="1"/>
+  <text x="770.0" y="259.5" text-anchor="middle">Explain who owns it</text>
+  <text x="770.0" y="275.5" text-anchor="middle">and how to request transfer</text>
+  <rect x="358" y="340" width="144" height="36" rx="8" fill="#f1f5f9" stroke="#475569" stroke-width="1"/>
+  <text x="430.0" y="362.5" text-anchor="middle" font-weight="bold">Confirm details</text>
+  <polygon points="353.5,433 367.5,408.0 492.5,408.0 506.5,433 492.5,458.0 367.5,458.0" fill="#ffffff" stroke="#475569" stroke-width="1"/>
+  <text x="430" y="437.5" text-anchor="middle">Save succeeds?</text>
+  <rect x="660" y="410" width="170" height="48" rx="8" fill="#f1f5f9" stroke="#475569" stroke-width="1"/>
+  <text x="745.0" y="430.5" text-anchor="middle" font-weight="bold">Keep entered data</text>
+  <text x="745.0" y="446.5" text-anchor="middle" font-size="12" fill="#475569">offer retry</text>
+  <rect x="320" y="510" width="220" height="48" rx="8" fill="#eff6ff" stroke="#1d4ed8" stroke-width="1"/>
+  <text x="430.0" y="530.5" text-anchor="middle" font-weight="bold">Device page</text>
+  <text x="430.0" y="546.5" text-anchor="middle" font-size="12" fill="#475569">with next suggested action</text>
+  <rect x="549.8" y="165.0" width="20.4" height="16" fill="#ffffff"/>
+  <text x="560" y="177.0" text-anchor="middle" font-size="11" fill="#475569">No</text>
+  <rect x="245.1" y="255.0" width="63.8" height="16" fill="#ffffff"/>
+  <text x="277" y="267.0" text-anchor="middle" font-size="11" fill="#475569">Not found</text>
+  <rect x="542.5" y="255.0" width="101.0" height="16" fill="#ffffff"/>
+  <text x="593" y="267.0" text-anchor="middle" font-size="11" fill="#475569">Already claimed</text>
+  <rect x="416.7" y="305.0" width="26.6" height="16" fill="#ffffff"/>
+  <text x="430" y="317.0" text-anchor="middle" font-size="11" fill="#475569">Yes</text>
+  <rect x="571.8" y="425.0" width="20.4" height="16" fill="#ffffff"/>
+  <text x="582" y="437.0" text-anchor="middle" font-size="11" fill="#475569">No</text>
+  <rect x="416.7" y="475.0" width="26.6" height="16" fill="#ffffff"/>
+  <text x="430" y="487.0" text-anchor="middle" font-size="11" fill="#475569">Yes</text>
+</svg>

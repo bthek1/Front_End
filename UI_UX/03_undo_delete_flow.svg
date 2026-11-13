@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 220" width="1000" height="220" font-family="Helvetica, Arial, sans-serif" font-size="13">
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#475569"/>
+    </marker>
+  </defs>
+  <rect width="1000" height="220" fill="#ffffff"/>
+  <path d="M150,110 L188,110" fill="none" stroke="#475569" stroke-width="1.6" marker-end="url(#a)"/>
+  <path d="M390,110 L428,110" fill="none" stroke="#475569" stroke-width="1.6" marker-end="url(#a)"/>
+  <path d="M654,110 L680,110 L680,50 L806,50" fill="none" stroke="#475569" stroke-width="1.6" marker-end="url(#a)"/>
+  <path d="M654,110 L680,110 L680,170 L806,170" fill="none" stroke="#475569" stroke-width="1.6" marker-end="url(#a)"/>
+  <rect x="20" y="90" width="130" height="40" rx="8" fill="#f1f5f9" stroke="#475569" stroke-width="1"/>
+  <text x="85.0" y="114.5" text-anchor="middle" font-weight="bold">Delete clicked</text>
+  <rect x="190" y="86" width="200" height="48" rx="8" fill="#f1f5f9" stroke="#475569" stroke-width="1"/>
+  <text x="290.0" y="106.5" text-anchor="middle" font-weight="bold">Item removed from view</text>
+  <text x="290.0" y="122.5" text-anchor="middle" font-size="12" fill="#475569">soft-deleted server-side</text>
+  <rect x="430" y="86" width="224" height="48" rx="8" fill="#f1f5f9" stroke="#475569" stroke-width="1"/>
+  <text x="542.0" y="106.5" text-anchor="middle" font-weight="bold">Persistent inline notice:</text>
+  <text x="542.0" y="122.5" text-anchor="middle" font-size="12" fill="#475569">Deleted 'Site 4'. Undo</text>
+  <rect x="808" y="30" width="176" height="40" rx="8" fill="#eff6ff" stroke="#1d4ed8" stroke-width="1"/>
+  <text x="896.0" y="54.5" text-anchor="middle" font-weight="bold">Restored in place</text>
+  <rect x="808" y="150" width="176" height="40" rx="8" fill="#f1f5f9" stroke="#475569" stroke-width="1"/>
+  <text x="896.0" y="174.5" text-anchor="middle" font-weight="bold">Hard delete queued</text>
+  <rect x="689.4" y="42.0" width="107.2" height="16" fill="#ffffff"/>
+  <text x="743" y="54.0" text-anchor="middle" font-size="11" fill="#475569">Undo within 30 s</text>
+  <rect x="689.4" y="155.0" width="107.2" height="30" fill="#ffffff"/>
+  <text x="743" y="167.0" text-anchor="middle" font-size="11" fill="#475569">Notice dismissed</text>
+  <text x="743" y="181.0" text-anchor="middle" font-size="11" fill="#475569">or timeout</text>
+</svg>

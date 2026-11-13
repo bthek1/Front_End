@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 490" width="1000" height="490" font-family="Helvetica, Arial, sans-serif" font-size="13">
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#475569"/>
+    </marker>
+  </defs>
+  <rect width="1000" height="490" fill="#ffffff"/>
+  <path d="M500,60 L500,88" fill="none" stroke="#475569" stroke-width="1.6" marker-end="url(#a)"/>
+  <path d="M387.5,115 L261,115 L261,168" fill="none" stroke="#475569" stroke-width="1.6" marker-end="url(#a)"/>
+  <path d="M612.5,115 L781,115 L781,168" fill="none" stroke="#475569" stroke-width="1.6" marker-end="url(#a)"/>
+  <path d="M261,220 L261,240 L85,240 L85,308" fill="none" stroke="#475569" stroke-width="1.6" marker-end="url(#a)"/>
+  <path d="M261,220 L261,240 L261,240 L261,308" fill="none" stroke="#475569" stroke-width="1.6" marker-end="url(#a)"/>
+  <path d="M261,220 L261,240 L437,240 L437,308" fill="none" stroke="#475569" stroke-width="1.6" marker-end="url(#a)"/>
+  <path d="M781,220 L781,240 L610,240 L610,308" fill="none" stroke="#475569" stroke-width="1.6" marker-end="url(#a)"/>
+  <path d="M781,220 L781,240 L781,240 L781,308" fill="none" stroke="#475569" stroke-width="1.6" marker-end="url(#a)"/>
+  <path d="M781,220 L781,240 L927,240 L927,308" fill="none" stroke="#475569" stroke-width="1.6" marker-end="url(#a)"/>
+  <path d="M85,360 L85,418" fill="none" stroke="#475569" stroke-width="1.6" marker-end="url(#a)"/>
+  <path d="M261,360 L261,418" fill="none" stroke="#475569" stroke-width="1.6" marker-end="url(#a)"/>
+  <path d="M437,360 L437,418" fill="none" stroke="#475569" stroke-width="1.6" marker-end="url(#a)"/>
+  <rect x="392" y="20" width="216" height="40" rx="8" fill="#f1f5f9" stroke="#475569" stroke-width="1"/>
+  <text x="500.0" y="44.5" text-anchor="middle" font-weight="bold">What do I need to learn?</text>
+  <polygon points="387.0,115 401.0,90.0 599.0,90.0 613.0,115 599.0,140.0 401.0,140.0" fill="#ffffff" stroke="#475569" stroke-width="1"/>
+  <text x="500" y="119.5" text-anchor="middle">Does a design exist yet?</text>
+  <polygon points="133.0,195 147.0,170.0 375.0,170.0 389.0,195 375.0,220.0 147.0,220.0" fill="#ffffff" stroke="#475569" stroke-width="1"/>
+  <text x="261" y="199.5" text-anchor="middle">Do I understand the problem?</text>
+  <polygon points="657.0,195 671.0,170.0 891.0,170.0 905.0,195 891.0,220.0 671.0,220.0" fill="#ffffff" stroke="#475569" stroke-width="1"/>
+  <text x="781" y="199.5" text-anchor="middle">Can I watch someone use it?</text>
+  <rect x="20" y="310" width="130" height="50" rx="8" fill="#f1f5f9" stroke="#475569" stroke-width="1"/>
+  <text x="85.0" y="331.5" text-anchor="middle" font-weight="bold">Interviews</text>
+  <text x="85.0" y="347.5" text-anchor="middle" font-size="12" fill="#475569">5 to 8 people</text>
+  <rect x="166" y="310" width="190" height="50" rx="8" fill="#f1f5f9" stroke="#475569" stroke-width="1"/>
+  <text x="261.0" y="331.5" text-anchor="middle" font-weight="bold">Contextual inquiry</text>
+  <text x="261.0" y="347.5" text-anchor="middle" font-size="12" fill="#475569">watch real work in situ</text>
+  <rect x="372" y="310" width="130" height="50" rx="8" fill="#f1f5f9" stroke="#475569" stroke-width="1"/>
+  <text x="437.0" y="331.5" text-anchor="middle" font-weight="bold">Survey</text>
+  <text x="437.0" y="347.5" text-anchor="middle" font-size="12" fill="#475569">100+ responses</text>
+  <rect x="530" y="310" width="160" height="50" rx="8" fill="#f1f5f9" stroke="#475569" stroke-width="1"/>
+  <text x="610.0" y="331.5" text-anchor="middle" font-weight="bold">Usability test</text>
+  <text x="610.0" y="347.5" text-anchor="middle" font-size="12" fill="#475569">5 people per round</text>
+  <rect x="706" y="310" width="150" height="50" rx="8" fill="#f1f5f9" stroke="#475569" stroke-width="1"/>
+  <text x="781.0" y="331.5" text-anchor="middle" font-weight="bold">Analytics +</text>
+  <text x="781.0" y="347.5" text-anchor="middle" font-size="12" fill="#475569">session replay</text>
+  <rect x="872" y="310" width="110" height="50" rx="8" fill="#f1f5f9" stroke="#475569" stroke-width="1"/>
+  <text x="927.0" y="339.5" text-anchor="middle" font-weight="bold">A/B test</text>
+  <rect x="40" y="420" width="440" height="44" rx="8" fill="#eff6ff" stroke="#1d4ed8" stroke-width="1"/>
+  <text x="260.0" y="446.5" text-anchor="middle" font-weight="bold">Affinity map &#8594; themes &#8594; opportunities</text>
+  <rect x="313.8" y="107.0" width="20.4" height="16" fill="#ffffff"/>
+  <text x="324" y="119.0" text-anchor="middle" font-size="11" fill="#475569">No</text>
+  <rect x="682.7" y="107.0" width="26.6" height="16" fill="#ffffff"/>
+  <text x="696" y="119.0" text-anchor="middle" font-size="11" fill="#475569">Yes</text>
+  <rect x="50.0" y="267.0" width="70.0" height="16" fill="#ffffff"/>
+  <text x="85" y="279.0" text-anchor="middle" font-size="11" fill="#475569">Not at all</text>
+  <rect x="235.3" y="267.0" width="51.4" height="16" fill="#ffffff"/>
+  <text x="261" y="279.0" text-anchor="middle" font-size="11" fill="#475569">Roughly</text>
+  <rect x="383.4" y="267.0" width="107.2" height="16" fill="#ffffff"/>
+  <text x="437" y="279.0" text-anchor="middle" font-size="11" fill="#475569">Well, need scale</text>
+  <rect x="596.7" y="267.0" width="26.6" height="16" fill="#ffffff"/>
+  <text x="610" y="279.0" text-anchor="middle" font-size="11" fill="#475569">Yes</text>
+  <rect x="749.1" y="260.0" width="63.8" height="30" fill="#ffffff"/>
+  <text x="781" y="272.0" text-anchor="middle" font-size="11" fill="#475569">No, but I</text>
+  <text x="781" y="286.0" text-anchor="middle" font-size="11" fill="#475569">have data</text>
+  <rect x="879.6" y="260.0" width="94.8" height="30" fill="#ffffff"/>
+  <text x="927" y="272.0" text-anchor="middle" font-size="11" fill="#475569">Need a verdict</text>
+  <text x="927" y="286.0" text-anchor="middle" font-size="11" fill="#475569">between two</text>
+</svg>

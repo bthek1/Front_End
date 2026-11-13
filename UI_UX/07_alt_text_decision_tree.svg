@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 820 520" width="820" height="520" font-family="Helvetica, Arial, sans-serif" font-size="13">
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#475569"/>
+    </marker>
+  </defs>
+  <rect width="820" height="520" fill="#ffffff"/>
+  <path d="M200,56 L200,84" fill="none" stroke="#475569" stroke-width="1.6" marker-end="url(#a)"/>
+  <path d="M200,134 L200,174" fill="none" stroke="#475569" stroke-width="1.6" marker-end="url(#a)"/>
+  <path d="M200,224 L200,264" fill="none" stroke="#475569" stroke-width="1.6" marker-end="url(#a)"/>
+  <path d="M200,314 L200,354" fill="none" stroke="#475569" stroke-width="1.6" marker-end="url(#a)"/>
+  <path d="M200,404 L200,448" fill="none" stroke="#475569" stroke-width="1.6" marker-end="url(#a)"/>
+  <path d="M316,110 L438,110" fill="none" stroke="#475569" stroke-width="1.6" marker-end="url(#a)"/>
+  <path d="M316,200 L438,200" fill="none" stroke="#475569" stroke-width="1.6" marker-end="url(#a)"/>
+  <path d="M303,290 L438,290" fill="none" stroke="#475569" stroke-width="1.6" marker-end="url(#a)"/>
+  <path d="M316,380 L438,380" fill="none" stroke="#475569" stroke-width="1.6" marker-end="url(#a)"/>
+  <rect x="140" y="20" width="120" height="36" rx="8" fill="#f1f5f9" stroke="#475569" stroke-width="1"/>
+  <text x="200.0" y="42.5" text-anchor="middle" font-weight="bold">An image</text>
+  <polygon points="84.0,110 98.0,86.0 302.0,86.0 316.0,110 302.0,134.0 98.0,134.0" fill="#ffffff" stroke="#475569" stroke-width="1"/>
+  <text x="200" y="114.5" text-anchor="middle">Is it purely decorative?</text>
+  <polygon points="84.0,200 98.0,176.0 302.0,176.0 316.0,200 302.0,224.0 98.0,224.0" fill="#ffffff" stroke="#475569" stroke-width="1"/>
+  <text x="200" y="204.5" text-anchor="middle">Is it a link or a button?</text>
+  <polygon points="97.0,290 111.0,266.0 289.0,266.0 303.0,290 289.0,314.0 111.0,314.0" fill="#ffffff" stroke="#475569" stroke-width="1"/>
+  <text x="200" y="294.5" text-anchor="middle">Does it contain text?</text>
+  <polygon points="84.0,380 98.0,356.0 302.0,356.0 316.0,380 302.0,404.0 98.0,404.0" fill="#ffffff" stroke="#475569" stroke-width="1"/>
+  <text x="200" y="384.5" text-anchor="middle">Is it a chart or diagram?</text>
+  <rect x="440" y="86" width="360" height="48" rx="8" fill="#f1f5f9" stroke="#475569" stroke-width="1"/>
+  <text x="620.0" y="106.5" text-anchor="middle" font-weight="bold">alt=''</text>
+  <text x="620.0" y="122.5" text-anchor="middle" font-size="12" fill="#475569">empty, not missing</text>
+  <rect x="440" y="176" width="360" height="48" rx="8" fill="#f1f5f9" stroke="#475569" stroke-width="1"/>
+  <text x="620.0" y="196.5" text-anchor="middle" font-weight="bold">alt describes the destination or action</text>
+  <text x="620.0" y="212.5" text-anchor="middle" font-size="12" fill="#475569">'Open the usage report'</text>
+  <rect x="440" y="266" width="360" height="48" rx="8" fill="#f1f5f9" stroke="#475569" stroke-width="1"/>
+  <text x="620.0" y="286.5" text-anchor="middle" font-weight="bold">alt repeats the text</text>
+  <text x="620.0" y="302.5" text-anchor="middle" font-size="12" fill="#475569">better: use real text instead</text>
+  <rect x="440" y="356" width="360" height="48" rx="8" fill="#f1f5f9" stroke="#475569" stroke-width="1"/>
+  <text x="620.0" y="376.5" text-anchor="middle" font-weight="bold">Short alt = the conclusion</text>
+  <text x="620.0" y="392.5" text-anchor="middle" font-size="12" fill="#475569">plus a full description or data table nearby</text>
+  <rect x="60" y="450" width="280" height="48" rx="8" fill="#f1f5f9" stroke="#475569" stroke-width="1"/>
+  <text x="200.0" y="470.5" text-anchor="middle">alt describes what matters here,</text>
+  <text x="200.0" y="486.5" text-anchor="middle">in about one sentence</text>
+  <rect x="376.7" y="102.0" width="26.6" height="16" fill="#ffffff"/>
+  <text x="390" y="114.0" text-anchor="middle" font-size="11" fill="#475569">Yes</text>
+  <rect x="376.7" y="192.0" width="26.6" height="16" fill="#ffffff"/>
+  <text x="390" y="204.0" text-anchor="middle" font-size="11" fill="#475569">Yes</text>
+  <rect x="376.7" y="282.0" width="26.6" height="16" fill="#ffffff"/>
+  <text x="390" y="294.0" text-anchor="middle" font-size="11" fill="#475569">Yes</text>
+  <rect x="376.7" y="372.0" width="26.6" height="16" fill="#ffffff"/>
+  <text x="390" y="384.0" text-anchor="middle" font-size="11" fill="#475569">Yes</text>
+  <rect x="189.8" y="146.0" width="20.4" height="16" fill="#ffffff"/>
+  <text x="200" y="158.0" text-anchor="middle" font-size="11" fill="#475569">No</text>
+  <rect x="189.8" y="236.0" width="20.4" height="16" fill="#ffffff"/>
+  <text x="200" y="248.0" text-anchor="middle" font-size="11" fill="#475569">No</text>
+  <rect x="189.8" y="326.0" width="20.4" height="16" fill="#ffffff"/>
+  <text x="200" y="338.0" text-anchor="middle" font-size="11" fill="#475569">No</text>
+  <rect x="189.8" y="418.0" width="20.4" height="16" fill="#ffffff"/>
+  <text x="200" y="430.0" text-anchor="middle" font-size="11" fill="#475569">No</text>
+</svg>

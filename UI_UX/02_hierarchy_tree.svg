@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 340" width="760" height="340" font-family="Helvetica, Arial, sans-serif" font-size="13">
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#475569"/>
+    </marker>
+  </defs>
+  <rect width="760" height="340" fill="#ffffff"/>
+  <path d="M380,56 L380,78 L140,78 L140,98" fill="none" stroke="#475569" stroke-width="1.6" marker-end="url(#a)"/>
+  <path d="M380,56 L380,78 L380,78 L380,98" fill="none" stroke="#475569" stroke-width="1.6" marker-end="url(#a)"/>
+  <path d="M380,56 L380,78 L620,78 L620,98" fill="none" stroke="#475569" stroke-width="1.6" marker-end="url(#a)"/>
+  <path d="M140,136 L140,158 L80,158 L80,188" fill="none" stroke="#475569" stroke-width="1.6" marker-end="url(#a)"/>
+  <path d="M140,136 L140,158 L200,158 L200,188" fill="none" stroke="#475569" stroke-width="1.6" marker-end="url(#a)"/>
+  <path d="M380,136 L380,158 L320,158 L320,188" fill="none" stroke="#475569" stroke-width="1.6" marker-end="url(#a)"/>
+  <path d="M380,136 L380,158 L440,158 L440,188" fill="none" stroke="#475569" stroke-width="1.6" marker-end="url(#a)"/>
+  <path d="M620,136 L620,158 L560,158 L560,188" fill="none" stroke="#475569" stroke-width="1.6" marker-end="url(#a)"/>
+  <path d="M620,136 L620,158 L680,158 L680,188" fill="none" stroke="#475569" stroke-width="1.6" marker-end="url(#a)"/>
+  <path d="M680,226 L680,278" fill="none" stroke="#475569" stroke-width="1.6" marker-end="url(#a)"/>
+  <rect x="330" y="20" width="100" height="36" rx="8" fill="#f1f5f9" stroke="#475569" stroke-width="1"/>
+  <text x="380.0" y="42.5" text-anchor="middle" font-weight="bold">Home</text>
+  <rect x="90" y="100" width="100" height="36" rx="8" fill="#f1f5f9" stroke="#475569" stroke-width="1"/>
+  <text x="140.0" y="122.5" text-anchor="middle" font-weight="bold">Products</text>
+  <rect x="330" y="100" width="100" height="36" rx="8" fill="#f1f5f9" stroke="#475569" stroke-width="1"/>
+  <text x="380.0" y="122.5" text-anchor="middle" font-weight="bold">Support</text>
+  <rect x="570" y="100" width="100" height="36" rx="8" fill="#f1f5f9" stroke="#475569" stroke-width="1"/>
+  <text x="620.0" y="122.5" text-anchor="middle" font-weight="bold">Account</text>
+  <rect x="30" y="190" width="100" height="36" rx="8" fill="#f1f5f9" stroke="#475569" stroke-width="1"/>
+  <text x="80.0" y="212.5" text-anchor="middle" font-weight="bold">Meters</text>
+  <rect x="150" y="190" width="100" height="36" rx="8" fill="#f1f5f9" stroke="#475569" stroke-width="1"/>
+  <text x="200.0" y="212.5" text-anchor="middle" font-weight="bold">Sensors</text>
+  <rect x="270" y="190" width="100" height="36" rx="8" fill="#f1f5f9" stroke="#475569" stroke-width="1"/>
+  <text x="320.0" y="212.5" text-anchor="middle" font-weight="bold">Guides</text>
+  <rect x="390" y="190" width="100" height="36" rx="8" fill="#f1f5f9" stroke="#475569" stroke-width="1"/>
+  <text x="440.0" y="212.5" text-anchor="middle" font-weight="bold">Contact</text>
+  <rect x="510" y="190" width="100" height="36" rx="8" fill="#f1f5f9" stroke="#475569" stroke-width="1"/>
+  <text x="560.0" y="212.5" text-anchor="middle" font-weight="bold">Profile</text>
+  <rect x="630" y="190" width="100" height="36" rx="8" fill="#f1f5f9" stroke="#475569" stroke-width="1"/>
+  <text x="680.0" y="212.5" text-anchor="middle" font-weight="bold">Billing</text>
+  <rect x="630" y="280" width="100" height="36" rx="8" fill="#f1f5f9" stroke="#475569" stroke-width="1"/>
+  <text x="680.0" y="302.5" text-anchor="middle" font-weight="bold">Invoices</text>
+</svg>
